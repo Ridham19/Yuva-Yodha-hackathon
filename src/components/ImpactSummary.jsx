@@ -52,27 +52,27 @@ export const ImpactSummary = () => {
         {/* Metric 1: SAIDI */}
         <div className="grid-card" style={{ padding: '20px', background: 'rgba(16, 185, 129, 0.05)', border: '1px solid rgba(16, 185, 129, 0.3)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '0.75rem', color: '#34d399', fontWeight: 'bold' }}>OUTAGE DURATION (SAIDI)</span>
+            <span style={{ fontSize: '0.75rem', color: '#10b981', fontWeight: 'bold' }}>OUTAGE DURATION (SAIDI)</span>
             <TrendingDown size={18} color="#10b981" />
           </div>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.5rem', fontWeight: '800', color: '#10b981', margin: '8px 0' }}>
             -78%
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#cbd5e1' }}>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
             Average customer outage hours drop from 18.5 hrs/year down to 4.1 hrs/year via sub-minute FLISR rerouting.
           </div>
         </div>
 
         {/* Metric 2: AT&C Loss */}
-        <div className="grid-card" style={{ padding: '20px', background: 'rgba(56, 189, 248, 0.05)', border: '1px solid rgba(56, 189, 248, 0.3)' }}>
+        <div className="grid-card" style={{ padding: '20px', background: 'rgba(14, 165, 233, 0.05)', border: '1px solid rgba(14, 165, 233, 0.3)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '0.75rem', color: '#38bdf8', fontWeight: 'bold' }}>AT&C LOSS REDUCTION</span>
-            <TrendingDown size={18} color="#38bdf8" />
+            <span style={{ fontSize: '0.75rem', color: 'var(--accent-cyan)', fontWeight: 'bold' }}>AT&C LOSS REDUCTION</span>
+            <TrendingDown size={18} color="var(--accent-cyan)" />
           </div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.5rem', fontWeight: '800', color: '#38bdf8', margin: '8px 0' }}>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.5rem', fontWeight: '800', color: 'var(--accent-cyan)', margin: '8px 0' }}>
             -6.6%
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#cbd5e1' }}>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
             From 21.4% down to 14.8% by eliminating overloaded feeder bottlenecks and phase unbalance.
           </div>
         </div>
@@ -80,13 +80,13 @@ export const ImpactSummary = () => {
         {/* Metric 3: Renewable Curtailment */}
         <div className="grid-card" style={{ padding: '20px', background: 'rgba(245, 158, 11, 0.05)', border: '1px solid rgba(245, 158, 11, 0.3)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '0.75rem', color: '#fbbf24', fontWeight: 'bold' }}>RENEWABLE ABSORPTION</span>
+            <span style={{ fontSize: '0.75rem', color: '#f59e0b', fontWeight: 'bold' }}>RENEWABLE ABSORPTION</span>
             <TrendingUp size={18} color="#f59e0b" />
           </div>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.5rem', fontWeight: '800', color: '#f59e0b', margin: '8px 0' }}>
             +34%
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#cbd5e1' }}>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
             Absorbing more rooftop solar and wind generation through coordinated BESS storage dispatch.
           </div>
         </div>
@@ -94,13 +94,13 @@ export const ImpactSummary = () => {
         {/* Metric 4: Field Safety */}
         <div className="grid-card" style={{ padding: '20px', background: 'rgba(139, 92, 246, 0.05)', border: '1px solid rgba(139, 92, 246, 0.3)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontSize: '0.75rem', color: '#c4b5fd', fontWeight: 'bold' }}>MANUAL HAZARD EXPOSURE</span>
+            <span style={{ fontSize: '0.75rem', color: '#8b5cf6', fontWeight: 'bold' }}>MANUAL HAZARD EXPOSURE</span>
             <ShieldCheck size={18} color="#8b5cf6" />
           </div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.5rem', fontWeight: '800', color: '#a78bfa', margin: '8px 0' }}>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.5rem', fontWeight: '800', color: '#8b5cf6', margin: '8px 0' }}>
             ZERO
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#cbd5e1' }}>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
             Zero manual line switching required under storm faults, drastically improving lineman safety.
           </div>
         </div>
@@ -109,7 +109,7 @@ export const ImpactSummary = () => {
       {/* 11-Slide Deck Presentation Mapping */}
       <div className="grid-card" style={{ padding: '24px' }}>
         <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.15rem', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <FileText size={20} color="#38bdf8" />
+          <FileText size={20} color="var(--accent-cyan)" />
           Hackathon Pitch Presentation Guide (11-Slide Deck Reference)
         </h3>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.8rem', marginBottom: '16px' }}>
@@ -121,7 +121,7 @@ export const ImpactSummary = () => {
             <div 
               key={slide.num}
               style={{
-                background: 'rgba(0,0,0,0.3)',
+                background: 'var(--bg-stat-box)',
                 border: '1px solid var(--border-subtle)',
                 borderRadius: '8px',
                 padding: '12px 16px'
@@ -129,7 +129,7 @@ export const ImpactSummary = () => {
             >
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
                 <span className="badge badge-info">Slide {slide.num}</span>
-                <strong style={{ fontSize: '0.9rem', color: '#f8fafc' }}>{slide.title}</strong>
+                <strong style={{ fontSize: '0.9rem', color: 'var(--text-primary)' }}>{slide.title}</strong>
               </div>
               <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
                 {slide.desc}

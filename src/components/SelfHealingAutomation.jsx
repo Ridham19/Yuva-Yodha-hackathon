@@ -71,7 +71,7 @@ export const SelfHealingAutomation = () => {
       {/* Restoration Stopwatch & Head-to-Head Comparison */}
       <div className="grid-3col">
         {/* Active FLISR Stopwatch */}
-        <div className="grid-card" style={{ padding: '20px', textAlign: 'center', background: 'rgba(15, 23, 42, 0.9)' }}>
+        <div className="grid-card" style={{ padding: '20px', textAlign: 'center', background: 'var(--bg-stat-box)', border: '1px solid var(--border-subtle)' }}>
           <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
             GridPulse Automated Restoration Timer
           </div>
@@ -79,26 +79,26 @@ export const SelfHealingAutomation = () => {
             fontFamily: 'var(--font-mono)', 
             fontSize: '3.2rem', 
             fontWeight: '800', 
-            color: flisrStage === 'RESTORED' ? '#10b981' : (flisrActive ? '#38bdf8' : '#64748b'),
+            color: flisrStage === 'RESTORED' ? '#10b981' : (flisrActive ? 'var(--accent-cyan)' : 'var(--text-muted)'),
             margin: '8px 0',
-            textShadow: flisrActive ? '0 0 20px rgba(56, 189, 248, 0.4)' : 'none'
+            textShadow: flisrActive ? '0 0 20px rgba(14, 165, 233, 0.3)' : 'none'
           }}>
             {seconds}s
           </div>
-          <div style={{ fontSize: '0.8rem', color: flisrStage === 'RESTORED' ? '#34d399' : '#94a3b8' }}>
+          <div style={{ fontSize: '0.8rem', color: flisrStage === 'RESTORED' ? '#10b981' : 'var(--text-muted)' }}>
             {flisrStage === 'RESTORED' ? '✅ Full Loop Restored in 6.82s' : (flisrActive ? `Stage: ${flisrStage}` : 'Awaiting Fault Event')}
           </div>
         </div>
 
         {/* Traditional Manual Restoration Comparison */}
         <div className="grid-card" style={{ padding: '20px', background: 'rgba(239, 68, 68, 0.05)', border: '1px solid rgba(239, 68, 68, 0.25)' }}>
-          <div style={{ fontSize: '0.75rem', color: '#f87171', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 'bold' }}>
+          <div style={{ fontSize: '0.75rem', color: '#ef4444', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 'bold' }}>
             Traditional SCADA-Lite / Manual Process
           </div>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.5rem', fontWeight: '700', color: '#ef4444', margin: '8px 0' }}>
             ~2h 15m
           </div>
-          <ul style={{ fontSize: '0.75rem', color: '#cbd5e1', paddingLeft: '18px', lineHeight: 1.6 }}>
+          <ul style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', paddingLeft: '18px', lineHeight: 1.6 }}>
             <li>Consumer phone complaints received</li>
             <li>Field line patrol van dispatched in traffic</li>
             <li>Manual pole-mounted gang switch opening</li>
@@ -107,13 +107,13 @@ export const SelfHealingAutomation = () => {
 
         {/* Outage Time Reduction Metric */}
         <div className="grid-card" style={{ padding: '20px', background: 'rgba(16, 185, 129, 0.05)', border: '1px solid rgba(16, 185, 129, 0.25)', textAlign: 'center' }}>
-          <div style={{ fontSize: '0.75rem', color: '#34d399', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 'bold' }}>
+          <div style={{ fontSize: '0.75rem', color: '#10b981', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 'bold' }}>
             Downtime Slashing Factor
           </div>
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.8rem', fontWeight: '800', color: '#10b981', margin: '8px 0' }}>
             99.9%
           </div>
-          <div style={{ fontSize: '0.8rem', color: '#cbd5e1' }}>
+          <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
             From 135 minutes down to &lt; 10 seconds. Direct impact on Indian utility SAIDI indices.
           </div>
         </div>
@@ -122,15 +122,15 @@ export const SelfHealingAutomation = () => {
       {/* 3-Stage Visual Self-Healing Pipeline */}
       <div className="grid-card" style={{ padding: '24px' }}>
         <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.15rem', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Zap size={20} color="#38bdf8" />
+          <Zap size={20} color="var(--accent-cyan)" />
           Autonomous 3-Step FLISR Execution Pipeline
         </h3>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
           {/* Step 1: Detection & Trip */}
           <div style={{
-            background: flisrStage === 'DETECTION' || flisrStage === 'ISOLATION' || flisrStage === 'RESTORATION' || flisrStage === 'RESTORED' ? 'rgba(56, 189, 248, 0.08)' : 'rgba(0,0,0,0.25)',
-            border: flisrStage === 'DETECTION' ? '2px solid #38bdf8' : '1px solid var(--border-subtle)',
+            background: flisrStage === 'DETECTION' || flisrStage === 'ISOLATION' || flisrStage === 'RESTORATION' || flisrStage === 'RESTORED' ? 'rgba(14, 165, 233, 0.1)' : 'var(--bg-stat-box)',
+            border: flisrStage === 'DETECTION' ? '2px solid var(--accent-cyan)' : '1px solid var(--border-subtle)',
             borderRadius: '10px',
             padding: '18px'
           }}>
@@ -138,7 +138,7 @@ export const SelfHealingAutomation = () => {
               <span className="badge badge-info">STEP 01</span>
               {flisrStage ? <CheckCircle2 size={16} color="#10b981" /> : <Clock size={16} color="#64748b" />}
             </div>
-            <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1rem', color: '#f8fafc', marginBottom: '6px' }}>
+            <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1rem', color: 'var(--text-primary)', marginBottom: '6px' }}>
               Fault Detection & Trip
             </h4>
             <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
@@ -148,7 +148,7 @@ export const SelfHealingAutomation = () => {
 
           {/* Step 2: Sectionalizer Isolation */}
           <div style={{
-            background: flisrStage === 'ISOLATION' || flisrStage === 'RESTORATION' || flisrStage === 'RESTORED' ? 'rgba(245, 158, 11, 0.08)' : 'rgba(0,0,0,0.25)',
+            background: flisrStage === 'ISOLATION' || flisrStage === 'RESTORATION' || flisrStage === 'RESTORED' ? 'rgba(245, 158, 11, 0.1)' : 'var(--bg-stat-box)',
             border: flisrStage === 'ISOLATION' ? '2px solid #f59e0b' : '1px solid var(--border-subtle)',
             borderRadius: '10px',
             padding: '18px'
@@ -157,7 +157,7 @@ export const SelfHealingAutomation = () => {
               <span className="badge badge-warning">STEP 02</span>
               {(flisrStage === 'RESTORATION' || flisrStage === 'RESTORED') ? <CheckCircle2 size={16} color="#10b981" /> : <Clock size={16} color="#64748b" />}
             </div>
-            <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1rem', color: '#f8fafc', marginBottom: '6px' }}>
+            <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1rem', color: 'var(--text-primary)', marginBottom: '6px' }}>
               Motorized Isolation & Upstream Restore
             </h4>
             <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
@@ -167,7 +167,7 @@ export const SelfHealingAutomation = () => {
 
           {/* Step 3: Tie-Switch Rerouting */}
           <div style={{
-            background: flisrStage === 'RESTORED' ? 'rgba(16, 185, 129, 0.08)' : 'rgba(0,0,0,0.25)',
+            background: flisrStage === 'RESTORED' ? 'rgba(16, 185, 129, 0.1)' : 'var(--bg-stat-box)',
             border: flisrStage === 'RESTORED' ? '2px solid #10b981' : '1px solid var(--border-subtle)',
             borderRadius: '10px',
             padding: '18px'
@@ -176,7 +176,7 @@ export const SelfHealingAutomation = () => {
               <span className="badge badge-purple">STEP 03</span>
               {flisrStage === 'RESTORED' ? <CheckCircle2 size={16} color="#10b981" /> : <Clock size={16} color="#64748b" />}
             </div>
-            <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1rem', color: '#f8fafc', marginBottom: '6px' }}>
+            <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1rem', color: 'var(--text-primary)', marginBottom: '6px' }}>
               Tie-Switch Power Reroute
             </h4>
             <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
@@ -189,7 +189,7 @@ export const SelfHealingAutomation = () => {
       {/* Real-Time FLISR Event Log */}
       <div className="grid-card" style={{ padding: '20px' }}>
         <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1rem', marginBottom: '14px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Clock size={16} color="#38bdf8" />
+          <Clock size={16} color="var(--accent-cyan)" />
           Sub-Second Automation Event Log
         </h4>
 
@@ -203,7 +203,7 @@ export const SelfHealingAutomation = () => {
               <div 
                 key={idx} 
                 style={{ 
-                  background: 'rgba(0,0,0,0.3)', 
+                  background: 'var(--bg-stat-box)', 
                   padding: '10px 14px', 
                   borderRadius: '6px', 
                   border: '1px solid var(--border-subtle)',
@@ -212,13 +212,13 @@ export const SelfHealingAutomation = () => {
                   gap: '12px'
                 }}
               >
-                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: '#38bdf8', minWidth: '55px', fontWeight: 'bold' }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: 'var(--accent-cyan)', minWidth: '55px', fontWeight: 'bold' }}>
                   {log.time}
                 </span>
                 <span className="badge badge-info" style={{ minWidth: '150px' }}>
                   {log.stage}
                 </span>
-                <span style={{ fontSize: '0.8rem', color: '#cbd5e1' }}>
+                <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
                   {log.detail}
                 </span>
               </div>

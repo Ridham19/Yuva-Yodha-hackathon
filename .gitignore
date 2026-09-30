@@ -29,13 +29,35 @@ out/
 
 # Environment and secrets
 .env
-.env.production
-.env.development
-.env.local
-.env.*.local
+.env.*
+!.env.example
+*.env
 *.pem
 *.key
 *.cert
+*.secret
+
+# Database & SQLite Storage
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+backend/data/*.db
+!backend/data/.gitkeep
+
+# Python & ML artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+*.pt
+*.pth
+*.onnx
+
 
 # Editor directories and files
 .vscode/*

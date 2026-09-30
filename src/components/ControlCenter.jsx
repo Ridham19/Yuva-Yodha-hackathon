@@ -84,16 +84,16 @@ export const ControlCenter = () => {
             </p>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'rgba(0,0,0,0.3)', padding: '6px 12px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
-              <UserCheck size={16} color="#38bdf8" />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', background: 'var(--bg-stat-box)', padding: '6px 12px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+              <UserCheck size={16} color="var(--text-accent)" />
               <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>Operator:</span>
               <select 
                 value={selectedOperatorId} 
                 onChange={(e) => setSelectedOperatorId(e.target.value)}
-                style={{ background: 'transparent', color: '#38bdf8', border: 'none', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', outline: 'none' }}
+                style={{ background: 'transparent', color: 'var(--text-accent)', border: 'none', fontSize: '0.8rem', fontWeight: 'bold', cursor: 'pointer', outline: 'none' }}
               >
                 {OPERATORS.map(op => (
-                  <option key={op.id} value={op.id} style={{ background: '#0f172a', color: '#f8fafc' }}>
+                  <option key={op.id} value={op.id} style={{ background: 'var(--bg-card)', color: 'var(--text-primary)' }}>
                     {op.label}
                   </option>
                 ))}
@@ -121,7 +121,7 @@ export const ControlCenter = () => {
                 <div 
                   key={feeder.id}
                   style={{
-                    background: 'rgba(0,0,0,0.3)',
+                    background: 'var(--bg-stat-box)',
                     border: '1px solid var(--border-subtle)',
                     borderRadius: '8px',
                     padding: '14px 16px',
@@ -133,7 +133,7 @@ export const ControlCenter = () => {
                 >
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: '#38bdf8', fontWeight: 'bold' }}>
+                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--text-accent)', fontWeight: 'bold' }}>
                         {feeder.id}
                       </span>
                       <strong style={{ fontSize: '0.9rem' }}>{feeder.name}</strong>
@@ -163,7 +163,7 @@ export const ControlCenter = () => {
 
           {/* Motorized Tie-Switch & Demand Response Section */}
           <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1px solid var(--border-subtle)' }}>
-            <h5 style={{ fontFamily: 'var(--font-heading)', fontSize: '0.95rem', color: '#cbd5e1', marginBottom: '12px' }}>
+            <h5 style={{ fontFamily: 'var(--font-heading)', fontSize: '0.95rem', color: 'var(--text-secondary)', marginBottom: '12px' }}>
               Auxiliary Switchgear & Demand Response
             </h5>
 
@@ -207,9 +207,9 @@ export const ControlCenter = () => {
               </div>
 
               {/* Auto-ADR Autonomous Frequency Guard Armed Switch */}
-              <div style={{ background: isAutoAdrArmed ? 'rgba(16, 185, 129, 0.08)' : 'rgba(0,0,0,0.3)', border: isAutoAdrArmed ? '1px solid rgba(16, 185, 129, 0.3)' : '1px solid var(--border-subtle)', borderRadius: '8px', padding: '12px 14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <div style={{ background: isAutoAdrArmed ? 'rgba(16, 185, 129, 0.08)' : 'var(--bg-stat-box)', border: isAutoAdrArmed ? '1px solid rgba(16, 185, 129, 0.3)' : '1px solid var(--border-subtle)', borderRadius: '8px', padding: '12px 14px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
-                  <div style={{ fontWeight: 'bold', fontSize: '0.85rem', color: isAutoAdrArmed ? '#34d399' : '#94a3b8', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <div style={{ fontWeight: 'bold', fontSize: '0.85rem', color: isAutoAdrArmed ? '#34d399' : 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <ShieldCheck size={16} /> Autonomous ADR Frequency Guard
                   </div>
                   <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
@@ -240,7 +240,7 @@ export const ControlCenter = () => {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             {/* Frequency Low Threshold */}
-            <div style={{ background: 'rgba(0,0,0,0.3)', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+            <div style={{ background: 'var(--bg-stat-box)', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
                 <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Under-Frequency Alarm Limit (Hz)</span>
                 <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold', color: '#f59e0b' }}>
@@ -264,10 +264,10 @@ export const ControlCenter = () => {
             </div>
 
             {/* Frequency High Threshold */}
-            <div style={{ background: 'rgba(0,0,0,0.3)', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+            <div style={{ background: 'var(--bg-stat-box)', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
                 <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Over-Frequency Alarm Limit (Hz)</span>
-                <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold', color: '#38bdf8' }}>
+                <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold', color: 'var(--text-accent)' }}>
                   {thresholds.freqHighHz} Hz
                 </span>
               </div>
@@ -278,7 +278,7 @@ export const ControlCenter = () => {
                 step="0.05" 
                 value={thresholds.freqHighHz} 
                 onChange={(e) => updateThreshold('freqHighHz', e.target.value)}
-                style={{ width: '100%', accentColor: '#38bdf8' }}
+                style={{ width: '100%', accentColor: 'var(--text-accent)' }}
               />
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.65rem', color: 'var(--text-muted)' }}>
                 <span>50.05 Hz</span>
@@ -288,7 +288,7 @@ export const ControlCenter = () => {
             </div>
 
             {/* Overcurrent Max (Amps) */}
-            <div style={{ background: 'rgba(0,0,0,0.3)', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+            <div style={{ background: 'var(--bg-stat-box)', padding: '12px 16px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
                 <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Feeder Overcurrent Trip Ceiling (A)</span>
                 <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold', color: '#ef4444' }}>
@@ -376,12 +376,12 @@ export const ControlCenter = () => {
                   <tr 
                     key={log.id || idx} 
                     style={{ 
-                      borderBottom: '1px solid rgba(255,255,255,0.04)',
-                      background: idx % 2 === 0 ? 'rgba(0,0,0,0.15)' : 'transparent'
+                      borderBottom: '1px solid var(--border-subtle)',
+                      background: idx % 2 === 0 ? 'var(--bg-subtle)' : 'transparent'
                     }}
                   >
-                    <td style={{ padding: '10px 12px', fontFamily: 'var(--font-mono)', color: '#94a3b8' }}>{log.id}</td>
-                    <td style={{ padding: '10px 12px', fontFamily: 'var(--font-mono)', color: '#38bdf8' }}>{log.timestamp}</td>
+                    <td style={{ padding: '10px 12px', fontFamily: 'var(--font-mono)', color: 'var(--text-muted)' }}>{log.id}</td>
+                    <td style={{ padding: '10px 12px', fontFamily: 'var(--font-mono)', color: 'var(--text-accent)' }}>{log.timestamp}</td>
                     <td style={{ padding: '10px 12px', fontWeight: 'bold' }}>
                       {log.feederId} <span style={{ color: 'var(--text-secondary)', fontWeight: 'normal', fontSize: '0.75rem' }}>({log.feederName})</span>
                     </td>
@@ -391,13 +391,13 @@ export const ControlCenter = () => {
                       </span>
                     </td>
                     <td style={{ padding: '10px 12px' }}>
-                      <span style={{ fontFamily: 'var(--font-mono)', color: '#f8fafc', fontWeight: '600' }}>{log.operator}</span>
+                      <span style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-primary)', fontWeight: '600' }}>{log.operator}</span>
                       {log.role && <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>{log.role}</div>}
                     </td>
                     <td style={{ padding: '10px 12px', color: '#10b981', fontSize: '0.75rem' }}>
                       ✓ {log.interlockStatus || 'CLEAR & VALIDATED'}
                     </td>
-                    <td style={{ padding: '10px 12px', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: '#c4b5fd' }}>
+                    <td style={{ padding: '10px 12px', fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: '#8b5cf6' }}>
                       {log.protocol || 'IEC 61850 GOOSE'}
                     </td>
                     <td style={{ padding: '10px 12px' }}>
@@ -422,16 +422,16 @@ export const ControlCenter = () => {
               </h3>
             </div>
 
-            <p style={{ fontSize: '0.85rem', color: '#cbd5e1', marginBottom: '16px', lineHeight: 1.5 }}>
+            <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '16px', lineHeight: 1.5 }}>
               You are issuing a direct remote command to <strong>{pendingAction.targetState}</strong> Circuit Breaker <strong>{pendingAction.feederId} ({pendingAction.feederName})</strong> on the live 11 kV bus.
             </p>
 
-            <div style={{ background: 'rgba(0,0,0,0.4)', padding: '12px', borderRadius: '8px', marginBottom: '16px', fontSize: '0.8rem' }}>
-              <div><strong>Operator ID:</strong> <span style={{ fontFamily: 'var(--font-mono)', color: '#38bdf8' }}>{operatorId}</span></div>
+            <div style={{ background: 'var(--bg-stat-box)', padding: '12px', borderRadius: '8px', marginBottom: '16px', fontSize: '0.8rem', border: '1px solid var(--border-subtle)' }}>
+              <div><strong>Operator ID:</strong> <span style={{ fontFamily: 'var(--font-mono)', color: 'var(--text-accent)' }}>{operatorId}</span></div>
               <div style={{ marginTop: '4px' }}><strong>Target Action:</strong> <span style={{ color: pendingAction.targetState === 'TRIP' ? '#ef4444' : '#10b981', fontWeight: 'bold' }}>{pendingAction.targetState} BREAKER</span></div>
             </div>
 
-            <label style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.8rem', color: '#e2e8f0', cursor: 'pointer', marginBottom: '20px' }}>
+            <label style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.8rem', color: 'var(--text-primary)', cursor: 'pointer', marginBottom: '20px' }}>
               <input 
                 type="checkbox" 
                 checked={safetyConfirmed} 

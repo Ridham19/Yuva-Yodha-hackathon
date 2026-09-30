@@ -87,27 +87,27 @@ export const PredictiveMaintenance = () => {
               {/* Health Score & RUL Big Gauge */}
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '20px' }}>
                 {/* Health Index (THI) */}
-                <div style={{ background: 'rgba(0,0,0,0.3)', padding: '16px', borderRadius: '10px', border: '1px solid var(--border-subtle)', textAlign: 'center' }}>
+                <div style={{ background: 'var(--bg-stat-box)', padding: '16px', borderRadius: '10px', border: '1px solid var(--border-subtle)', textAlign: 'center' }}>
                   <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
                     Transformer Health Index (THI)
                   </div>
                   <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.4rem', fontWeight: '800', color: isHealthy ? '#10b981' : '#f59e0b', margin: '4px 0' }}>
                     {transformer.healthIndexPct}%
                   </div>
-                  <div style={{ fontSize: '0.75rem', color: isHealthy ? '#34d399' : '#fbbf24' }}>
+                  <div style={{ fontSize: '0.75rem', color: isHealthy ? '#10b981' : '#f59e0b' }}>
                     {isHealthy ? 'Optimal Dielectric Strength' : 'Elevated Thermal Stress'}
                   </div>
                 </div>
 
                 {/* Remaining Useful Life */}
-                <div style={{ background: 'rgba(0,0,0,0.3)', padding: '16px', borderRadius: '10px', border: '1px solid var(--border-subtle)', textAlign: 'center' }}>
+                <div style={{ background: 'var(--bg-stat-box)', padding: '16px', borderRadius: '10px', border: '1px solid var(--border-subtle)', textAlign: 'center' }}>
                   <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>
                     Predicted Remaining Useful Life
                   </div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.4rem', fontWeight: '800', color: '#38bdf8', margin: '4px 0' }}>
-                    {transformer.predictedRulYears} <span style={{ fontSize: '1rem', color: '#94a3b8' }}>Years</span>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.4rem', fontWeight: '800', color: 'var(--accent-cyan)', margin: '4px 0' }}>
+                    {transformer.predictedRulYears} <span style={{ fontSize: '1rem', color: 'var(--text-muted)' }}>Years</span>
                   </div>
-                  <div style={{ fontSize: '0.75rem', color: '#cbd5e1' }}>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
                     {isHealthy ? 'Next Overhaul: 2040' : 'Recommended Overhaul: 2032'}
                   </div>
                 </div>
@@ -115,34 +115,34 @@ export const PredictiveMaintenance = () => {
 
               {/* Temperatures & Loading */}
               <div className="grid-3col" style={{ gap: '10px', marginBottom: '16px' }}>
-                <div style={{ background: 'rgba(255,255,255,0.02)', padding: '10px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: 'var(--bg-stat-box)', padding: '10px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>WINDING TEMP</div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: '700', color: transformer.windingTempC > 75 ? '#f59e0b' : '#f8fafc' }}>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: '700', color: transformer.windingTempC > 75 ? '#f59e0b' : 'var(--text-primary)' }}>
                     {transformer.windingTempC}°C
                   </div>
-                  <div style={{ fontSize: '0.65rem', color: '#94a3b8' }}>Limit: 95°C</div>
+                  <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>Limit: 95°C</div>
                 </div>
 
-                <div style={{ background: 'rgba(255,255,255,0.02)', padding: '10px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: 'var(--bg-stat-box)', padding: '10px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>TOP OIL TEMP</div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: '700', color: '#f8fafc' }}>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: '700', color: 'var(--text-primary)' }}>
                     {transformer.oilTempC}°C
                   </div>
-                  <div style={{ fontSize: '0.65rem', color: '#94a3b8' }}>Limit: 85°C</div>
+                  <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>Limit: 85°C</div>
                 </div>
 
-                <div style={{ background: 'rgba(255,255,255,0.02)', padding: '10px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: 'var(--bg-stat-box)', padding: '10px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>VIBRATION</div>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: '700', color: transformer.vibrationMmS > 3.0 ? '#f59e0b' : '#f8fafc' }}>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: '700', color: transformer.vibrationMmS > 3.0 ? '#f59e0b' : 'var(--text-primary)' }}>
                     {transformer.vibrationMmS} mm/s
                   </div>
-                  <div style={{ fontSize: '0.65rem', color: '#94a3b8' }}>Core RMS</div>
+                  <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>Core RMS</div>
                 </div>
               </div>
 
               {/* Dissolved Gas Analysis (DGA) Indicators */}
-              <div style={{ background: 'rgba(0,0,0,0.25)', padding: '14px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
-                <div style={{ fontSize: '0.75rem', fontWeight: 'bold', color: '#cbd5e1', marginBottom: '8px' }}>
+              <div style={{ background: 'var(--bg-stat-box)', padding: '14px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ fontSize: '0.75rem', fontWeight: 'bold', color: 'var(--text-primary)', marginBottom: '8px' }}>
                   Online Dissolved Gas Analysis (DGA PPMs)
                 </div>
                 
@@ -153,7 +153,7 @@ export const PredictiveMaintenance = () => {
                       <span>H₂ (Hydrogen)</span>
                       <span style={{ fontFamily: 'var(--font-mono)' }}>{transformer.dgaH2Ppm} ppm</span>
                     </div>
-                    <div style={{ background: '#1e293b', height: '4px', borderRadius: '2px', marginTop: '4px' }}>
+                    <div style={{ background: 'var(--track-bg)', height: '4px', borderRadius: '2px', marginTop: '4px' }}>
                       <div style={{ background: transformer.dgaH2Ppm > 70 ? '#f59e0b' : '#10b981', width: `${(transformer.dgaH2Ppm / 150) * 100}%`, height: '100%' }} />
                     </div>
                   </div>
@@ -164,7 +164,7 @@ export const PredictiveMaintenance = () => {
                       <span>CH₄ (Methane)</span>
                       <span style={{ fontFamily: 'var(--font-mono)' }}>{transformer.dgaCh4Ppm} ppm</span>
                     </div>
-                    <div style={{ background: '#1e293b', height: '4px', borderRadius: '2px', marginTop: '4px' }}>
+                    <div style={{ background: 'var(--track-bg)', height: '4px', borderRadius: '2px', marginTop: '4px' }}>
                       <div style={{ background: transformer.dgaCh4Ppm > 60 ? '#f59e0b' : '#10b981', width: `${(transformer.dgaCh4Ppm / 120) * 100}%`, height: '100%' }} />
                     </div>
                   </div>
@@ -175,7 +175,7 @@ export const PredictiveMaintenance = () => {
                       <span>C₂H₄ (Ethylene)</span>
                       <span style={{ fontFamily: 'var(--font-mono)' }}>{transformer.dgaC2h4Ppm} ppm</span>
                     </div>
-                    <div style={{ background: '#1e293b', height: '4px', borderRadius: '2px', marginTop: '4px' }}>
+                    <div style={{ background: 'var(--track-bg)', height: '4px', borderRadius: '2px', marginTop: '4px' }}>
                       <div style={{ background: transformer.dgaC2h4Ppm > 40 ? '#f59e0b' : '#10b981', width: `${(transformer.dgaC2h4Ppm / 80) * 100}%`, height: '100%' }} />
                     </div>
                   </div>
@@ -223,11 +223,11 @@ export const PredictiveMaintenance = () => {
         {/* 3 Top Gauges */}
         <div className="grid-3col" style={{ marginBottom: '24px' }}>
           {/* Current AT&C Loss */}
-          <div style={{ background: 'rgba(0,0,0,0.3)', padding: '18px', borderRadius: '10px', border: '1px solid var(--border-subtle)', textAlign: 'center' }}>
+          <div style={{ background: 'var(--bg-stat-box)', padding: '18px', borderRadius: '10px', border: '1px solid var(--border-subtle)', textAlign: 'center' }}>
             <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               Substation AT&C Loss
             </div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.6rem', fontWeight: '800', color: '#38bdf8', margin: '4px 0' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.6rem', fontWeight: '800', color: 'var(--accent-cyan)', margin: '4px 0' }}>
               14.80%
             </div>
             <div style={{ fontSize: '0.75rem', color: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px' }}>
@@ -236,27 +236,27 @@ export const PredictiveMaintenance = () => {
           </div>
 
           {/* National Benchmark vs Target */}
-          <div style={{ background: 'rgba(0,0,0,0.3)', padding: '18px', borderRadius: '10px', border: '1px solid var(--border-subtle)', textAlign: 'center' }}>
+          <div style={{ background: 'var(--bg-stat-box)', padding: '18px', borderRadius: '10px', border: '1px solid var(--border-subtle)', textAlign: 'center' }}>
             <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               CEA National Benchmark
             </div>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.6rem', fontWeight: '800', color: '#f59e0b', margin: '4px 0' }}>
               16.50%
             </div>
-            <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
+            <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
               GridPulse is <strong>1.70% below</strong> national average
             </div>
           </div>
 
           {/* RDSS UDAY Target */}
-          <div style={{ background: 'rgba(0,0,0,0.3)', padding: '18px', borderRadius: '10px', border: '1px solid var(--border-subtle)', textAlign: 'center' }}>
+          <div style={{ background: 'var(--bg-stat-box)', padding: '18px', borderRadius: '10px', border: '1px solid var(--border-subtle)', textAlign: 'center' }}>
             <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
               Statutory RDSS Target
             </div>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.6rem', fontWeight: '800', color: '#10b981', margin: '4px 0' }}>
               &lt; 12.00%
             </div>
-            <div style={{ fontSize: '0.75rem', color: '#34d399' }}>
+            <div style={{ fontSize: '0.75rem', color: '#10b981' }}>
               Trajectory on track for Q4 compliance
             </div>
           </div>
@@ -267,7 +267,7 @@ export const PredictiveMaintenance = () => {
           {/* Technical Losses */}
           <div style={{ background: 'rgba(6, 182, 212, 0.05)', border: '1px solid rgba(6, 182, 212, 0.25)', borderRadius: '10px', padding: '18px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
-              <span style={{ fontWeight: 'bold', fontSize: '0.95rem', color: '#38bdf8', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontWeight: 'bold', fontSize: '0.95rem', color: 'var(--accent-cyan)', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Zap size={18} /> Technical Losses (9.70%)
               </span>
               <span className="badge badge-info">PHYSICAL DISSIPATION</span>
@@ -276,33 +276,33 @@ export const PredictiveMaintenance = () => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {/* Conductor I2R */}
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: '#cbd5e1' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
                   <span>Conductor I²R Line Heating</span>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold' }}>5.40%</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold', color: 'var(--text-primary)' }}>5.40%</span>
                 </div>
-                <div style={{ background: '#1e293b', height: '6px', borderRadius: '3px', marginTop: '4px', overflow: 'hidden' }}>
+                <div style={{ background: 'var(--track-bg)', height: '6px', borderRadius: '3px', marginTop: '4px', overflow: 'hidden' }}>
                   <div style={{ background: '#06b6d4', width: '55.6%', height: '100%' }} />
                 </div>
               </div>
 
               {/* Transformer Core & Copper */}
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: '#cbd5e1' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
                   <span>Distribution Transformer (DT) Core & Copper Loss</span>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold' }}>3.20%</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold', color: 'var(--text-primary)' }}>3.20%</span>
                 </div>
-                <div style={{ background: '#1e293b', height: '6px', borderRadius: '3px', marginTop: '4px', overflow: 'hidden' }}>
-                  <div style={{ background: '#38bdf8', width: '33.0%', height: '100%' }} />
+                <div style={{ background: 'var(--track-bg)', height: '6px', borderRadius: '3px', marginTop: '4px', overflow: 'hidden' }}>
+                  <div style={{ background: 'var(--accent-cyan)', width: '33.0%', height: '100%' }} />
                 </div>
               </div>
 
               {/* Phase Unbalance */}
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: '#cbd5e1' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
                   <span>Phase Unbalance Neutral Current Dissipation</span>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold' }}>1.10%</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold', color: 'var(--text-primary)' }}>1.10%</span>
                 </div>
-                <div style={{ background: '#1e293b', height: '6px', borderRadius: '3px', marginTop: '4px', overflow: 'hidden' }}>
+                <div style={{ background: 'var(--track-bg)', height: '6px', borderRadius: '3px', marginTop: '4px', overflow: 'hidden' }}>
                   <div style={{ background: '#818cf8', width: '11.4%', height: '100%' }} />
                 </div>
               </div>
@@ -312,7 +312,7 @@ export const PredictiveMaintenance = () => {
           {/* Non-Technical / Commercial Losses */}
           <div style={{ background: 'rgba(245, 158, 11, 0.05)', border: '1px solid rgba(245, 158, 11, 0.25)', borderRadius: '10px', padding: '18px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
-              <span style={{ fontWeight: 'bold', fontSize: '0.95rem', color: '#fbbf24', display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <span style={{ fontWeight: 'bold', fontSize: '0.95rem', color: '#f59e0b', display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <Search size={18} /> Commercial / Non-Technical (5.10%)
               </span>
               <span className="badge badge-warning">THEFT & UNMETERED</span>
@@ -321,33 +321,33 @@ export const PredictiveMaintenance = () => {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {/* Unmetered Agricultural */}
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: '#cbd5e1' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
                   <span>Unmetered Agricultural Pump Sets</span>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold' }}>3.00%</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold', color: 'var(--text-primary)' }}>3.00%</span>
                 </div>
-                <div style={{ background: '#1e293b', height: '6px', borderRadius: '3px', marginTop: '4px', overflow: 'hidden' }}>
+                <div style={{ background: 'var(--track-bg)', height: '6px', borderRadius: '3px', marginTop: '4px', overflow: 'hidden' }}>
                   <div style={{ background: '#f59e0b', width: '58.8%', height: '100%' }} />
                 </div>
               </div>
 
               {/* Direct Hooking / Theft */}
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: '#cbd5e1' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
                   <span>Direct Line Hooking & Shunt Theft</span>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold' }}>1.80%</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold', color: 'var(--text-primary)' }}>1.80%</span>
                 </div>
-                <div style={{ background: '#1e293b', height: '6px', borderRadius: '3px', marginTop: '4px', overflow: 'hidden' }}>
+                <div style={{ background: 'var(--track-bg)', height: '6px', borderRadius: '3px', marginTop: '4px', overflow: 'hidden' }}>
                   <div style={{ background: '#ef4444', width: '35.3%', height: '100%' }} />
                 </div>
               </div>
 
               {/* Meter Drift */}
               <div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: '#cbd5e1' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
                   <span>Defective / Sluggish Mechanical Meters</span>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold' }}>0.30%</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontWeight: 'bold', color: 'var(--text-primary)' }}>0.30%</span>
                 </div>
-                <div style={{ background: '#1e293b', height: '6px', borderRadius: '3px', marginTop: '4px', overflow: 'hidden' }}>
+                <div style={{ background: 'var(--track-bg)', height: '6px', borderRadius: '3px', marginTop: '4px', overflow: 'hidden' }}>
                   <div style={{ background: '#fbbf24', width: '5.9%', height: '100%' }} />
                 </div>
               </div>
@@ -356,9 +356,9 @@ export const PredictiveMaintenance = () => {
         </div>
 
         {/* Real-Time Energy Audit Balance Meter Bar */}
-        <div style={{ background: 'rgba(0,0,0,0.3)', padding: '16px 20px', borderRadius: '10px', border: '1px solid var(--border-subtle)', marginBottom: '24px' }}>
+        <div style={{ background: 'var(--bg-stat-box)', padding: '16px 20px', borderRadius: '10px', border: '1px solid var(--border-subtle)', marginBottom: '24px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-            <span style={{ fontSize: '0.85rem', fontWeight: 'bold', color: '#f8fafc' }}>
+            <span style={{ fontSize: '0.85rem', fontWeight: 'bold', color: 'var(--text-primary)' }}>
               Energy Balance Reconciliation (Current Month: 142.60 MU)
             </span>
             <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.8rem', color: '#10b981' }}>
@@ -366,8 +366,8 @@ export const PredictiveMaintenance = () => {
             </span>
           </div>
 
-          <div style={{ display: 'flex', height: '24px', borderRadius: '6px', overflow: 'hidden', background: '#1e293b', marginBottom: '8px' }}>
-            <div style={{ width: '85.2%', background: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', color: '#070b14', fontWeight: 'bold' }} title="Billed Energy: 121.50 MU">
+          <div style={{ display: 'flex', height: '24px', borderRadius: '6px', overflow: 'hidden', background: 'var(--track-bg)', marginBottom: '8px' }}>
+            <div style={{ width: '85.2%', background: '#10b981', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', color: '#ffffff', fontWeight: 'bold' }} title="Billed Energy: 121.50 MU">
               Billed Energy (121.50 MU • 85.2%)
             </div>
             <div style={{ width: '9.7%', background: '#0284c7', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', color: '#fff', fontWeight: 'bold' }} title="Technical Loss: 13.83 MU">
@@ -387,8 +387,8 @@ export const PredictiveMaintenance = () => {
 
         {/* Feeder-Level Loss Table & Anomaly Localization */}
         <div>
-          <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1rem', color: '#f8fafc', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <BarChart3 size={16} color="#38bdf8" />
+          <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1rem', color: 'var(--text-primary)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <BarChart3 size={16} color="var(--accent-cyan)" />
             Feeder-by-Feeder Loss Audit & Anomaly Detection
           </h4>
 
@@ -406,9 +406,9 @@ export const PredictiveMaintenance = () => {
               </thead>
               <tbody>
                 {feederLossData.map((f, idx) => (
-                  <tr key={f.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.04)', background: idx % 2 === 0 ? 'rgba(0,0,0,0.15)' : 'transparent' }}>
+                  <tr key={f.id} style={{ borderBottom: '1px solid var(--border-subtle)', background: idx % 2 === 0 ? 'var(--bg-stat-box)' : 'transparent' }}>
                     <td style={{ padding: '10px 12px', fontWeight: 'bold' }}>
-                      <span style={{ color: '#38bdf8' }}>{f.id}</span> - {f.name}
+                      <span style={{ color: 'var(--accent-cyan)' }}>{f.id}</span> - {f.name}
                     </td>
                     <td style={{ padding: '10px 12px', fontFamily: 'var(--font-mono)' }}>{f.inputMu}</td>
                     <td style={{ padding: '10px 12px', fontFamily: 'var(--font-mono)' }}>{f.billedMu}</td>
@@ -420,7 +420,7 @@ export const PredictiveMaintenance = () => {
                         {f.risk} RISK
                       </span>
                     </td>
-                    <td style={{ padding: '10px 12px', color: '#cbd5e1' }}>
+                    <td style={{ padding: '10px 12px', color: 'var(--text-secondary)' }}>
                       {f.anomaly}
                     </td>
                   </tr>

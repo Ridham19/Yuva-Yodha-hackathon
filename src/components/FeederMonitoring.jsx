@@ -66,11 +66,11 @@ export const FeederMonitoring = () => {
                 {renewables.solarIrradianceWm2} W/m²
               </span>
             </div>
-            <div style={{ fontSize: '1.8rem', fontFamily: 'var(--font-mono)', fontWeight: '700', color: '#f8fafc' }}>
-              {renewables.solarOutputMw} <span style={{ fontSize: '1rem', color: '#94a3b8' }}>/ {renewables.solarCapacityMw} MW</span>
+            <div style={{ fontSize: '1.8rem', fontFamily: 'var(--font-mono)', fontWeight: '700', color: 'var(--text-primary)' }}>
+              {renewables.solarOutputMw} <span style={{ fontSize: '1rem', color: 'var(--text-muted)' }}>/ {renewables.solarCapacityMw} MW</span>
             </div>
             {/* Progress bar */}
-            <div style={{ background: '#1e293b', height: '6px', borderRadius: '3px', marginTop: '10px', overflow: 'hidden' }}>
+            <div style={{ background: 'var(--track-bg)', height: '6px', borderRadius: '3px', marginTop: '10px', overflow: 'hidden' }}>
               <div style={{ background: 'linear-gradient(90deg, #f59e0b, #fbbf24)', width: `${(renewables.solarOutputMw / renewables.solarCapacityMw) * 100}%`, height: '100%', transition: 'width 0.4s ease' }} />
             </div>
           </div>
@@ -85,10 +85,10 @@ export const FeederMonitoring = () => {
                 Wind: 7.8 m/s
               </span>
             </div>
-            <div style={{ fontSize: '1.8rem', fontFamily: 'var(--font-mono)', fontWeight: '700', color: '#f8fafc' }}>
-              {renewables.windOutputMw} <span style={{ fontSize: '1rem', color: '#94a3b8' }}>/ {renewables.windCapacityMw} MW</span>
+            <div style={{ fontSize: '1.8rem', fontFamily: 'var(--font-mono)', fontWeight: '700', color: 'var(--text-primary)' }}>
+              {renewables.windOutputMw} <span style={{ fontSize: '1rem', color: 'var(--text-muted)' }}>/ {renewables.windCapacityMw} MW</span>
             </div>
-            <div style={{ background: '#1e293b', height: '6px', borderRadius: '3px', marginTop: '10px', overflow: 'hidden' }}>
+            <div style={{ background: 'var(--track-bg)', height: '6px', borderRadius: '3px', marginTop: '10px', overflow: 'hidden' }}>
               <div style={{ background: 'linear-gradient(90deg, #0284c7, #38bdf8)', width: `${(renewables.windOutputMw / renewables.windCapacityMw) * 100}%`, height: '100%', transition: 'width 0.4s ease' }} />
             </div>
           </div>
@@ -103,10 +103,10 @@ export const FeederMonitoring = () => {
                 {renewables.bessOutputMw > 0 ? `DISCHARGING (+${renewables.bessOutputMw} MW)` : 'STANDBY'}
               </span>
             </div>
-            <div style={{ fontSize: '1.8rem', fontFamily: 'var(--font-mono)', fontWeight: '700', color: '#f8fafc' }}>
-              {renewables.bessCurrentSoCPct}% <span style={{ fontSize: '1rem', color: '#94a3b8' }}>State of Charge</span>
+            <div style={{ fontSize: '1.8rem', fontFamily: 'var(--font-mono)', fontWeight: '700', color: 'var(--text-primary)' }}>
+              {renewables.bessCurrentSoCPct}% <span style={{ fontSize: '1rem', color: 'var(--text-muted)' }}>State of Charge</span>
             </div>
-            <div style={{ background: '#1e293b', height: '6px', borderRadius: '3px', marginTop: '10px', overflow: 'hidden' }}>
+            <div style={{ background: 'var(--track-bg)', height: '6px', borderRadius: '3px', marginTop: '10px', overflow: 'hidden' }}>
               <div style={{ background: 'linear-gradient(90deg, #10b981, #34d399)', width: `${renewables.bessCurrentSoCPct}%`, height: '100%' }} />
             </div>
           </div>
@@ -116,7 +116,7 @@ export const FeederMonitoring = () => {
       {/* 4 Feeder Live Telemetry Cards */}
       <div>
         <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', marginBottom: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Activity size={20} color="#38bdf8" />
+          <Activity size={20} color="var(--text-accent)" />
           11 kV Distribution Feeder Telemetry
         </h3>
 
@@ -138,7 +138,7 @@ export const FeederMonitoring = () => {
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '14px' }}>
                   <div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: '#38bdf8', fontWeight: 'bold' }}>
+                      <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', color: 'var(--text-accent)', fontWeight: 'bold' }}>
                         {feeder.id}
                       </span>
                       <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.1rem' }}>
@@ -157,38 +157,38 @@ export const FeederMonitoring = () => {
                 {/* Main Metrics 4-Box Grid */}
                 <div className="grid-4col" style={{ gap: '10px', marginBottom: '16px' }}>
                   {/* Voltage */}
-                  <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                  <div className="stat-box">
                     <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Voltage (kV)</div>
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.15rem', fontWeight: '700', color: '#f8fafc' }}>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.15rem', fontWeight: '700', color: 'var(--text-primary)' }}>
                       {feeder.voltageKv.toFixed(2)}
                     </div>
                     <div style={{ fontSize: '0.65rem', color: '#10b981' }}>Nominal 11.0</div>
                   </div>
 
                   {/* Current */}
-                  <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                  <div className="stat-box">
                     <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Current (Amps)</div>
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.15rem', fontWeight: '700', color: isOverloaded ? '#ef4444' : '#f8fafc' }}>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.15rem', fontWeight: '700', color: isOverloaded ? '#ef4444' : 'var(--text-primary)' }}>
                       {feeder.currentA.toFixed(1)}
                     </div>
-                    <div style={{ fontSize: '0.65rem', color: isOverloaded ? '#ef4444' : '#94a3b8' }}>
+                    <div style={{ fontSize: '0.65rem', color: isOverloaded ? '#ef4444' : 'var(--text-muted)' }}>
                       Max {thresholds.feederCurrentMaxA}A
                     </div>
                   </div>
 
                   {/* Active Power */}
-                  <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                  <div className="stat-box">
                     <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Active (MW)</div>
-                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.15rem', fontWeight: '700', color: '#38bdf8' }}>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.15rem', fontWeight: '700', color: 'var(--text-accent)' }}>
                       {feeder.activePowerMw.toFixed(2)}
                     </div>
-                    <div style={{ fontSize: '0.65rem', color: '#94a3b8' }}>
+                    <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)' }}>
                       {feeder.reactivePowerMvar.toFixed(1)} MVAR
                     </div>
                   </div>
 
                   {/* Power Factor */}
-                  <div style={{ background: 'rgba(0,0,0,0.3)', padding: '10px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                  <div className="stat-box">
                     <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>Power Factor</div>
                     <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.15rem', fontWeight: '700', color: '#10b981' }}>
                       {feeder.powerFactor}

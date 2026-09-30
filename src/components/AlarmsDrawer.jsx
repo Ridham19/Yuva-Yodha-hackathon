@@ -35,10 +35,10 @@ export const AlarmsDrawer = () => {
       left: 0,
       right: 0,
       zIndex: 90,
-      background: 'rgba(10, 15, 26, 0.95)',
+      background: 'var(--bg-card)',
       backdropFilter: 'blur(16px)',
       borderTop: '1px solid var(--border-medium)',
-      boxShadow: '0 -4px 20px rgba(0, 0, 0, 0.8)',
+      boxShadow: 'var(--shadow-lg)',
       transition: 'all 0.3s ease'
     }}>
       {/* Alarm Bar Header */}
@@ -55,7 +55,7 @@ export const AlarmsDrawer = () => {
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <div style={{ position: 'relative' }}>
-            <BellRing size={18} color={unackCount > 0 ? '#ef4444' : '#38bdf8'} />
+            <BellRing size={18} color={unackCount > 0 ? '#ef4444' : '#0284c7'} />
             {unackCount > 0 && (
               <span style={{
                 position: 'absolute',
@@ -73,7 +73,7 @@ export const AlarmsDrawer = () => {
             )}
           </div>
 
-          <span style={{ fontFamily: 'var(--font-heading)', fontWeight: '600', fontSize: '0.9rem' }}>
+          <span style={{ fontFamily: 'var(--font-heading)', fontWeight: '600', fontSize: '0.9rem', color: 'var(--text-primary)' }}>
             Real-Time SCADA Alarms & Event Dispatch Log
           </span>
 
@@ -88,7 +88,7 @@ export const AlarmsDrawer = () => {
           <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
             {isOpen ? 'Click to collapse' : 'Click to expand alarm stream'}
           </span>
-          {isOpen ? <ChevronDown size={18} /> : <ChevronUp size={18} />}
+          {isOpen ? <ChevronDown size={18} color="var(--text-secondary)" /> : <ChevronUp size={18} color="var(--text-secondary)" />}
         </div>
       </div>
 
@@ -106,8 +106,8 @@ export const AlarmsDrawer = () => {
                   style={{
                     padding: '3px 10px',
                     fontSize: '0.7rem',
-                    background: filter === sev ? 'rgba(56, 189, 248, 0.2)' : 'transparent',
-                    borderColor: filter === sev ? '#38bdf8' : 'var(--border-subtle)'
+                    background: filter === sev ? 'rgba(14, 165, 233, 0.15)' : 'transparent',
+                    borderColor: filter === sev ? 'var(--accent-cyan)' : 'var(--border-subtle)'
                   }}
                 >
                   {sev}
@@ -118,7 +118,7 @@ export const AlarmsDrawer = () => {
             <button
               onClick={(e) => { e.stopPropagation(); clearAcknowledgedAlarms(); }}
               className="btn-outline"
-              style={{ padding: '3px 10px', fontSize: '0.7rem', color: '#94a3b8' }}
+              style={{ padding: '3px 10px', fontSize: '0.7rem', color: 'var(--text-muted)' }}
             >
               <Trash2 size={12} /> Clear Acknowledged
             </button>
@@ -135,7 +135,7 @@ export const AlarmsDrawer = () => {
                 <div
                   key={alarm.id}
                   style={{
-                    background: alarm.acknowledged ? 'rgba(0,0,0,0.2)' : 'rgba(255,255,255,0.03)',
+                    background: alarm.acknowledged ? 'var(--bg-stat-box)' : 'var(--bg-glass)',
                     border: '1px solid var(--border-subtle)',
                     borderRadius: '6px',
                     padding: '8px 12px',
@@ -147,14 +147,14 @@ export const AlarmsDrawer = () => {
                   }}
                 >
                   <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: '#94a3b8' }}>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--text-muted)' }}>
                       {alarm.timestamp}
                     </span>
                     {getSeverityBadge(alarm.severity)}
-                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: '#38bdf8', fontWeight: 'bold' }}>
+                    <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--accent-cyan)', fontWeight: 'bold' }}>
                       [{alarm.source}]
                     </span>
-                    <span style={{ fontSize: '0.8rem', color: '#f8fafc' }}>
+                    <span style={{ fontSize: '0.8rem', color: 'var(--text-primary)' }}>
                       {alarm.message}
                     </span>
                   </div>

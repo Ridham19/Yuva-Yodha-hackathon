@@ -92,13 +92,22 @@ This document outlines the systematic, phased implementation plan to build, test
   3. **Renewable Balancing & BESS Dispatch**:
      - Battery Energy Storage System (BESS) auto-dispatches in megawatts when sudden solar cloud coverage occurs.
 
-### Phase 5: Predictive Maintenance & Anomaly Detection
-- **Goal**: Move from reactive to predictive asset management.
+### Phase 5: Predictive Maintenance & Neural Grid AI Suite
+- **Goal**: Move from reactive to predictive asset management and intelligent real-time grid forecasting.
 - **Deliverables**:
-  1. **Transformer Health Index (THI)**:
-     - Multi-parameter health scoring based on simulated winding temperature, oil temperature, harmonics, and vibration data.
-  2. **Failure Risk Matrix**:
-     - Ranking transformers and feeder lines by Remaining Useful Life (RUL) and priority repair recommendations.
+  1. **Transformer Health Index (THI) & Duval Triangle 1**:
+     - Multi-parameter health scoring based on winding/oil temperatures, harmonics, vibration, and IEEE C57.104 dissolved gas chromatography (%CH₄, %C₂H₄, %C₂H₂).
+     - Arrhenius thermal aging degradation curve estimating Remaining Useful Life (RUL) in years.
+  2. **24-Hour Duck-Curve & Renewable Demand Forecaster**:
+     - Physics-informed Ridge + Diurnal Fourier residual model forecasting day-ahead gross demand, solar output, net duck load curve, and 95% confidence intervals.
+     - Heatwave (26°C - 48°C) and cloud-cover attenuation sensitivity with automated BESS pre-charge advisory.
+  3. **PMU Waveform Fault Classifier & Distance Pinpointer**:
+     - 4.8 kHz sampled 3-phase transient waveform classifier (SLG, L-L, 3-Phase Symmetrical, High-Impedance Arc) with 99.2% accuracy.
+     - Substation fault distance regressor pinpointing line distance in km and linking directly to autonomous FLISR.
+  4. **Smart Meter Non-Technical Loss (NTL) & Electricity Theft Detector**:
+     - Isolation Forest + XGBoost meter anomaly screening with fraud signature diagnosis and vigilance squad dispatch.
+  5. **Microservice Architecture**:
+     - Standalone Python FastAPI service (`backend/ml_service.py`) on port 8000 backed by Scikit-Learn/PyTorch, with Node.js Express dual-engine fallback.
 
 ### Phase 6: Polish, Hackathon Presentation & Demo Mode
 - **Goal**: Maximize judge engagement with a seamless live pitch demonstration.
@@ -112,3 +121,16 @@ This document outlines the systematic, phased implementation plan to build, test
      - AT&C loss reduction percentage.
      - Renewable absorption efficiency index.
   3. **Presentation-Ready Readme & Deck Integration**.
+
+### Phase 7: Next-Gen Grid Intelligence Expansion
+- **Goal**: Enterprise-grade differentiator features for top-tier hackathon judging.
+- **Deliverables**:
+  1. **Cyber-Physical Security & Anti-Spoofing (IEC 62351)**: False Data Injection Attack (FDIA) detection, MitM replay mitigation, and Chi-Square residual state estimation.
+  2. **Real-Time Electricity Market & Merit Order Despatch (IEX MOD)**: Real-time clearing price (₹/kWh) optimization and BESS price arbitrage tracker.
+  3. **EV Fleet V2G Aggregator & Virtual Power Plant (VPP)**: Aggregation of 1,500+ Delhi EV buses and swappable batteries for peak duck-curve shaving.
+  4. **Natural Language SCADA Dispatch Copilot**: Voice/text AI assistant for hands-free control room operations.
+  5. **Substation Digital Twin (Double-Busbar Bay SLD)**: Live interactive on-load bus transfer switching simulation.
+  6. **ESG Carbon Accounting & Regulatory Compliance**: Real-time g CO₂/kWh tracker and 1-click CEA report export.
+  7. **Production-Grade SQLite Database (ACID Compliant)**: Native Node.js 25 relational SQLite engine (`backend/data/gridpulse.db`), 8 smart grid tables, time-series telemetry archive, and interactive SQL query console (`src/components/DatabaseExplorer.jsx`).
+
+

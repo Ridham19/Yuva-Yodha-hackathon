@@ -25,8 +25,11 @@ import {
   SlidersHorizontal,
   Activity,
   Unplug,
-  Crosshair
+  Crosshair,
+  Database
 } from 'lucide-react';
+import { PowerPlantCsvModal } from './PowerPlantCsvModal';
+import { SinkCsvModal } from './SinkCsvModal';
 
 export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
   const {
@@ -45,7 +48,8 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
     triggerFLISRSimulation,
     flisrActive,
     flisrStage,
-    flisrLog
+    flisrLog,
+    theme
   } = useGrid();
 
   const mapContainerRef = useRef(null);
@@ -57,6 +61,8 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
   const [selectedNode, setSelectedNode] = useState(null);
   const [faultInjectionMode, setFaultInjectionMode] = useState(false);
   const [dispatchSliderVal, setDispatchSliderVal] = useState(1800);
+  const [showMapCsvModal, setShowMapCsvModal] = useState(false);
+  const [showMapSinkCsvModal, setShowMapSinkCsvModal] = useState(false);
   const baseTileLayerRef = useRef(null);
 
   // Keep selectedNode synchronized with real-time state changes
@@ -113,6 +119,20 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
         attribution: '&copy; OpenStreetMap contributors | NLDC / POSOCO',
         maxZoom: 18
       });
+    } else if (mapStyle === 'LIGHT' || (mapStyle === 'DARK' && theme === 'light')) {
+      // Crisp Esri World Light Gray Canvas for high-contrast day operations
+      const lightGroup = L.layerGroup([
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+          attribution: '&copy; Esri, OpenStreetMap contributors | NLDC / POSOCO',
+          maxZoom: 16
+        }),
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+          attribution: '',
+          maxZoom: 16,
+          opacity: 0.7
+        })
+      ]);
+      newTileLayer = lightGroup;
     } else {
       // Default: Esri World Dark Gray Canvas (100% Keyless, zero watermarks)
       const darkGroup = L.layerGroup([
@@ -131,7 +151,7 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
 
     newTileLayer.addTo(map);
     baseTileLayerRef.current = newTileLayer;
-  }, [mapStyle]);
+  }, [mapStyle, theme]);
 
   // Leaflet Grid Assets Layer Rendering
   useEffect(() => {
@@ -260,7 +280,7 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
               width: 36px;
               height: 36px;
               border-radius: 50%;
-              background: #0f172a;
+              background: ${theme === 'light' ? '#ffffff' : '#0f172a'};
               border: 2px solid ${markerColor};
               box-shadow: 0 0 ${isTripped ? '18px #ef4444' : '14px ' + markerColor};
               display: flex;
@@ -342,7 +362,7 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
               width: 38px;
               height: 38px;
               border-radius: 50%;
-              background: #0f172a;
+              background: ${theme === 'light' ? '#ffffff' : '#0f172a'};
               border: 2px solid ${borderColor};
               box-shadow: 0 0 16px ${isShed ? 'rgba(245, 158, 11, 0.8)' : 'rgba(16, 185, 129, 0.7)'};
               display: flex;
@@ -381,7 +401,7 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
       });
     }
 
-  }, [activeFilter, corridors, sources, sinks, faultInjectionMode]);
+  }, [activeFilter, corridors, sources, sinks, faultInjectionMode, theme]);
 
   // Aggregate National Overview metrics
   const totalGenMw = sources.reduce((acc, s) => s.status === 'ONLINE' ? acc + s.currentGenMw : acc, 0);
@@ -473,6 +493,19 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
               style={{
                 fontSize: '0.72rem',
                 padding: '5px 10px',
+                background: activeFilter === 'THERMAL' ? 'rgba(139, 92, 246, 0.2)' : 'transparent',
+                borderColor: activeFilter === 'THERMAL' ? '#8b5cf6' : 'var(--border-subtle)',
+                color: activeFilter === 'THERMAL' ? '#c084fc' : 'var(--text-primary)'
+              }}
+              onClick={() => setActiveFilter('THERMAL')}
+            >
+              🏭 Thermal Coal ({sources.filter(s => s.type === 'THERMAL_COAL').length})
+            </button>
+            <button
+              className="btn-outline"
+              style={{
+                fontSize: '0.72rem',
+                padding: '5px 10px',
                 background: activeFilter === 'FACTORIES' ? 'rgba(245, 158, 11, 0.2)' : 'transparent',
                 borderColor: activeFilter === 'FACTORIES' ? '#f59e0b' : 'var(--border-subtle)',
                 color: activeFilter === 'FACTORIES' ? '#fbbf24' : 'var(--text-primary)'
@@ -529,13 +562,26 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
                 style={{
                   fontSize: '0.72rem',
                   padding: '4px 8px',
-                  background: mapStyle === 'DARK' ? 'rgba(56, 189, 248, 0.25)' : 'transparent',
-                  borderColor: mapStyle === 'DARK' ? '#38bdf8' : 'var(--border-subtle)',
-                  color: mapStyle === 'DARK' ? '#38bdf8' : 'var(--text-secondary)'
+                  background: (mapStyle === 'DARK' && theme === 'dark') ? 'rgba(56, 189, 248, 0.25)' : 'transparent',
+                  borderColor: (mapStyle === 'DARK' && theme === 'dark') ? '#38bdf8' : 'var(--border-subtle)',
+                  color: (mapStyle === 'DARK' && theme === 'dark') ? '#38bdf8' : 'var(--text-secondary)'
                 }}
                 onClick={() => setMapStyle('DARK')}
               >
                 🌙 Dark Canvas
+              </button>
+              <button
+                className="btn-outline"
+                style={{
+                  fontSize: '0.72rem',
+                  padding: '4px 8px',
+                  background: (mapStyle === 'LIGHT' || (mapStyle === 'DARK' && theme === 'light')) ? 'rgba(56, 189, 248, 0.25)' : 'transparent',
+                  borderColor: (mapStyle === 'LIGHT' || (mapStyle === 'DARK' && theme === 'light')) ? 'var(--border-active)' : 'var(--border-subtle)',
+                  color: (mapStyle === 'LIGHT' || (mapStyle === 'DARK' && theme === 'light')) ? 'var(--text-accent)' : 'var(--text-secondary)'
+                }}
+                onClick={() => setMapStyle('LIGHT')}
+              >
+                ☀️ Light Canvas
               </button>
               <button
                 className="btn-outline"
@@ -564,15 +610,57 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
                 🗺️ Street
               </button>
             </div>
+
+            {/* CSV Manager Modal Button */}
+            <button
+              className="btn-outline"
+              style={{
+                fontSize: '0.72rem',
+                padding: '4px 10px',
+                marginLeft: '12px',
+                borderColor: 'var(--accent-cyan)',
+                color: 'var(--accent-cyan)',
+                background: 'rgba(14, 165, 233, 0.12)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px'
+              }}
+              onClick={() => setShowMapCsvModal(true)}
+              title="Open Power Plants CSV Database Manager"
+            >
+              <Database size={13} />
+              <span>Plants CSV ({sources.length})</span>
+            </button>
+
+            {/* Sinks CSV Manager Modal Button */}
+            <button
+              className="btn-outline"
+              style={{
+                fontSize: '0.72rem',
+                padding: '4px 10px',
+                marginLeft: '6px',
+                borderColor: 'var(--status-normal)',
+                color: 'var(--status-normal)',
+                background: 'rgba(16, 185, 129, 0.12)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px'
+              }}
+              onClick={() => setShowMapSinkCsvModal(true)}
+              title="Open Demand Sinks (Cities & Factories) CSV Database Manager"
+            >
+              <Building2 size={13} />
+              <span>Sinks CSV ({sinks.length})</span>
+            </button>
           </div>
         </div>
       </div>
 
       {/* Regional RLDCs Quick Telemetry Bar */}
-      <div className="grid-card" style={{ padding: '12px 18px', background: 'rgba(15, 23, 42, 0.65)' }}>
+      <div className="grid-card" style={{ padding: '12px 18px', background: 'var(--bg-glass)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
-          <span style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <Activity size={14} color="#38bdf8" /> 5 REGIONAL LOAD DESPATCH CENTRES (RLDCs):
+          <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <Activity size={14} color="var(--text-accent)" /> 5 REGIONAL LOAD DESPATCH CENTRES (RLDCs):
           </span>
           <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', flex: 1, justifyContent: 'flex-end' }}>
             {regions.map(rldc => {
@@ -581,8 +669,8 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
                 <div 
                   key={rldc.id}
                   style={{
-                    background: isIslanded ? 'rgba(239, 68, 68, 0.2)' : 'rgba(30, 41, 59, 0.6)',
-                    border: `1px solid ${isIslanded ? '#ef4444' : 'var(--border-subtle)'}`,
+                    background: isIslanded ? 'var(--badge-bg-danger)' : 'var(--bg-stat-box)',
+                    border: `1px solid ${isIslanded ? 'var(--status-critical)' : 'var(--border-subtle)'}`,
                     borderRadius: '6px',
                     padding: '4px 10px',
                     display: 'flex',
@@ -591,10 +679,10 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
                     fontSize: '0.75rem'
                   }}
                 >
-                  <span style={{ fontWeight: 'bold', color: isIslanded ? '#ef4444' : '#38bdf8' }}>
+                  <span style={{ fontWeight: 'bold', color: isIslanded ? 'var(--status-critical)' : 'var(--text-accent)' }}>
                     {rldc.code}
                   </span>
-                  <span style={{ color: '#cbd5e1' }}>
+                  <span style={{ color: 'var(--text-secondary)' }}>
                     {(rldc.demandMetMw / 1000).toFixed(1)} GW
                   </span>
                   <button
@@ -635,7 +723,7 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
         >
           <div 
             ref={mapContainerRef} 
-            style={{ width: '100%', height: '100%', background: '#070b14' }} 
+            style={{ width: '100%', height: '100%', background: 'var(--bg-primary)' }} 
           />
 
           {/* Fault Injection Mode Notification Banner */}
@@ -674,7 +762,7 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
             position: 'absolute',
             top: '16px',
             left: '16px',
-            background: 'rgba(15, 23, 42, 0.9)',
+            background: 'var(--bg-glass)',
             backdropFilter: 'blur(12px)',
             border: '1px solid var(--border-medium)',
             borderRadius: '10px',
@@ -683,7 +771,8 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
             display: 'flex',
             flexDirection: 'column',
             gap: '6px',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.6)'
+            boxShadow: 'var(--shadow-md)',
+            color: 'var(--text-primary)'
           }}>
             <span style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 'bold' }}>
               REAL-TIME INDIAN GRID AGGREGATE
@@ -783,7 +872,7 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
             position: 'absolute',
             bottom: '16px',
             left: '16px',
-            background: 'rgba(15, 23, 42, 0.85)',
+            background: 'var(--bg-glass)',
             backdropFilter: 'blur(12px)',
             border: '1px solid var(--border-subtle)',
             borderRadius: '8px',
@@ -792,7 +881,8 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
             fontSize: '0.72rem',
             display: 'flex',
             gap: '14px',
-            flexWrap: 'wrap'
+            flexWrap: 'wrap',
+            color: 'var(--text-primary)'
           }}>
             <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#f59e0b', boxShadow: '0 0 6px #f59e0b' }}></span> Solar Park
@@ -824,11 +914,11 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
                 <span className={`badge ${selectedNode.category === 'SOURCE' ? 'badge-warning' : (selectedNode.category === 'SINK' ? 'badge-success' : 'badge-info')}`}>
                   {selectedNode.category} • SCADA TELE-CONTROL
                 </span>
-                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', marginTop: '6px', color: '#f8fafc' }}>
+                <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', marginTop: '6px', color: 'var(--text-primary)' }}>
                   {selectedNode.name}
                 </h3>
                 {selectedNode.state && (
-                  <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
+                  <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)' }}>
                     {selectedNode.state} • Region: {selectedNode.region || 'National'}
                   </div>
                 )}
@@ -842,14 +932,14 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
               </button>
             </div>
 
-            <p style={{ fontSize: '0.8rem', color: '#cbd5e1', lineHeight: 1.5 }}>
+            <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
               {selectedNode.description}
             </p>
 
             {/* --- CONTROLS FOR TRANSMISSION CORRIDOR --- */}
             {selectedNode.category === 'CORRIDOR' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-                <div style={{ background: 'rgba(0,0,0,0.3)', padding: '14px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: 'var(--bg-stat-box)', padding: '14px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>POWER FLOW WHEELING</span>
                     <span className={`badge ${selectedNode.status === 'ENERGIZED' ? 'badge-success' : (selectedNode.status === 'REROUTED' ? 'badge-info' : 'badge-danger')}`}>
@@ -859,10 +949,10 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
                   <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.8rem', fontWeight: 'bold', color: selectedNode.status === 'TRIPPED' ? '#ef4444' : selectedNode.color, marginTop: '4px' }}>
                     {selectedNode.flowMw} MW
                   </div>
-                  <div style={{ fontSize: '0.72rem', color: '#94a3b8', marginTop: '2px' }}>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '2px' }}>
                     Thermal Transmission Rating: {selectedNode.capacityMw} MW ({selectedNode.voltageKv} kV)
                   </div>
-                  <div style={{ height: '6px', background: '#1e293b', borderRadius: '3px', marginTop: '10px', overflow: 'hidden' }}>
+                  <div style={{ height: '6px', background: 'var(--track-bg)', borderRadius: '3px', marginTop: '10px', overflow: 'hidden' }}>
                     <div 
                       style={{ 
                         height: '100%', 
@@ -927,7 +1017,7 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
             {/* --- CONTROLS FOR GENERATION SOURCE --- */}
             {selectedNode.category === 'SOURCE' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-                <div style={{ background: 'rgba(0,0,0,0.3)', padding: '14px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: 'var(--bg-stat-box)', padding: '14px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>CURRENT DISPATCH OUTPUT</span>
                     <span className={`badge ${selectedNode.status === 'ONLINE' ? 'badge-success' : 'badge-danger'}`}>
@@ -937,7 +1027,7 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
                   <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.8rem', fontWeight: 'bold', color: selectedNode.status === 'TRIPPED' ? '#ef4444' : '#f59e0b', marginTop: '4px' }}>
                     {selectedNode.currentGenMw} MW
                   </div>
-                  <div style={{ fontSize: '0.72rem', color: '#94a3b8', marginTop: '2px' }}>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '2px' }}>
                     Installed Capacity: {selectedNode.capacityMw} MW ({selectedNode.voltageKv} kV Interconnector)
                   </div>
                 </div>
@@ -1032,21 +1122,21 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
                 {selectedNode.riverBasin && (
                   <div style={{ background: 'rgba(56, 189, 248, 0.08)', border: '1px solid rgba(56, 189, 248, 0.25)', borderRadius: '8px', padding: '12px' }}>
                     <div style={{ fontSize: '0.72rem', color: '#38bdf8', fontWeight: 'bold' }}>💧 HYDRO DAM & RESERVOIR SPECS</div>
-                    <div style={{ fontSize: '0.8rem', color: '#f8fafc', marginTop: '4px' }}>
+                    <div style={{ fontSize: '0.8rem', color: 'var(--text-primary)', marginTop: '4px' }}>
                       River Basin: <b>{selectedNode.riverBasin}</b>
                     </div>
                     {selectedNode.operatingHeadMeters && (
-                      <div style={{ fontSize: '0.75rem', color: '#cbd5e1', marginTop: '2px' }}>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
                         Operating Head: <b>{selectedNode.operatingHeadMeters} m</b> • Full Reservoir Level: <b>{selectedNode.fullReservoirLevelMeters} m</b>
                       </div>
                     )}
                     {selectedNode.unitDetails && (
-                      <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: '4px' }}>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '4px' }}>
                         Turbine Units: {selectedNode.unitDetails}
                       </div>
                     )}
                     {selectedNode.operator && (
-                      <div style={{ fontSize: '0.7rem', color: '#64748b', marginTop: '4px' }}>
+                      <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '4px' }}>
                         Plant Operator: {selectedNode.operator}
                       </div>
                     )}
@@ -1057,19 +1147,21 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
                 {selectedNode.fuelType && (
                   <div style={{ background: 'rgba(168, 85, 247, 0.08)', border: '1px solid rgba(168, 85, 247, 0.25)', borderRadius: '8px', padding: '12px' }}>
                     <div style={{ fontSize: '0.72rem', color: '#c084fc', fontWeight: 'bold' }}>⚛️ NUCLEAR REACTOR & FUEL CYCLE</div>
-                    <div style={{ fontSize: '0.8rem', color: '#f8fafc', marginTop: '4px' }}>
+                    <div style={{ fontSize: '0.8rem', color: 'var(--text-primary)', marginTop: '4px' }}>
                       Design: <b>{selectedNode.subtype}</b>
                     </div>
-                    <div style={{ fontSize: '0.75rem', color: '#cbd5e1', marginTop: '2px' }}>
-                      Fuel Cycle: <b>{selectedNode.fuelType}</b>
-                    </div>
+                    {selectedNode.fuelType && (
+                      <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
+                        Fuel Cycle: <b>{selectedNode.fuelType}</b>
+                      </div>
+                    )}
                     {selectedNode.unitDetails && (
-                      <div style={{ fontSize: '0.75rem', color: '#94a3b8', marginTop: '4px' }}>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '4px' }}>
                         Reactor Units: {selectedNode.unitDetails}
                       </div>
                     )}
                     {selectedNode.operator && (
-                      <div style={{ fontSize: '0.7rem', color: '#64748b', marginTop: '4px' }}>
+                      <div style={{ fontSize: '0.7rem', color: 'var(--text-muted)', marginTop: '4px' }}>
                         Operator: {selectedNode.operator}
                       </div>
                     )}
@@ -1081,7 +1173,7 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
             {/* --- CONTROLS FOR DEMAND SINK --- */}
             {selectedNode.category === 'SINK' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-                <div style={{ background: 'rgba(0,0,0,0.3)', padding: '14px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
+                <div style={{ background: 'var(--bg-stat-box)', padding: '14px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)' }}>ACTIVE LOAD DRAW</span>
                     <span className={`badge ${selectedNode.status === 'NORMAL' ? 'badge-success' : 'badge-warning'}`}>
@@ -1091,7 +1183,7 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
                   <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.8rem', fontWeight: 'bold', color: '#10b981', marginTop: '4px' }}>
                     {selectedNode.currentDemandMw} MW
                   </div>
-                  <div style={{ fontSize: '0.72rem', color: '#94a3b8', marginTop: '2px' }}>
+                  <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', marginTop: '2px' }}>
                     All-Time Peak: {selectedNode.peakDemandMw} MW • Voltage: {selectedNode.voltageLevelKv || 66} kV • Shed: {selectedNode.loadShedPct}%
                   </div>
                 </div>
@@ -1197,6 +1289,18 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
           </div>
         )}
       </div>
+
+      {/* Power Plant CSV Database Manager Modal */}
+      <PowerPlantCsvModal 
+        isOpen={showMapCsvModal} 
+        onClose={() => setShowMapCsvModal(false)} 
+      />
+
+      {/* Demand Sinks CSV Database Manager Modal */}
+      <SinkCsvModal 
+        isOpen={showMapSinkCsvModal} 
+        onClose={() => setShowMapSinkCsvModal(false)} 
+      />
     </div>
   );
 };

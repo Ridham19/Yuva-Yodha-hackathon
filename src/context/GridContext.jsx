@@ -14,6 +14,14 @@ import {
   TRANSMISSION_CORRIDORS
 } from '../data/indiaGridData';
 import {
+  parsePowerPlantsCsv,
+  sourcesToCsv
+} from '../utils/powerPlantCsvParser';
+import {
+  parseSinksCsv,
+  sinksToCsv
+} from '../utils/sinkCsvParser';
+import {
   playBreakerTripSound,
   playBreakerCloseSound,
   playAlarmChirp,
@@ -31,6 +39,82 @@ export const GridProvider = ({ children }) => {
   const [corridors, setCorridors] = useState(TRANSMISSION_CORRIDORS);
   const [isBackendConnected, setIsBackendConnected] = useState(false);
   const [commandAuditLog, setCommandAuditLog] = useState([]);
+
+  // Power Plant CSV Integration State
+  const [powerPlantsCsvInfo, setPowerPlantsCsvInfo] = useState({
+    filename: 'powerplants.csv',
+    path: '/data/powerplants.csv',
+    loadedAt: new Date().toLocaleTimeString(),
+    count: INDIA_GRID_SOURCES.length,
+    isCustomLoaded: false
+  });
+
+  // Attempt to load master power plants CSV on startup
+  useEffect(() => {
+    let isMounted = true;
+    const fetchCsv = async () => {
+      try {
+        const res = await fetch('/data/powerplants.csv');
+        if (res.ok) {
+          const csvText = await res.text();
+          const parsed = parsePowerPlantsCsv(csvText);
+          if (parsed && parsed.length > 0 && isMounted) {
+            setSources(parsed);
+            setPowerPlantsCsvInfo({
+              filename: 'powerplants.csv',
+              path: '/data/powerplants.csv',
+              loadedAt: new Date().toLocaleTimeString(),
+              count: parsed.length,
+              isCustomLoaded: false
+            });
+            console.log(`[GridPulse SCADA] Loaded ${parsed.length} power plants from /data/powerplants.csv`);
+          }
+        }
+      } catch (e) {
+        console.warn("[GridPulse SCADA] CSV fetch fallback to built-in bundle", e);
+      }
+    };
+    fetchCsv();
+    return () => { isMounted = false; };
+  }, []);
+
+  // Demand Sinks CSV Integration State
+  const [sinksCsvInfo, setSinksCsvInfo] = useState({
+    filename: 'sinks.csv',
+    path: '/data/sinks.csv',
+    loadedAt: new Date().toLocaleTimeString(),
+    count: INDIA_GRID_SINKS.length,
+    isCustomLoaded: false
+  });
+
+  // Attempt to load master demand sinks CSV on startup
+  useEffect(() => {
+    let isMounted = true;
+    const fetchSinks = async () => {
+      try {
+        const res = await fetch('/data/sinks.csv');
+        if (res.ok) {
+          const csvText = await res.text();
+          const parsed = parseSinksCsv(csvText);
+          if (parsed && parsed.length > 0 && isMounted) {
+            setSinks(parsed);
+            setSinksCsvInfo({
+              filename: 'sinks.csv',
+              path: '/data/sinks.csv',
+              loadedAt: new Date().toLocaleTimeString(),
+              count: parsed.length,
+              isCustomLoaded: false
+            });
+            console.log(`[GridPulse SCADA] Loaded ${parsed.length} demand sinks from /data/sinks.csv`);
+          }
+        }
+      } catch (e) {
+        console.warn("[GridPulse SCADA] Sinks CSV fetch fallback to built-in bundle", e);
+      }
+    };
+    fetchSinks();
+    return () => { isMounted = false; };
+  }, []);
 
   // Breaker Operation & Interlock Audit Log (IEC 61850-7-4)
   const [breakerOperationLog, setBreakerOperationLog] = useState([
@@ -74,6 +158,31 @@ export const GridProvider = ({ children }) => {
 
   // Audio mute switch
   const [soundMuted, setSoundMuted] = useState(false);
+
+  // Theme state: 'dark' | 'light' with localStorage persistence
+  const [theme, setTheme] = useState(() => {
+    try {
+      const saved = localStorage.getItem('gridpulse-theme');
+      if (saved) return saved;
+      return window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    } catch {
+      return 'dark';
+    }
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    document.documentElement.style.colorScheme = theme;
+    try {
+      localStorage.setItem('gridpulse-theme', theme);
+    } catch (e) {
+      // ignore
+    }
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
   // Auto Demand Response (ADR) Armed Flag
   const [isAutoAdrArmed, setIsAutoAdrArmed] = useState(true);
@@ -781,6 +890,142 @@ export const GridProvider = ({ children }) => {
     }, 1000);
   };
 
+  const reloadPowerPlantsFromCsv = async () => {
+    try {
+      const res = await fetch(`/data/powerplants.csv?t=${Date.now()}`);
+      if (res.ok) {
+        const csvText = await res.text();
+        const parsed = parsePowerPlantsCsv(csvText);
+        if (parsed && parsed.length > 0) {
+          setSources(parsed);
+          setPowerPlantsCsvInfo({
+            filename: 'powerplants.csv',
+            path: '/data/powerplants.csv',
+            loadedAt: new Date().toLocaleTimeString(),
+            count: parsed.length,
+            isCustomLoaded: false
+          });
+          addAlarm("INFO", "CSV-SYNC", `Synchronized ${parsed.length} generation plants from /data/powerplants.csv.`);
+          return { success: true, count: parsed.length };
+        }
+      }
+    } catch (err) {
+      console.error("Failed to reload CSV", err);
+    }
+    return { success: false, error: "Failed to reload CSV from server." };
+  };
+
+  const importPowerPlantsCsv = (csvText, customFileName = 'custom_powerplants.csv') => {
+    try {
+      const parsed = parsePowerPlantsCsv(csvText);
+      if (parsed && parsed.length > 0) {
+        setSources(parsed);
+        setPowerPlantsCsvInfo({
+          filename: customFileName,
+          path: 'Custom Upload',
+          loadedAt: new Date().toLocaleTimeString(),
+          count: parsed.length,
+          isCustomLoaded: true
+        });
+        addAlarm("INFO", "CSV-IMPORT", `Successfully imported ${parsed.length} generation plants from ${customFileName}.`);
+        return { success: true, count: parsed.length };
+      } else {
+        return { success: false, error: "CSV file did not contain any valid power plant rows." };
+      }
+    } catch (err) {
+      console.error("CSV import error:", err);
+      return { success: false, error: err.message };
+    }
+  };
+
+  const exportPowerPlantsCsv = () => {
+    try {
+      const csvContent = sourcesToCsv(sources);
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `gridpulse_powerplants_${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      addAlarm("INFO", "CSV-EXPORT", `Exported ${sources.length} power plants to CSV.`);
+      return true;
+    } catch (e) {
+      console.error("Export CSV error:", e);
+      return false;
+    }
+  };
+
+  const reloadSinksFromCsv = async () => {
+    try {
+      const res = await fetch(`/data/sinks.csv?t=${Date.now()}`);
+      if (res.ok) {
+        const csvText = await res.text();
+        const parsed = parseSinksCsv(csvText);
+        if (parsed && parsed.length > 0) {
+          setSinks(parsed);
+          setSinksCsvInfo({
+            filename: 'sinks.csv',
+            path: '/data/sinks.csv',
+            loadedAt: new Date().toLocaleTimeString(),
+            count: parsed.length,
+            isCustomLoaded: false
+          });
+          addAlarm("INFO", "CSV-SYNC", `Synchronized ${parsed.length} demand sinks from /data/sinks.csv.`);
+          return { success: true, count: parsed.length };
+        }
+      }
+    } catch (err) {
+      console.error("Failed to reload sinks CSV", err);
+    }
+    return { success: false, error: "Failed to reload sinks CSV from server." };
+  };
+
+  const importSinksCsv = (csvText, customFileName = 'custom_sinks.csv') => {
+    try {
+      const parsed = parseSinksCsv(csvText);
+      if (parsed && parsed.length > 0) {
+        setSinks(parsed);
+        setSinksCsvInfo({
+          filename: customFileName,
+          path: 'Custom Upload',
+          loadedAt: new Date().toLocaleTimeString(),
+          count: parsed.length,
+          isCustomLoaded: true
+        });
+        addAlarm("INFO", "CSV-IMPORT", `Successfully imported ${parsed.length} demand sinks from ${customFileName}.`);
+        return { success: true, count: parsed.length };
+      } else {
+        return { success: false, error: "CSV file did not contain any valid demand sink rows." };
+      }
+    } catch (err) {
+      console.error("Sinks CSV import error:", err);
+      return { success: false, error: err.message };
+    }
+  };
+
+  const exportSinksCsv = () => {
+    try {
+      const csvContent = sinksToCsv(sinks);
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', `gridpulse_sinks_${new Date().toISOString().slice(0, 10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+      addAlarm("INFO", "CSV-EXPORT", `Exported ${sinks.length} demand sinks to CSV.`);
+      return true;
+    } catch (e) {
+      console.error("Export sinks CSV error:", e);
+      return false;
+    }
+  };
+
   const resetToHealthy = () => {
     if (flisrIntervalRef.current) clearInterval(flisrIntervalRef.current);
     setFeeders(INITIAL_FEEDERS);
@@ -808,6 +1053,18 @@ export const GridProvider = ({ children }) => {
         corridors,
         isBackendConnected,
         commandAuditLog,
+
+        // Power Plant CSV Integration
+        powerPlantsCsvInfo,
+        reloadPowerPlantsFromCsv,
+        importPowerPlantsCsv,
+        exportPowerPlantsCsv,
+
+        // Demand Sinks CSV Integration
+        sinksCsvInfo,
+        reloadSinksFromCsv,
+        importSinksCsv,
+        exportSinksCsv,
 
         // Map-based controls
         controlCorridor,
@@ -843,12 +1100,15 @@ export const GridProvider = ({ children }) => {
         triggerPeakLoadADRSimulation,
         resetToHealthy,
 
-        // Breaker logs & ADR & Sound
+        // Breaker logs & ADR & Sound & Theme
         breakerOperationLog,
         isAutoAdrArmed,
         setIsAutoAdrArmed,
         soundMuted,
-        toggleSound
+        toggleSound,
+        theme,
+        setTheme,
+        toggleTheme
       }}
     >
       {children}
