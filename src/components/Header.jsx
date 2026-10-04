@@ -27,10 +27,12 @@ import {
   Car,
   Layers,
   Leaf,
-  FolderDown
+  FolderDown,
+  Award,
+  Boxes
 } from 'lucide-react';
 
-export const Header = ({ activeTab, setActiveTab }) => {
+export const Header = ({ activeTab, setActiveTab, onOpenPitchDeck }) => {
   const {
     substation,
     gridFrequencyHz,
@@ -70,7 +72,7 @@ export const Header = ({ activeTab, setActiveTab }) => {
 
   // Determine which of the 4 main categories is active
   const getCategory = () => {
-    if (['topology', 'busbar-sld', 'feeders', 'control', 'flisr'].includes(activeTab)) return 'substation';
+    if (['topology', 'busbar-sld', 'feeders', 'control', 'flisr', 'ecostruxure'].includes(activeTab)) return 'substation';
     if (['ml-studio', 'cyber', 'predictive'].includes(activeTab)) return 'ai-cyber';
     if (['market', 'v2g', 'database', 'carbon', 'impact'].includes(activeTab)) return 'markets';
     return 'national-grid';
@@ -156,6 +158,27 @@ export const Header = ({ activeTab, setActiveTab }) => {
 
         {/* Simplified Action Controls */}
         <div className="header-actions">
+          {/* Yuva Yodha Grand Finale Pitch Deck Button */}
+          {onOpenPitchDeck && (
+            <button
+              className="btn-demo"
+              id="btn-pitch-deck"
+              onClick={onOpenPitchDeck}
+              style={{
+                background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.22) 0%, rgba(6, 182, 212, 0.22) 100%)',
+                borderColor: '#10b981',
+                color: '#10b981',
+                fontWeight: 'bold',
+                boxShadow: '0 0 10px rgba(16, 185, 129, 0.25)'
+              }}
+              title="Open Yuva Yodha Grand Finale Pitch Deck [P]"
+            >
+              <Award size={14} color="#10b981" />
+              <span>Jury Pitch Deck</span>
+              <span style={{ fontSize: '0.65rem', opacity: 0.85, background: 'rgba(0,0,0,0.3)', padding: '1px 5px', borderRadius: '4px' }}>P</span>
+            </button>
+          )}
+
           {/* Scenarios Dropdown */}
           <div style={{ position: 'relative' }}>
             <button 
@@ -417,6 +440,14 @@ export const Header = ({ activeTab, setActiveTab }) => {
             >
               <RefreshCw size={13} />
               Self-Healing FLISR
+            </button>
+            <button 
+              className={`subnav-segmented-btn ${activeTab === 'ecostruxure' ? 'active' : ''}`}
+              onClick={() => setActiveTab('ecostruxure')}
+              style={{ color: activeTab === 'ecostruxure' ? '#10b981' : undefined }}
+            >
+              <Boxes size={13} />
+              Schneider EcoStruxure™
             </button>
           </div>
         </div>

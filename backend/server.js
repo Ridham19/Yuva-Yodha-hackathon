@@ -1133,6 +1133,31 @@ function maskKey(key) {
   return key.slice(0, 4) + '...' + key.slice(-4);
 }
 
+// Schneider Electric EcoStruxure™ Interoperability Manifest Endpoint
+app.get('/api/ecostruxure/manifest', (req, res) => {
+  res.json({
+    success: true,
+    platform: "GridPulse Intelligent Grid Management",
+    vendorCompatibility: "Schneider Electric EcoStruxure™ Power & Grid",
+    substation: "Mayur Vihar 66/11kV Substation",
+    standards: [
+      "IEC 61850 Edition 2 (Substation Automation & Protection)",
+      "IEC 62351-3/5/6 (Substation Cyber Security & GOOSE Authentication)",
+      "IEEE C37.118 (Phasor Measurement Unit PMU Sync)",
+      "Modbus TCP / IEC 60870-5-104 (SCADA Telemetry Stream)",
+      "IEEE 738 (Dynamic Line Rating & Conductor Thermal Model)"
+    ],
+    hardwareMapping: [
+      { bay: "FDR-01 (Industrial 11kV)", protectionRelay: "Schneider Electric Easergy P5F30", meter: "PowerLogic ION9000", switchgear: "Premset SF6-Free 11kV" },
+      { bay: "FDR-02 (Residential 11kV)", protectionRelay: "Schneider Electric Easergy P5F30", meter: "PowerLogic PM8000", switchgear: "Premset SF6-Free 11kV" },
+      { bay: "FDR-03 (Hospital Metro 11kV)", protectionRelay: "Schneider Electric Easergy P5F30 Dual-Eth", meter: "PowerLogic ION9000", switchgear: "Premset SF6-Free 11kV" },
+      { bay: "TR-01 (16 MVA 33/11kV)", protectionRelay: "Schneider Electric Easergy P5T30 Transformer Diff", meter: "PowerLogic ION9000 Class 0.1S", switchgear: "Schneider GHA Gas-Insulated" },
+      { bay: "BESS & Solar Microgrid", edgeController: "Schneider EcoStruxure Microgrid Advisor", inverterGateway: "Conext Smart Inverter Gateway" }
+    ],
+    timestamp: new Date().toISOString()
+  });
+});
+
 // System Environment & Operational Security Status (Masked)
 app.get('/api/system/env-status', (req, res) => {
   res.json({

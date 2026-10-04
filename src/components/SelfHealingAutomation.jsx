@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useGrid } from '../context/GridContext';
 import { 
   RefreshCw, 
@@ -8,11 +8,15 @@ import {
   Clock, 
   Zap, 
   AlertOctagon, 
-  ArrowRight,
-  TrendingDown,
-  SunMedium,
-  BatteryCharging
+  ArrowRight, 
+  TrendingDown, 
+  SunMedium, 
+  BatteryCharging,
+  Wind,
+  ShieldAlert,
+  Radio
 } from 'lucide-react';
+import { playBreakerCloseSound, playBreakerTripSound, playAlarmChirp } from '../utils/audioEffects';
 
 export const SelfHealingAutomation = () => {
   const { 
@@ -22,10 +26,45 @@ export const SelfHealingAutomation = () => {
     flisrLog, 
     triggerFLISRSimulation, 
     triggerSolarDipSimulation,
-    resetToHealthy 
+    triggerPeakLoadADRSimulation,
+    resetToHealthy,
+    gridFrequencyHz
   } = useGrid();
 
+  const [activeDrill, setActiveDrill] = useState('FLISR');
+  const [cycloneDrillActive, setCycloneDrillActive] = useState(false);
+  const [islandDrillActive, setIslandDrillActive] = useState(false);
+  const [drillMessage, setDrillMessage] = useState('');
+
   const seconds = (flisrTimerMs / 1000).toFixed(2);
+
+  // Trigger Cyclone Coastal Transmission Trip & Reroute Drill
+  const handleTriggerCycloneDrill = () => {
+    setActiveDrill('CYCLONE');
+    setCycloneDrillActive(true);
+    playAlarmChirp();
+    setDrillMessage('🌪️ Cyclone Biparjoy Alert: 140 km/h wind shear detected. Northern 765kV Corridor C-01 tripped! Dynamic Line Rating re-routing power through Southern Corridor C-04. Islanded microgrids synchronized.');
+
+    setTimeout(() => {
+      playBreakerCloseSound();
+      setDrillMessage('✅ Dynamic re-routing completed in 4.2 seconds. All coastal loads maintained via BESS and hydro dam back-feed.');
+      setCycloneDrillActive(false);
+    }, 4500);
+  };
+
+  // Trigger Microgrid Islanding & Blackstart Drill
+  const handleTriggerIslandDrill = () => {
+    setActiveDrill('ISLAND');
+    setIslandDrillActive(true);
+    playBreakerTripSound();
+    setDrillMessage('⚡ Grid Disconnection: Main Incomer 33kV Breaker tripped. Substation seamlessly transitioned to autonomous Islanded Microgrid mode.');
+
+    setTimeout(() => {
+      playBreakerCloseSound();
+      setDrillMessage('✅ BESS Grid-Forming Inverter active. Voltage 11.0 kV and 50.00 Hz frequency synthesized locally without interruption.');
+      setIslandDrillActive(false);
+    }, 4000);
+  };
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }} id="flisr-automation-view">
@@ -38,10 +77,10 @@ export const SelfHealingAutomation = () => {
               <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Yuva Yodha Grid Reliability Track</span>
             </div>
             <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', marginTop: '6px' }}>
-              Autonomous Self-Healing (FLISR) & Renewable Balancing
+              Autonomous Self-Healing (FLISR) & Multi-Hazard Disaster Sandbox
             </h2>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', maxWidth: '850px', marginTop: '4px' }}>
-              When a distribution fault strikes, GridPulse isolates the damaged section and automatically reroutes healthy downstream consumers to adjacent feeders in seconds — slashing restoration from hours to single-digit seconds.
+              When a distribution fault or extreme weather anomaly strikes, GridPulse isolates the damaged section and automatically reroutes healthy downstream consumers to adjacent feeders in seconds — slashing restoration from hours to single-digit seconds.
             </p>
           </div>
 
@@ -66,6 +105,64 @@ export const SelfHealingAutomation = () => {
             </button>
           </div>
         </div>
+      </div>
+
+      {/* Multi-Hazard Drill Scenario Switcher Bar */}
+      <div className="grid-card" style={{ padding: '18px', background: 'rgba(16, 185, 129, 0.04)', border: '1px solid rgba(16, 185, 129, 0.2)' }}>
+        <div style={{ fontSize: '0.8rem', color: '#10b981', fontWeight: 'bold', textTransform: 'uppercase', marginBottom: '10px' }}>
+          Select Operational Disaster Drill (5 High-Impact Scenarios)
+        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+          <button
+            onClick={() => { setActiveDrill('FLISR'); triggerFLISRSimulation(); }}
+            disabled={flisrActive}
+            className={`btn-demo ${activeDrill === 'FLISR' ? 'active' : ''}`}
+            style={{ fontSize: '0.8rem', padding: '8px 14px' }}
+          >
+            <Flame size={14} color="#ef4444" />
+            1. Sub-10s FLISR Fault Reroute
+          </button>
+          <button
+            onClick={() => { setActiveDrill('SOLAR'); triggerSolarDipSimulation(); }}
+            className={`btn-demo ${activeDrill === 'SOLAR' ? 'active' : ''}`}
+            style={{ fontSize: '0.8rem', padding: '8px 14px' }}
+          >
+            <SunMedium size={14} color="#f59e0b" />
+            2. Solar Cloud Dip & BESS FFR
+          </button>
+          <button
+            onClick={() => { setActiveDrill('ADR'); triggerPeakLoadADRSimulation(); }}
+            className={`btn-demo ${activeDrill === 'ADR' ? 'active' : ''}`}
+            style={{ fontSize: '0.8rem', padding: '8px 14px' }}
+          >
+            <Zap size={14} color="#06b6d4" />
+            3. Peak Demand-Response Shedding
+          </button>
+          <button
+            onClick={handleTriggerCycloneDrill}
+            disabled={cycloneDrillActive}
+            className={`btn-demo ${activeDrill === 'CYCLONE' ? 'active' : ''}`}
+            style={{ fontSize: '0.8rem', padding: '8px 14px' }}
+          >
+            <Wind size={14} color="#38bdf8" />
+            4. Cyclone 140km/h Line Trip & DLR
+          </button>
+          <button
+            onClick={handleTriggerIslandDrill}
+            disabled={islandDrillActive}
+            className={`btn-demo ${activeDrill === 'ISLAND' ? 'active' : ''}`}
+            style={{ fontSize: '0.8rem', padding: '8px 14px' }}
+          >
+            <Radio size={14} color="#a855f7" />
+            5. Microgrid Islanding & Blackstart
+          </button>
+        </div>
+
+        {drillMessage && (
+          <div style={{ marginTop: '14px', padding: '12px 16px', background: 'var(--bg-card)', borderRadius: '8px', border: '1px solid var(--border-medium)', fontSize: '0.85rem', color: 'var(--text-primary)' }}>
+            {drillMessage}
+          </div>
+        )}
       </div>
 
       {/* Restoration Stopwatch & Head-to-Head Comparison */}
@@ -98,85 +195,82 @@ export const SelfHealingAutomation = () => {
           <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.5rem', fontWeight: '700', color: '#ef4444', margin: '8px 0' }}>
             ~2h 15m
           </div>
-          <ul style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', paddingLeft: '18px', lineHeight: 1.6 }}>
-            <li>Consumer phone complaints received</li>
-            <li>Field line patrol van dispatched in traffic</li>
-            <li>Manual pole-mounted gang switch opening</li>
-          </ul>
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+            Customer call centers → Patrol vehicles dispatched → Manual line sectionalizing.
+          </div>
         </div>
 
-        {/* Outage Time Reduction Metric */}
-        <div className="grid-card" style={{ padding: '20px', background: 'rgba(16, 185, 129, 0.05)', border: '1px solid rgba(16, 185, 129, 0.25)', textAlign: 'center' }}>
+        {/* Net Reliability Benefit */}
+        <div className="grid-card" style={{ padding: '20px', background: 'rgba(16, 185, 129, 0.05)', border: '1px solid rgba(16, 185, 129, 0.25)' }}>
           <div style={{ fontSize: '0.75rem', color: '#10b981', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 'bold' }}>
-            Downtime Slashing Factor
+            Net Outage Time Slashed
           </div>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.8rem', fontWeight: '800', color: '#10b981', margin: '8px 0' }}>
-            99.9%
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '2.5rem', fontWeight: '700', color: '#10b981', margin: '8px 0' }}>
+            -99.9%
           </div>
-          <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>
-            From 135 minutes down to &lt; 10 seconds. Direct impact on Indian utility SAIDI indices.
+          <div style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', lineHeight: 1.4 }}>
+            Restoration latency reduced from 8,100 seconds to 6.82 seconds. Zero manual hazard.
           </div>
         </div>
       </div>
 
-      {/* 3-Stage Visual Self-Healing Pipeline */}
-      <div className="grid-card" style={{ padding: '24px' }}>
-        <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.15rem', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Zap size={20} color="var(--accent-cyan)" />
-          Autonomous 3-Step FLISR Execution Pipeline
-        </h3>
+      {/* 3-Step Animated Visual Sequence Breakdown */}
+      <div className="grid-card" style={{ padding: '20px' }}>
+        <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.1rem', marginBottom: '16px' }}>
+          Autonomous 3-Stage Fault Resolution Sequence
+        </h4>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
-          {/* Step 1: Detection & Trip */}
-          <div style={{
-            background: flisrStage === 'DETECTION' || flisrStage === 'ISOLATION' || flisrStage === 'RESTORATION' || flisrStage === 'RESTORED' ? 'rgba(14, 165, 233, 0.1)' : 'var(--bg-stat-box)',
-            border: flisrStage === 'DETECTION' ? '2px solid var(--accent-cyan)' : '1px solid var(--border-subtle)',
-            borderRadius: '10px',
-            padding: '18px'
+        <div className="grid-3col">
+          {/* Step 1 */}
+          <div style={{ 
+            background: flisrStage === 'FAULT_DETECTED' || flisrStage === 'ISOLATING' || flisrStage === 'RESTORED' ? 'rgba(239, 68, 68, 0.08)' : 'var(--bg-stat-box)', 
+            border: flisrStage === 'FAULT_DETECTED' ? '1px solid #ef4444' : '1px solid var(--border-subtle)',
+            borderRadius: '8px',
+            padding: '16px'
           }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-              <span className="badge badge-info">STEP 01</span>
-              {flisrStage ? <CheckCircle2 size={16} color="#10b981" /> : <Clock size={16} color="#64748b" />}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+              <span className="badge badge-danger">STAGE 1 (42ms)</span>
+              <AlertOctagon size={18} color="#ef4444" />
             </div>
-            <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1rem', color: 'var(--text-primary)', marginBottom: '6px' }}>
-              Fault Detection & Trip
+            <h4 style={{ fontSize: '0.95rem', marginBottom: '6px' }}>
+              Digital Overcurrent Trip
             </h4>
             <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-              Numeric protection relay senses high dI/dt fault surge (1,240A). Substation breaker CB-02 opens in <strong>42 milliseconds</strong> to prevent equipment damage.
+              Easergy numerical relay detects cable short circuit on Feeder 2. Main substation circuit breaker <strong>CB-02 trips in 42ms</strong> to clear the high fault energy.
             </p>
           </div>
 
-          {/* Step 2: Sectionalizer Isolation */}
-          <div style={{
-            background: flisrStage === 'ISOLATION' || flisrStage === 'RESTORATION' || flisrStage === 'RESTORED' ? 'rgba(245, 158, 11, 0.1)' : 'var(--bg-stat-box)',
-            border: flisrStage === 'ISOLATION' ? '2px solid #f59e0b' : '1px solid var(--border-subtle)',
-            borderRadius: '10px',
-            padding: '18px'
+          {/* Step 2 */}
+          <div style={{ 
+            background: flisrStage === 'ISOLATING' || flisrStage === 'RESTORED' ? 'rgba(245, 158, 11, 0.08)' : 'var(--bg-stat-box)', 
+            border: flisrStage === 'ISOLATING' ? '1px solid #f59e0b' : '1px solid var(--border-subtle)',
+            borderRadius: '8px',
+            padding: '16px'
           }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-              <span className="badge badge-warning">STEP 02</span>
-              {(flisrStage === 'RESTORATION' || flisrStage === 'RESTORED') ? <CheckCircle2 size={16} color="#10b981" /> : <Clock size={16} color="#64748b" />}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+              <span className="badge badge-warning">STAGE 2 (3.45s)</span>
+              <ShieldCheck size={18} color="#f59e0b" />
             </div>
-            <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1rem', color: 'var(--text-primary)', marginBottom: '6px' }}>
-              Motorized Isolation & Upstream Restore
+            <h4 style={{ fontSize: '0.95rem', marginBottom: '6px' }}>
+              Automated Section Isolation
             </h4>
             <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
-              Smart sectionalizers SW-2A & SW-2B open, safely isolating damaged Section B. CB-02 re-closes, restoring <strong>1,400 customers on Section A</strong>.
+              Smart sectionalizers SW-2A and SW-2B open to isolate the damaged Section B cable. CB-02 safely re-closes to restore upstream <strong>1,850 consumers on Section A</strong>.
             </p>
           </div>
 
-          {/* Step 3: Tie-Switch Rerouting */}
-          <div style={{
-            background: flisrStage === 'RESTORED' ? 'rgba(16, 185, 129, 0.1)' : 'var(--bg-stat-box)',
-            border: flisrStage === 'RESTORED' ? '2px solid #10b981' : '1px solid var(--border-subtle)',
-            borderRadius: '10px',
-            padding: '18px'
+          {/* Step 3 */}
+          <div style={{ 
+            background: flisrStage === 'RESTORED' ? 'rgba(16, 185, 129, 0.08)' : 'var(--bg-stat-box)', 
+            border: flisrStage === 'RESTORED' ? '1px solid #10b981' : '1px solid var(--border-subtle)',
+            borderRadius: '8px',
+            padding: '16px'
           }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-              <span className="badge badge-purple">STEP 03</span>
-              {flisrStage === 'RESTORED' ? <CheckCircle2 size={16} color="#10b981" /> : <Clock size={16} color="#64748b" />}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+              <span className="badge badge-success">STAGE 3 (6.82s)</span>
+              <CheckCircle2 size={18} color="#10b981" />
             </div>
-            <h4 style={{ fontFamily: 'var(--font-heading)', fontSize: '1rem', color: 'var(--text-primary)', marginBottom: '6px' }}>
+            <h4 style={{ fontSize: '0.95rem', marginBottom: '6px' }}>
               Tie-Switch Power Reroute
             </h4>
             <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', lineHeight: 1.5 }}>
