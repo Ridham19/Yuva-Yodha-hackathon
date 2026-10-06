@@ -63,6 +63,7 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
   const [dispatchSliderVal, setDispatchSliderVal] = useState(1800);
   const [showMapCsvModal, setShowMapCsvModal] = useState(false);
   const [showMapSinkCsvModal, setShowMapSinkCsvModal] = useState(false);
+  const [showRldcs, setShowRldcs] = useState(false);
   const baseTileLayerRef = useRef(null);
 
   // Keep selectedNode synchronized with real-time state changes
@@ -237,13 +238,14 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
     }
 
     // 2. Add Electricity Generation Sources (Hydro Dams, Nuclear, Solar, Thermal, Wind)
-    const showSources = activeFilter === 'ALL' || activeFilter === 'SOURCES' || activeFilter === 'HYDRO' || activeFilter === 'NUCLEAR' || activeFilter === 'RENEWABLE' || activeFilter === 'THERMAL';
+    const showSources = activeFilter === 'ALL' || activeFilter === 'SOURCES' || activeFilter === 'HYDRO' || activeFilter === 'NUCLEAR' || activeFilter === 'RENEWABLE' || activeFilter === 'THERMAL' || activeFilter === 'BASELOAD';
     if (showSources) {
       sources.forEach(source => {
         if (activeFilter === 'HYDRO' && source.type !== 'HYDRO_DAM' && source.type !== 'HYDRO_PSP') return;
         if (activeFilter === 'NUCLEAR' && source.type !== 'NUCLEAR_BASE') return;
-        if (activeFilter === 'RENEWABLE' && source.type !== 'SOLAR_RE' && source.type !== 'WIND_RE' && source.type !== 'HYBRID_RE') return;
+        if (activeFilter === 'RENEWABLE' && source.type !== 'SOLAR_RE' && source.type !== 'WIND_RE' && source.type !== 'HYBRID_RE' && source.type !== 'HYDRO_DAM' && source.type !== 'HYDRO_PSP') return;
         if (activeFilter === 'THERMAL' && source.type !== 'THERMAL_COAL') return;
+        if (activeFilter === 'BASELOAD' && source.type !== 'THERMAL_COAL' && source.type !== 'NUCLEAR_BASE') return;
 
         const isTripped = source.status === 'TRIPPED';
         const isCurtailed = source.curtailed;
@@ -408,304 +410,88 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
   const totalDemandMw = sinks.reduce((acc, s) => s.status !== 'BLACKOUT' ? acc + s.currentDemandMw : acc, 0);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }} id="india-national-grid-view">
-      {/* Top Banner: National Grid Overview & Filter Toolbar */}
-      <div className="grid-card" style={{ padding: '18px 22px', borderLeft: '4px solid #06b6d4' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '16px' }}>
-          <div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span className="badge badge-info">OFFICIAL NLDC SCADA TOPOLOGY</span>
-              <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>
-                Grid Controller of India (Grid-India) • IEGC Nominal 50.00 Hz
-              </span>
-              {isBackendConnected && (
-                <span className="badge badge-success" style={{ fontSize: '0.7rem' }}>
-                  ● LIVE WS SYNC
-                </span>
-              )}
-            </div>
-            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.35rem', marginTop: '6px', display: 'flex', alignItems: 'center', gap: '10px' }}>
-              Indian National Power Grid: Geo-Spatial Tele-Control Center
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }} id="india-national-grid-view">
+      {/* Sleek Top Header Card */}
+      <div className="grid-card" style={{ padding: '14px 20px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '14px' }}>
+        <div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', margin: 0, display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-primary)' }}>
+              <Compass size={18} color="var(--accent-cyan)" />
+              National Power Grid Tele-Control
             </h2>
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', marginTop: '4px' }}>
-              Direct bidirectional actuation for 765kV transmission corridors, mega RE parks (Bhadla, Khavda, Pavagada), peaking hydro, and metro demand centers.
-            </p>
+            <span className="badge badge-info">IEGC 50.00 Hz</span>
+            {isBackendConnected && (
+              <span className="badge badge-success">● LIVE WS</span>
+            )}
           </div>
+          <div style={{ color: 'var(--text-secondary)', fontSize: '0.78rem', marginTop: '2px' }}>
+            All-India synchronous interconnection: 765kV corridors, mega RE parks & metro demand sinks
+          </div>
+        </div>
 
-          {/* Layer Filter Toolbar */}
-          <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', alignItems: 'center' }}>
-            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-              <Filter size={14} /> Filter:
-            </span>
-            <button
-              className="btn-outline"
-              style={{
-                fontSize: '0.72rem',
-                padding: '5px 10px',
-                background: activeFilter === 'ALL' ? 'rgba(56, 189, 248, 0.2)' : 'transparent',
-                borderColor: activeFilter === 'ALL' ? '#38bdf8' : 'var(--border-subtle)'
-              }}
-              onClick={() => setActiveFilter('ALL')}
-            >
-              All Assets ({sources.length + sinks.length + corridors.length})
-            </button>
-            <button
-              className="btn-outline"
-              style={{
-                fontSize: '0.72rem',
-                padding: '5px 10px',
-                background: activeFilter === 'HYDRO' ? 'rgba(56, 189, 248, 0.2)' : 'transparent',
-                borderColor: activeFilter === 'HYDRO' ? '#38bdf8' : 'var(--border-subtle)',
-                color: activeFilter === 'HYDRO' ? '#38bdf8' : 'var(--text-primary)'
-              }}
-              onClick={() => setActiveFilter('HYDRO')}
-            >
-              💧 Hydro Dams ({sources.filter(s => s.type === 'HYDRO_DAM' || s.type === 'HYDRO_PSP').length})
-            </button>
-            <button
-              className="btn-outline"
-              style={{
-                fontSize: '0.72rem',
-                padding: '5px 10px',
-                background: activeFilter === 'NUCLEAR' ? 'rgba(168, 85, 247, 0.2)' : 'transparent',
-                borderColor: activeFilter === 'NUCLEAR' ? '#a855f7' : 'var(--border-subtle)',
-                color: activeFilter === 'NUCLEAR' ? '#c084fc' : 'var(--text-primary)'
-              }}
-              onClick={() => setActiveFilter('NUCLEAR')}
-            >
-              ⚛️ Nuclear ({sources.filter(s => s.type === 'NUCLEAR_BASE').length})
-            </button>
-            <button
-              className="btn-outline"
-              style={{
-                fontSize: '0.72rem',
-                padding: '5px 10px',
-                background: activeFilter === 'RENEWABLE' ? 'rgba(245, 158, 11, 0.2)' : 'transparent',
-                borderColor: activeFilter === 'RENEWABLE' ? '#f59e0b' : 'var(--border-subtle)',
-                color: activeFilter === 'RENEWABLE' ? '#fbbf24' : 'var(--text-primary)'
-              }}
-              onClick={() => setActiveFilter('RENEWABLE')}
-            >
-              ☀️ Solar & Wind ({sources.filter(s => s.type === 'SOLAR_RE' || s.type === 'WIND_RE' || s.type === 'HYBRID_RE').length})
-            </button>
-            <button
-              className="btn-outline"
-              style={{
-                fontSize: '0.72rem',
-                padding: '5px 10px',
-                background: activeFilter === 'THERMAL' ? 'rgba(139, 92, 246, 0.2)' : 'transparent',
-                borderColor: activeFilter === 'THERMAL' ? '#8b5cf6' : 'var(--border-subtle)',
-                color: activeFilter === 'THERMAL' ? '#c084fc' : 'var(--text-primary)'
-              }}
-              onClick={() => setActiveFilter('THERMAL')}
-            >
-              🏭 Thermal Coal ({sources.filter(s => s.type === 'THERMAL_COAL').length})
-            </button>
-            <button
-              className="btn-outline"
-              style={{
-                fontSize: '0.72rem',
-                padding: '5px 10px',
-                background: activeFilter === 'FACTORIES' ? 'rgba(245, 158, 11, 0.2)' : 'transparent',
-                borderColor: activeFilter === 'FACTORIES' ? '#f59e0b' : 'var(--border-subtle)',
-                color: activeFilter === 'FACTORIES' ? '#fbbf24' : 'var(--text-primary)'
-              }}
-              onClick={() => setActiveFilter('FACTORIES')}
-            >
-              🏭 Factories ({sinks.filter(s => s.category === 'FACTORY_HEAVY_INDUSTRY').length})
-            </button>
-            <button
-              className="btn-outline"
-              style={{
-                fontSize: '0.72rem',
-                padding: '5px 10px',
-                background: activeFilter === 'CITIES' ? 'rgba(16, 185, 129, 0.2)' : 'transparent',
-                borderColor: activeFilter === 'CITIES' ? '#10b981' : 'var(--border-subtle)',
-                color: activeFilter === 'CITIES' ? '#34d399' : 'var(--text-primary)'
-              }}
-              onClick={() => setActiveFilter('CITIES')}
-            >
-              🏙️ Cities ({sinks.filter(s => s.category === 'CITY_METRO').length})
-            </button>
-            <button
-              className="btn-outline"
-              style={{
-                fontSize: '0.72rem',
-                padding: '5px 10px',
-                background: activeFilter === 'HOUSING' ? 'rgba(56, 189, 248, 0.2)' : 'transparent',
-                borderColor: activeFilter === 'HOUSING' ? '#38bdf8' : 'var(--border-subtle)',
-                color: activeFilter === 'HOUSING' ? '#38bdf8' : 'var(--text-primary)'
-              }}
-              onClick={() => setActiveFilter('HOUSING')}
-            >
-              🏘️ Houses ({sinks.filter(s => s.category === 'RESIDENTIAL_HOUSING').length})
-            </button>
-            <button
-              className="btn-outline"
-              style={{
-                fontSize: '0.72rem',
-                padding: '5px 10px',
-                background: activeFilter === 'CORRIDORS' ? 'rgba(6, 182, 212, 0.2)' : 'transparent',
-                borderColor: activeFilter === 'CORRIDORS' ? '#06b6d4' : 'var(--border-subtle)',
-                color: activeFilter === 'CORRIDORS' ? '#38bdf8' : 'var(--text-primary)'
-              }}
-              onClick={() => setActiveFilter('CORRIDORS')}
-            >
-              ⚡ Corridors ({corridors.length})
-            </button>
-
-            {/* Basemap Switcher */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', marginLeft: '12px', borderLeft: '1px solid var(--border-subtle)', paddingLeft: '12px' }}>
-              <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>Basemap:</span>
-              <button
-                className="btn-outline"
-                style={{
-                  fontSize: '0.72rem',
-                  padding: '4px 8px',
-                  background: (mapStyle === 'DARK' && theme === 'dark') ? 'rgba(56, 189, 248, 0.25)' : 'transparent',
-                  borderColor: (mapStyle === 'DARK' && theme === 'dark') ? '#38bdf8' : 'var(--border-subtle)',
-                  color: (mapStyle === 'DARK' && theme === 'dark') ? '#38bdf8' : 'var(--text-secondary)'
-                }}
-                onClick={() => setMapStyle('DARK')}
-              >
-                🌙 Dark Canvas
-              </button>
-              <button
-                className="btn-outline"
-                style={{
-                  fontSize: '0.72rem',
-                  padding: '4px 8px',
-                  background: (mapStyle === 'LIGHT' || (mapStyle === 'DARK' && theme === 'light')) ? 'rgba(56, 189, 248, 0.25)' : 'transparent',
-                  borderColor: (mapStyle === 'LIGHT' || (mapStyle === 'DARK' && theme === 'light')) ? 'var(--border-active)' : 'var(--border-subtle)',
-                  color: (mapStyle === 'LIGHT' || (mapStyle === 'DARK' && theme === 'light')) ? 'var(--text-accent)' : 'var(--text-secondary)'
-                }}
-                onClick={() => setMapStyle('LIGHT')}
-              >
-                ☀️ Light Canvas
-              </button>
-              <button
-                className="btn-outline"
-                style={{
-                  fontSize: '0.72rem',
-                  padding: '4px 8px',
-                  background: mapStyle === 'SATELLITE' ? 'rgba(16, 185, 129, 0.25)' : 'transparent',
-                  borderColor: mapStyle === 'SATELLITE' ? '#10b981' : 'var(--border-subtle)',
-                  color: mapStyle === 'SATELLITE' ? '#34d399' : 'var(--text-secondary)'
-                }}
-                onClick={() => setMapStyle('SATELLITE')}
-              >
-                🛰️ Satellite
-              </button>
-              <button
-                className="btn-outline"
-                style={{
-                  fontSize: '0.72rem',
-                  padding: '4px 8px',
-                  background: mapStyle === 'STREET' ? 'rgba(245, 158, 11, 0.25)' : 'transparent',
-                  borderColor: mapStyle === 'STREET' ? '#f59e0b' : 'var(--border-subtle)',
-                  color: mapStyle === 'STREET' ? '#fbbf24' : 'var(--text-secondary)'
-                }}
-                onClick={() => setMapStyle('STREET')}
-              >
-                🗺️ Street
-              </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+          {/* Clean National Metrics Capsule */}
+          <div className="kpi-pill" style={{ padding: '4px 12px', gap: '12px' }}>
+            <div>
+              <span style={{ fontSize: '0.67rem', color: '#f59e0b', textTransform: 'uppercase', fontWeight: 700 }}>RE Gen: </span>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.88rem', fontWeight: 700 }}>{totalGenMw.toLocaleString()} MW</span>
             </div>
-
-            {/* CSV Manager Modal Button */}
-            <button
-              className="btn-outline"
-              style={{
-                fontSize: '0.72rem',
-                padding: '4px 10px',
-                marginLeft: '12px',
-                borderColor: 'var(--accent-cyan)',
-                color: 'var(--accent-cyan)',
-                background: 'rgba(14, 165, 233, 0.12)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px'
-              }}
-              onClick={() => setShowMapCsvModal(true)}
-              title="Open Power Plants CSV Database Manager"
-            >
-              <Database size={13} />
-              <span>Plants CSV ({sources.length})</span>
-            </button>
-
-            {/* Sinks CSV Manager Modal Button */}
-            <button
-              className="btn-outline"
-              style={{
-                fontSize: '0.72rem',
-                padding: '4px 10px',
-                marginLeft: '6px',
-                borderColor: 'var(--status-normal)',
-                color: 'var(--status-normal)',
-                background: 'rgba(16, 185, 129, 0.12)',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px'
-              }}
-              onClick={() => setShowMapSinkCsvModal(true)}
-              title="Open Demand Sinks (Cities & Factories) CSV Database Manager"
-            >
-              <Building2 size={13} />
-              <span>Sinks CSV ({sinks.length})</span>
-            </button>
+            <div style={{ width: 1, height: 16, background: 'var(--border-subtle)' }} />
+            <div>
+              <span style={{ fontSize: '0.67rem', color: '#10b981', textTransform: 'uppercase', fontWeight: 700 }}>Demand: </span>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.88rem', fontWeight: 700 }}>{totalDemandMw.toLocaleString()} MW</span>
+            </div>
+            <div style={{ width: 1, height: 16, background: 'var(--border-subtle)' }} />
+            <div>
+              <span style={{ fontSize: '0.67rem', color: '#38bdf8', textTransform: 'uppercase', fontWeight: 700 }}>Freq: </span>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.88rem', fontWeight: 700, color: gridFrequencyHz >= 49.90 && gridFrequencyHz <= 50.05 ? 'var(--status-normal)' : 'var(--status-warning)' }}>{gridFrequencyHz.toFixed(2)} Hz</span>
+            </div>
           </div>
+
+          {/* Toggle Regional RLDCs */}
+          <button
+            className="btn-outline"
+            onClick={() => setShowRldcs(!showRldcs)}
+            style={{ padding: '6px 12px', fontSize: '0.75rem', gap: '6px' }}
+            title="Toggle Regional Load Despatch Centres (RLDCs) ribbon"
+          >
+            <Activity size={13} color="var(--text-accent)" />
+            <span>RLDCs ({regions.length})</span>
+          </button>
         </div>
       </div>
 
-      {/* Regional RLDCs Quick Telemetry Bar */}
-      <div className="grid-card" style={{ padding: '12px 18px', background: 'var(--bg-glass)' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
-          <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <Activity size={14} color="var(--text-accent)" /> 5 REGIONAL LOAD DESPATCH CENTRES (RLDCs):
+      {/* Collapsible RLDCs Strip */}
+      {showRldcs && (
+        <div className="grid-card" style={{ padding: '10px 16px', background: 'var(--bg-glass)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
+          <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)', fontWeight: 700 }}>
+            5 REGIONAL LOAD DESPATCH CENTRES (RLDCs):
           </span>
-          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', flex: 1, justifyContent: 'flex-end' }}>
-            {regions.map(rldc => {
-              const isIslanded = rldc.isIslanded;
-              return (
-                <div 
-                  key={rldc.id}
-                  style={{
-                    background: isIslanded ? 'var(--badge-bg-danger)' : 'var(--bg-stat-box)',
-                    border: `1px solid ${isIslanded ? 'var(--status-critical)' : 'var(--border-subtle)'}`,
-                    borderRadius: '6px',
-                    padding: '4px 10px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    fontSize: '0.75rem'
-                  }}
+          <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            {regions.map(rldc => (
+              <div key={rldc.id} style={{
+                background: rldc.isIslanded ? 'var(--badge-bg-danger)' : 'var(--bg-stat-box)',
+                border: `1px solid ${rldc.isIslanded ? 'var(--status-critical)' : 'var(--border-subtle)'}`,
+                borderRadius: '6px',
+                padding: '3px 9px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '7px',
+                fontSize: '0.72rem'
+              }}>
+                <strong style={{ color: rldc.isIslanded ? 'var(--status-critical)' : 'var(--text-accent)' }}>{rldc.code}</strong>
+                <span style={{ color: 'var(--text-secondary)' }}>{(rldc.demandMetMw / 1000).toFixed(1)} GW</span>
+                <button
+                  onClick={() => controlRegion(rldc.id, 'ISOLATE')}
+                  style={{ background: 'none', border: 'none', color: rldc.isIslanded ? '#34d399' : 'var(--text-muted)', cursor: 'pointer', fontSize: '0.68rem', textDecoration: 'underline' }}
                 >
-                  <span style={{ fontWeight: 'bold', color: isIslanded ? 'var(--status-critical)' : 'var(--text-accent)' }}>
-                    {rldc.code}
-                  </span>
-                  <span style={{ color: 'var(--text-secondary)' }}>
-                    {(rldc.demandMetMw / 1000).toFixed(1)} GW
-                  </span>
-                  <button
-                    onClick={() => controlRegion(rldc.id, 'ISOLATE')}
-                    title={isIslanded ? `Re-synchronize ${rldc.code} to national synchronous grid` : `Engage emergency regional islanding for ${rldc.code}`}
-                    style={{
-                      background: 'none',
-                      border: 'none',
-                      color: isIslanded ? '#34d399' : '#94a3b8',
-                      cursor: 'pointer',
-                      fontSize: '0.7rem',
-                      padding: '0 2px',
-                      textDecoration: 'underline'
-                    }}
-                  >
-                    {isIslanded ? 'Re-Sync' : 'Isolate'}
-                  </button>
-                </div>
-              );
-            })}
+                  {rldc.isIslanded ? 'Re-Sync' : 'Isolate'}
+                </button>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
+      )}
 
       {/* Main Map Canvas and Right SCADA Control Drawer */}
       <div style={{ display: 'grid', gridTemplateColumns: selectedNode ? '2.1fr 1.1fr' : '1fr', gap: '20px' }}>
@@ -713,7 +499,9 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
         <div 
           className="grid-card" 
           style={{ 
-            height: '660px', 
+            height: 'calc(100vh - 125px)', 
+            minHeight: '600px',
+            maxHeight: '780px',
             borderRadius: '12px', 
             overflow: 'hidden', 
             position: 'relative',
@@ -730,15 +518,15 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
           {faultInjectionMode && (
             <div style={{
               position: 'absolute',
-              top: '16px',
+              top: '14px',
               left: '50%',
               transform: 'translateX(-50%)',
               background: 'rgba(239, 68, 68, 0.95)',
               color: '#ffffff',
-              padding: '8px 20px',
+              padding: '6px 18px',
               borderRadius: '24px',
               zIndex: 500,
-              fontSize: '0.8rem',
+              fontSize: '0.78rem',
               fontWeight: 'bold',
               display: 'flex',
               alignItems: 'center',
@@ -746,111 +534,186 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
               boxShadow: '0 0 20px rgba(239, 68, 68, 0.8)',
               animation: 'fadeIn 200ms ease'
             }}>
-              <Crosshair size={18} />
-              FAULT INJECTION ACTIVE: Click any line or power station on the map to trigger simulated trip!
+              <Crosshair size={16} />
+              FAULT INJECTION ACTIVE: Click any line or power station on map to trip!
               <button 
                 onClick={() => setFaultInjectionMode(false)}
-                style={{ background: '#000', color: '#fff', border: 'none', borderRadius: '12px', padding: '2px 8px', fontSize: '0.7rem', cursor: 'pointer', marginLeft: '8px' }}
+                style={{ background: '#000', color: '#fff', border: 'none', borderRadius: '12px', padding: '2px 8px', fontSize: '0.68rem', cursor: 'pointer', marginLeft: '6px' }}
               >
                 Cancel
               </button>
             </div>
           )}
 
-          {/* Floating National Stats Overlay on Map */}
+          {/* Floating Top-Left Layer Filter Pill */}
           <div style={{
             position: 'absolute',
-            top: '16px',
-            left: '16px',
+            top: '14px',
+            left: '14px',
             background: 'var(--bg-glass)',
-            backdropFilter: 'blur(12px)',
+            backdropFilter: 'blur(16px)',
             border: '1px solid var(--border-medium)',
             borderRadius: '10px',
-            padding: '12px 18px',
+            padding: '3px',
             zIndex: 400,
             display: 'flex',
-            flexDirection: 'column',
-            gap: '6px',
-            boxShadow: 'var(--shadow-md)',
-            color: 'var(--text-primary)'
+            gap: '3px',
+            boxShadow: 'var(--shadow-md)'
           }}>
-            <span style={{ fontSize: '0.7rem', color: '#94a3b8', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 'bold' }}>
-              REAL-TIME INDIAN GRID AGGREGATE
-            </span>
-            <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-              <div>
-                <div style={{ fontSize: '0.7rem', color: '#f59e0b' }}>Key RE Gen:</div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: 'bold' }}>
-                  {totalGenMw.toLocaleString()} MW
-                </div>
-              </div>
-              <div style={{ width: '1px', height: '24px', background: 'var(--border-subtle)' }}></div>
-              <div>
-                <div style={{ fontSize: '0.7rem', color: '#10b981' }}>Metro Demand:</div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: 'bold' }}>
-                  {totalDemandMw.toLocaleString()} MW
-                </div>
-              </div>
-              <div style={{ width: '1px', height: '24px', background: 'var(--border-subtle)' }}></div>
-              <div>
-                <div style={{ fontSize: '0.7rem', color: '#38bdf8' }}>Freq IEGC:</div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.1rem', fontWeight: 'bold', color: gridFrequencyHz >= 49.90 && gridFrequencyHz <= 50.05 ? '#10b981' : '#f59e0b' }}>
-                  {gridFrequencyHz.toFixed(2)} Hz
-                </div>
-              </div>
-            </div>
+            {[
+              { id: 'ALL', label: `All (${sources.length + sinks.length + corridors.length})` },
+              { id: 'CORRIDORS', label: `⚡ Lines (${corridors.length})` },
+              { id: 'RENEWABLE', label: `☀️ Clean (${sources.filter(s => s.type === 'SOLAR_RE' || s.type === 'WIND_RE' || s.type === 'HYBRID_RE' || s.type === 'HYDRO_DAM' || s.type === 'HYDRO_PSP').length})` },
+              { id: 'BASELOAD', label: `🏭 Base (${sources.filter(s => s.type === 'THERMAL_COAL' || s.type === 'NUCLEAR_BASE').length})` },
+              { id: 'SINKS', label: `🏙️ Demand (${sinks.length})` }
+            ].map(item => (
+              <button
+                key={item.id}
+                onClick={() => setActiveFilter(item.id)}
+                style={{
+                  background: activeFilter === item.id ? 'var(--border-active)' : 'transparent',
+                  color: activeFilter === item.id ? '#ffffff' : 'var(--text-secondary)',
+                  border: 'none',
+                  borderRadius: '7px',
+                  padding: '5px 10px',
+                  fontSize: '0.72rem',
+                  fontWeight: activeFilter === item.id ? 700 : 500,
+                  cursor: 'pointer',
+                  transition: 'all var(--transition-fast)'
+                }}
+              >
+                {item.label}
+              </button>
+            ))}
           </div>
 
-          {/* Floating SCADA Map Control Dock (HUD) */}
-          <div className="map-control-hud">
-            <span style={{ fontSize: '0.7rem', color: '#94a3b8', fontWeight: 'bold', textTransform: 'uppercase' }}>
-              MAP CONTROLS:
-            </span>
+          {/* Floating Top-Right Basemap & CSV Tools */}
+          <div style={{
+            position: 'absolute',
+            top: '14px',
+            right: '14px',
+            background: 'var(--bg-glass)',
+            backdropFilter: 'blur(16px)',
+            border: '1px solid var(--border-medium)',
+            borderRadius: '10px',
+            padding: '3px 8px',
+            zIndex: 400,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            boxShadow: 'var(--shadow-md)'
+          }}>
+            <div style={{ display: 'flex', gap: '2px' }}>
+              <button
+                onClick={() => setMapStyle('DARK')}
+                style={{
+                  background: (mapStyle === 'DARK' && theme === 'dark') ? 'var(--bg-subtle)' : 'transparent',
+                  border: (mapStyle === 'DARK' && theme === 'dark') ? '1px solid var(--border-active)' : '1px solid transparent',
+                  color: (mapStyle === 'DARK' && theme === 'dark') ? 'var(--text-accent)' : 'var(--text-muted)',
+                  borderRadius: '6px',
+                  padding: '3px 7px',
+                  fontSize: '0.7rem',
+                  cursor: 'pointer'
+                }}
+                title="Dark Canvas"
+              >
+                🌙 Dark
+              </button>
+              <button
+                onClick={() => setMapStyle('LIGHT')}
+                style={{
+                  background: (mapStyle === 'LIGHT' || (mapStyle === 'DARK' && theme === 'light')) ? 'var(--bg-subtle)' : 'transparent',
+                  border: (mapStyle === 'LIGHT' || (mapStyle === 'DARK' && theme === 'light')) ? '1px solid var(--border-active)' : '1px solid transparent',
+                  color: (mapStyle === 'LIGHT' || (mapStyle === 'DARK' && theme === 'light')) ? 'var(--text-accent)' : 'var(--text-muted)',
+                  borderRadius: '6px',
+                  padding: '3px 7px',
+                  fontSize: '0.7rem',
+                  cursor: 'pointer'
+                }}
+                title="Light Canvas"
+              >
+                ☀️ Light
+              </button>
+              <button
+                onClick={() => setMapStyle('SATELLITE')}
+                style={{
+                  background: mapStyle === 'SATELLITE' ? 'var(--bg-subtle)' : 'transparent',
+                  border: mapStyle === 'SATELLITE' ? '1px solid var(--status-normal)' : '1px solid transparent',
+                  color: mapStyle === 'SATELLITE' ? 'var(--status-normal)' : 'var(--text-muted)',
+                  borderRadius: '6px',
+                  padding: '3px 7px',
+                  fontSize: '0.7rem',
+                  cursor: 'pointer'
+                }}
+                title="Satellite Imagery"
+              >
+                🛰️ Sat
+              </button>
+            </div>
 
-            {/* Fault Injection Button */}
+            <div style={{ width: 1, height: 16, background: 'var(--border-subtle)' }} />
+
+            <button
+              onClick={() => setShowMapCsvModal(true)}
+              style={{ background: 'transparent', border: 'none', color: 'var(--accent-cyan)', fontSize: '0.7rem', cursor: 'pointer', padding: '3px 6px', display: 'flex', alignItems: 'center', gap: '4px' }}
+              title="Open Power Plants CSV Data"
+            >
+              <Database size={12} /> Plants ({sources.length})
+            </button>
+            <button
+              onClick={() => setShowMapSinkCsvModal(true)}
+              style={{ background: 'transparent', border: 'none', color: 'var(--status-normal)', fontSize: '0.7rem', cursor: 'pointer', padding: '3px 6px', display: 'flex', alignItems: 'center', gap: '4px' }}
+              title="Open Demand Sinks CSV Data"
+            >
+              <Building2 size={12} /> Sinks ({sinks.length})
+            </button>
+          </div>
+
+          {/* Floating SCADA Map Control Dock */}
+          <div style={{
+            position: 'absolute',
+            bottom: '14px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            background: 'var(--bg-glass)',
+            backdropFilter: 'blur(20px)',
+            border: '1px solid var(--border-medium)',
+            borderRadius: '12px',
+            padding: '5px 10px',
+            zIndex: 400,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            boxShadow: 'var(--shadow-lg)'
+          }}>
             <button 
               className={`map-hud-btn ${faultInjectionMode ? 'active' : ''}`}
               onClick={() => setFaultInjectionMode(!faultInjectionMode)}
-              title="Activate crosshairs to click and trip any corridor or station on the map"
+              title="Click any line or station to trip"
             >
-              <Crosshair size={14} color={faultInjectionMode ? '#fff' : '#ef4444'} />
-              {faultInjectionMode ? "Arm Armed (Click Asset)" : "Inject Line Fault"}
+              <Crosshair size={13} color={faultInjectionMode ? '#fff' : 'var(--status-critical)'} />
+              <span>{faultInjectionMode ? "Arm Armed (Click Line)" : "Inject Fault"}</span>
             </button>
 
-            {/* Run Transmission FLISR */}
             <button
               className="map-hud-btn"
               onClick={triggerFLISRSimulation}
               disabled={flisrActive}
-              title="Run automated 3-step Fault Location, Isolation & Service Restoration"
+              title="Execute automated FLISR self-healing"
             >
-              <Flame size={14} color="#f59e0b" />
-              {flisrActive ? `FLISR: ${flisrStage}...` : "Execute Auto-FLISR"}
+              <Flame size={13} color="#f59e0b" />
+              <span>{flisrActive ? `FLISR: ${flisrStage}...` : "Auto-FLISR"}</span>
             </button>
 
-            {/* IEGC Frequency Stabilizer (AGC) */}
             <button
               className="map-hud-btn success"
               onClick={stabilizeFrequency}
-              title="Command Tehri Hydro & AGC generation to pull grid frequency to exact 50.00 Hz"
+              title="Stabilize Indian grid frequency to 50.00 Hz"
             >
-              <ShieldCheck size={14} />
-              IEGC Stabilize (50.00 Hz)
+              <ShieldCheck size={13} />
+              <span>Stabilize 50 Hz</span>
             </button>
 
-            {/* All-India Demand Response 5% Shave */}
-            <button
-              className="map-hud-btn"
-              onClick={() => {
-                sinks.forEach(sink => controlDemand(sink.id, 'SHED', 10));
-              }}
-              title="Trigger national 10% emergency load reduction across all metropolitan centers"
-            >
-              <SlidersHorizontal size={14} color="#06b6d4" />
-              National 10% Load Shed
-            </button>
-
-            {/* Restore All */}
             <button
               className="map-hud-btn"
               onClick={() => {
@@ -860,54 +723,51 @@ export const IndiaGridMap = ({ onSelectLocalSubstation }) => {
                   if (src.status === 'TRIPPED') controlGenerator(src.id, 'TRIP');
                 });
               }}
-              title="Re-close all tripped corridors and restore normal loads"
+              title="Reset all lines and stations to normal"
             >
-              <RefreshCw size={14} />
-              Restore All Normal
+              <RefreshCw size={13} />
+              <span>Restore All</span>
             </button>
           </div>
 
-          {/* Map Legend */}
+          {/* Floating Map Legend */}
           <div style={{
             position: 'absolute',
-            bottom: '16px',
-            left: '16px',
+            bottom: '14px',
+            left: '14px',
             background: 'var(--bg-glass)',
-            backdropFilter: 'blur(12px)',
+            backdropFilter: 'blur(14px)',
             border: '1px solid var(--border-subtle)',
             borderRadius: '8px',
-            padding: '8px 14px',
+            padding: '6px 12px',
             zIndex: 400,
-            fontSize: '0.72rem',
+            fontSize: '0.7rem',
             display: 'flex',
-            gap: '14px',
-            flexWrap: 'wrap',
+            gap: '12px',
+            alignItems: 'center',
             color: 'var(--text-primary)'
           }}>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#f59e0b', boxShadow: '0 0 6px #f59e0b' }}></span> Solar Park
+            <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#f59e0b' }} /> Solar/Wind
             </span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#06b6d4', boxShadow: '0 0 6px #06b6d4' }}></span> Wind / Hybrid
+            <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#38bdf8' }} /> Hydro
             </span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#38bdf8', boxShadow: '0 0 6px #38bdf8' }}></span> Hydro Peaking
+            <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#a855f7' }} /> Nuclear
             </span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#a855f7', boxShadow: '0 0 6px #a855f7' }}></span> Nuclear
+            <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#10b981' }} /> Demand
             </span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#10b981', boxShadow: '0 0 6px #10b981' }}></span> Demand Sink
-            </span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span style={{ width: 16, height: 3, background: '#ef4444' }}></span> Tripped Line
+            <span style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
+              <span style={{ width: 14, height: 3, background: '#ef4444' }} /> Tripped Line
             </span>
           </div>
         </div>
 
         {/* Selected Asset SCADA Tele-Control Drawer */}
         {selectedNode && (
-          <div className="grid-card" style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '14px', height: '660px', overflowY: 'auto' }}>
+          <div className="grid-card" style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '14px', height: '720px', overflowY: 'auto' }}>
             {/* Header of Drawer */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
               <div>

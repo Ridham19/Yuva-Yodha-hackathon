@@ -18,15 +18,15 @@ import { CarbonAndReports } from './components/CarbonAndReports';
 import { VoiceDispatchCopilot } from './components/VoiceDispatchCopilot';
 import { ImpactSummary } from './components/ImpactSummary';
 import { AlarmsDrawer } from './components/AlarmsDrawer';
-import { MissionControlBar } from './components/MissionControlBar';
 import { HackathonPitchDeck } from './components/HackathonPitchDeck';
 
 function DashboardContent() {
   const [activeTab, setActiveTab] = useState('india-map');
   const [showPitchDeck, setShowPitchDeck] = useState(false);
+  const [isAlarmsOpen, setIsAlarmsOpen] = useState(false);
   const { toggleTheme, setIsLiveStreamActive, toggleSound } = useGrid();
 
-  // Keyboard shortcuts for power operators: [T] Theme, [Space] Stream, [M] Mute, [P] Pitch Deck
+  // Keyboard shortcuts for power operators: [T] Theme, [Space] Stream, [M] Mute, [P] Pitch Deck, [A] Alarms
   useEffect(() => {
     const handleKeyDown = (e) => {
       const activeTag = document.activeElement?.tagName?.toLowerCase();
@@ -44,6 +44,9 @@ function DashboardContent() {
       } else if (e.key === 'p' || e.key === 'P') {
         e.preventDefault();
         setShowPitchDeck(prev => !prev);
+      } else if (e.key === 'a' || e.key === 'A') {
+        e.preventDefault();
+        setIsAlarmsOpen(prev => !prev);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
@@ -51,11 +54,13 @@ function DashboardContent() {
   }, [toggleTheme, setIsLiveStreamActive, toggleSound]);
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', paddingBottom: '70px' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <Header 
         activeTab={activeTab} 
         setActiveTab={setActiveTab} 
         onOpenPitchDeck={() => setShowPitchDeck(true)}
+        isAlarmsOpen={isAlarmsOpen}
+        onToggleAlarms={() => setIsAlarmsOpen(prev => !prev)}
       />
 
       <main className="dashboard-container">
@@ -78,13 +83,14 @@ function DashboardContent() {
         {activeTab === 'impact' && <ImpactSummary />}
       </main>
 
-      <AlarmsDrawer />
+      {/* Slide-over SCADA Alarms Drawer */}
+      <AlarmsDrawer 
+        isOpen={isAlarmsOpen} 
+        onClose={() => setIsAlarmsOpen(false)} 
+      />
 
       {/* Floating AI SCADA Voice Copilot */}
       <VoiceDispatchCopilot onNavigateTab={(tab) => setActiveTab(tab)} />
-
-      {/* Docked SCADA Mission Control Telemetry HUD */}
-      <MissionControlBar />
 
       {/* Yuva Yodha Grand Finale Interactive Pitch Deck */}
       {showPitchDeck && (
@@ -107,4 +113,3 @@ export default function App() {
     </GridProvider>
   );
 }
-

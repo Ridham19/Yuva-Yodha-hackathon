@@ -76,7 +76,7 @@ export const SelfHealingAutomation = () => {
               <span className="badge badge-success">CORE DIFFERENTIATOR</span>
               <span style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Yuva Yodha Grid Reliability Track</span>
             </div>
-            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', marginTop: '6px' }}>
+            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.4rem', marginTop: '6px', color: 'var(--text-primary)' }}>
               Autonomous Self-Healing (FLISR) & Multi-Hazard Disaster Sandbox
             </h2>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.85rem', maxWidth: '850px', marginTop: '4px' }}>

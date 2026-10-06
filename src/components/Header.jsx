@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useGrid } from '../context/GridContext';
 import { PowerPlantCsvModal } from './PowerPlantCsvModal';
 import { SinkCsvModal } from './SinkCsvModal';
@@ -29,10 +29,20 @@ import {
   Leaf,
   FolderDown,
   Award,
-  Boxes
+  Boxes,
+  BellRing,
+  SlidersHorizontal,
+  Settings,
+  Sparkles
 } from 'lucide-react';
 
-export const Header = ({ activeTab, setActiveTab, onOpenPitchDeck }) => {
+export const Header = ({ 
+  activeTab, 
+  setActiveTab, 
+  onOpenPitchDeck,
+  onToggleAlarms,
+  isAlarmsOpen
+}) => {
   const {
     substation,
     gridFrequencyHz,
@@ -51,14 +61,32 @@ export const Header = ({ activeTab, setActiveTab, onOpenPitchDeck }) => {
     theme,
     toggleTheme,
     sources,
-    sinks
+    sinks,
+    alarms
   } = useGrid();
 
   const [currentTime, setCurrentTime] = useState('');
   const [showDrillsMenu, setShowDrillsMenu] = useState(false);
-  const [showDataMenu, setShowDataMenu] = useState(false);
+  const [showToolsMenu, setShowToolsMenu] = useState(false);
   const [showCsvModal, setShowCsvModal] = useState(false);
   const [showSinkCsvModal, setShowSinkCsvModal] = useState(false);
+
+  const drillsRef = useRef(null);
+  const toolsRef = useRef(null);
+
+  // Close dropdowns on outside click
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (drillsRef.current && !drillsRef.current.contains(e.target)) {
+        setShowDrillsMenu(false);
+      }
+      if (toolsRef.current && !toolsRef.current.contains(e.target)) {
+        setShowToolsMenu(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   useEffect(() => {
     const updateClock = () => {
@@ -70,7 +98,7 @@ export const Header = ({ activeTab, setActiveTab, onOpenPitchDeck }) => {
     return () => clearInterval(timer);
   }, []);
 
-  // Determine which of the 4 main categories is active
+  // Determine active primary category
   const getCategory = () => {
     if (['topology', 'busbar-sld', 'feeders', 'control', 'flisr', 'ecostruxure'].includes(activeTab)) return 'substation';
     if (['ml-studio', 'cyber', 'predictive'].includes(activeTab)) return 'ai-cyber';
@@ -80,15 +108,17 @@ export const Header = ({ activeTab, setActiveTab, onOpenPitchDeck }) => {
 
   const activeCategory = getCategory();
 
-  // Grid frequency health indicator
+  // Grid frequency status calculations
   const freqDeviation = +(gridFrequencyHz - 50.0).toFixed(2);
   const isFreqSafe = Math.abs(freqDeviation) <= 0.05;
   const isFreqWarning = Math.abs(freqDeviation) > 0.05 && Math.abs(freqDeviation) <= 0.15;
 
+  const unackAlarmsCount = alarms ? alarms.filter(a => !a.acknowledged).length : 0;
+
   return (
     <header className="header-container" id="gridpulse-header">
       <div className="header-inner">
-        {/* Brand Identity & Location */}
+        {/* Left: Brand Identity & Location */}
         <div className="brand-wrapper">
           <div className="brand-logo-badge">
             <Zap size={22} color="#ffffff" />
@@ -107,12 +137,13 @@ export const Header = ({ activeTab, setActiveTab, onOpenPitchDeck }) => {
                   background: isBackendConnected ? 'var(--badge-bg-success)' : 'var(--badge-bg-warning)',
                   padding: '2px 8px',
                   borderRadius: '12px',
-                  border: isBackendConnected ? '1px solid var(--badge-border-success)' : '1px solid var(--badge-border-warning)'
+                  border: isBackendConnected ? '1px solid var(--badge-border-success)' : '1px solid var(--badge-border-warning)',
+                  fontWeight: 600
                 }}
-                title={isBackendConnected ? "Real-time Node.js + WebSocket Server active on Port 5000" : "Standalone simulator"}
+                title={isBackendConnected ? "Real-time Node.js + WebSocket Server active on Port 5000" : "In-browser simulation active"}
               >
                 <span className={`status-dot ${isBackendConnected ? 'normal' : 'warning'}`}></span> 
-                {isBackendConnected ? ":5000" : "Offline"}
+                {isBackendConnected ? ":5000" : "Sim"}
               </span>
             </div>
             <div className="brand-subtitle">
@@ -120,76 +151,118 @@ export const Header = ({ activeTab, setActiveTab, onOpenPitchDeck }) => {
               <span style={{ opacity: 0.4 }}>•</span>
               <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.72rem' }}>
                 <Clock size={11} style={{ display: 'inline', marginRight: '3px', verticalAlign: 'middle' }} />
-                {currentTime || 'Live Clock'}
+                {currentTime || 'Live IST'}
               </span>
             </div>
           </div>
         </div>
 
-        {/* 2 Clean Essential Telemetry Indicators */}
-        <div className="telemetry-pills">
-          {/* Grid Frequency */}
-          <div className="kpi-pill" title="Indian Electricity Grid Code: Nominal 50.00 Hz">
-            <div className={`status-dot ${isFreqSafe ? 'normal' : isFreqWarning ? 'warning' : 'critical'}`}></div>
-            <div>
-              <div className="kpi-label">Grid Frequency</div>
-              <div className="kpi-val" style={{ color: isFreqSafe ? 'var(--status-normal)' : isFreqWarning ? 'var(--status-warning)' : 'var(--status-critical)' }}>
+        {/* Center: 4 Modern Primary Tabs */}
+        <nav className="nav-tabs-wrapper" style={{ margin: 0, padding: 0 }} aria-label="Primary SCADA Modules">
+          <button
+            className={`nav-tab-btn ${activeCategory === 'national-grid' ? 'active' : ''}`}
+            onClick={() => setActiveTab('india-map')}
+            id="tab-india-map"
+          >
+            <Compass size={15} />
+            <span>National Grid</span>
+          </button>
+
+          <button
+            className={`nav-tab-btn ${activeCategory === 'substation' ? 'active' : ''}`}
+            onClick={() => setActiveTab('topology')}
+            id="tab-substation"
+          >
+            <Zap size={15} />
+            <span>Substation SCADA</span>
+            {flisrActive && (
+              <span className="nav-tab-badge" style={{ background: 'var(--status-critical)', color: '#fff' }}>
+                FAULT
+              </span>
+            )}
+          </button>
+
+          <button
+            className={`nav-tab-btn ${activeCategory === 'ai-cyber' ? 'active' : ''}`}
+            onClick={() => setActiveTab('ml-studio')}
+            id="tab-ai-cyber"
+          >
+            <Cpu size={15} />
+            <span>AI & Cyber</span>
+            <span className="nav-tab-badge" style={{ background: 'rgba(168, 85, 247, 0.18)', color: '#c084fc' }}>
+              ML
+            </span>
+          </button>
+
+          <button
+            className={`nav-tab-btn ${activeCategory === 'markets' ? 'active' : ''}`}
+            onClick={() => setActiveTab('market')}
+            id="tab-markets"
+          >
+            <Coins size={15} />
+            <span>Markets & Ops</span>
+          </button>
+        </nav>
+
+        {/* Right: Telemetry Capsule + Human-Friendly Actions */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          {/* Calm, Consolidated Live Telemetry Capsule */}
+          <div 
+            className="kpi-pill"
+            style={{ padding: '5px 12px', gap: '10px' }}
+            title={`IEGC Grid Frequency: ${gridFrequencyHz.toFixed(2)} Hz | Demand: ${totalDemandMw} MW / Gen: ${totalGenerationMw} MW`}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <div className={`status-dot ${isFreqSafe ? 'normal' : isFreqWarning ? 'warning' : 'critical'}`}></div>
+              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.85rem', fontWeight: 700, color: isFreqSafe ? 'var(--status-normal)' : isFreqWarning ? 'var(--status-warning)' : 'var(--status-critical)' }}>
                 {gridFrequencyHz.toFixed(2)} Hz
-                <span style={{ fontSize: '0.65rem', marginLeft: '4px', opacity: 0.8, color: 'var(--text-muted)' }}>
-                  ({freqDeviation >= 0 ? `+${freqDeviation}` : freqDeviation})
-                </span>
-              </div>
+              </span>
+            </div>
+            <div style={{ width: 1, height: 16, background: 'var(--border-subtle)' }}></div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '0.82rem' }}>
+              <span style={{ color: 'var(--text-accent)', fontWeight: 600 }}>{totalDemandMw} MW</span>
+              <span style={{ color: 'var(--text-muted)', fontSize: '0.72rem' }}>load</span>
             </div>
           </div>
 
-          {/* Substation Power */}
-          <div className="kpi-pill" title="Substation Active Demand / Generation Capacity">
-            <Radio size={14} color="var(--text-accent)" />
-            <div>
-              <div className="kpi-label">Substation Load</div>
-              <div className="kpi-val">
-                <span style={{ color: 'var(--text-accent)' }}>{totalDemandMw} MW</span>
-                <span style={{ color: 'var(--text-muted)', margin: '0 4px', fontSize: '0.75rem' }}>/</span>
-                <span style={{ color: 'var(--status-normal)' }}>{totalGenerationMw} MW</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Simplified Action Controls */}
-        <div className="header-actions">
-          {/* Yuva Yodha Grand Finale Pitch Deck Button */}
-          {onOpenPitchDeck && (
-            <button
-              className="btn-demo"
-              id="btn-pitch-deck"
-              onClick={onOpenPitchDeck}
-              style={{
-                background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.22) 0%, rgba(6, 182, 212, 0.22) 100%)',
-                borderColor: '#10b981',
-                color: '#10b981',
+          {/* Alarms Drawer Bell Trigger */}
+          <button
+            className={`btn-demo ${isAlarmsOpen ? 'active' : ''}`}
+            id="btn-header-alarms"
+            onClick={onToggleAlarms}
+            style={{ position: 'relative', padding: '6px 10px' }}
+            title={unackAlarmsCount > 0 ? `${unackAlarmsCount} unacknowledged alarms` : "Open SCADA Alarms Drawer"}
+          >
+            <BellRing size={15} color={unackAlarmsCount > 0 ? 'var(--status-critical)' : 'var(--text-secondary)'} />
+            {unackAlarmsCount > 0 && (
+              <span style={{
+                position: 'absolute',
+                top: -4,
+                right: -4,
+                background: 'var(--status-critical)',
+                color: '#fff',
+                fontSize: '0.62rem',
                 fontWeight: 'bold',
-                boxShadow: '0 0 10px rgba(16, 185, 129, 0.25)'
-              }}
-              title="Open Yuva Yodha Grand Finale Pitch Deck [P]"
-            >
-              <Award size={14} color="#10b981" />
-              <span>Jury Pitch Deck</span>
-              <span style={{ fontSize: '0.65rem', opacity: 0.85, background: 'rgba(0,0,0,0.3)', padding: '1px 5px', borderRadius: '4px' }}>P</span>
-            </button>
-          )}
+                borderRadius: '8px',
+                padding: '1px 5px',
+                lineHeight: 1
+              }}>
+                {unackAlarmsCount}
+              </span>
+            )}
+          </button>
 
-          {/* Scenarios Dropdown */}
-          <div style={{ position: 'relative' }}>
+          {/* Operational Drills Dropdown */}
+          <div style={{ position: 'relative' }} ref={drillsRef}>
             <button 
               className={`btn-demo ${flisrActive ? 'active' : ''}`}
               id="btn-drills-menu"
               onClick={() => setShowDrillsMenu(!showDrillsMenu)}
-              title="Inject demo operational scenarios"
+              title="Inject demo operational drills"
             >
-              <Flame size={14} color={flisrActive ? 'var(--status-critical)' : 'var(--status-warning)'} />
-              <span>{flisrActive ? "Fault Running..." : "Scenarios"}</span>
-              <ChevronDown size={11} style={{ transform: showDrillsMenu ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
+              <Flame size={14} color={flisrActive ? 'var(--status-critical)' : '#f59e0b'} />
+              <span>{flisrActive ? "Drill Running..." : "Drills"}</span>
+              <ChevronDown size={12} style={{ transform: showDrillsMenu ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }} />
             </button>
 
             {showDrillsMenu && (
@@ -209,12 +282,12 @@ export const Header = ({ activeTab, setActiveTab, onOpenPitchDeck }) => {
                   flexDirection: 'column',
                   gap: '6px',
                   zIndex: 200,
-                  minWidth: '220px'
+                  minWidth: '230px'
                 }}
                 onClick={() => setShowDrillsMenu(false)}
               >
                 <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'uppercase', padding: '4px 8px', fontWeight: 700 }}>
-                  Inject Scenario Drill
+                  Inject Operational Drill
                 </div>
                 <button
                   className="btn-demo"
@@ -253,28 +326,37 @@ export const Header = ({ activeTab, setActiveTab, onOpenPitchDeck }) => {
             )}
           </div>
 
-          {/* Pause / Resume Stream */}
-          <button 
-            className="btn-demo"
-            id="btn-stream-toggle"
-            onClick={() => setIsLiveStreamActive(!isLiveStreamActive)}
-            title={isLiveStreamActive ? "Pause live simulation [Space]" : "Resume live simulation [Space]"}
-          >
-            {isLiveStreamActive ? <Pause size={13} /> : <Play size={13} color="var(--status-normal)" />}
-            <span>{isLiveStreamActive ? "Live" : "Paused"}</span>
-          </button>
-
-          {/* Grid CSV Data Dropdown */}
-          <div style={{ position: 'relative' }}>
+          {/* Yuva Yodha Grand Finale Pitch Deck Button */}
+          {onOpenPitchDeck && (
             <button
               className="btn-demo"
-              onClick={() => setShowDataMenu(!showDataMenu)}
-              title="Manage CSV Power Plants & Sinks Data"
+              id="btn-pitch-deck"
+              onClick={onOpenPitchDeck}
+              style={{
+                borderColor: 'var(--status-normal)',
+                color: 'var(--status-normal)',
+                fontWeight: '600'
+              }}
+              title="Open Yuva Yodha Grand Finale Pitch Deck [P]"
             >
-              <FolderDown size={13} color="var(--text-accent)" />
-              <span>CSV Data</span>
+              <Award size={14} color="var(--status-normal)" />
+              <span>Pitch Deck</span>
+              <span style={{ fontSize: '0.62rem', opacity: 0.85, background: 'var(--bg-subtle)', padding: '1px 5px', borderRadius: '4px', border: '1px solid var(--border-subtle)' }}>P</span>
             </button>
-            {showDataMenu && (
+          )}
+
+          {/* Quick Tools & Settings Dropdown */}
+          <div style={{ position: 'relative' }} ref={toolsRef}>
+            <button
+              className="btn-demo"
+              onClick={() => setShowToolsMenu(!showToolsMenu)}
+              title="Tools & Settings"
+              style={{ padding: '6px 9px' }}
+            >
+              <SlidersHorizontal size={14} color="var(--text-secondary)" />
+            </button>
+
+            {showToolsMenu && (
               <div
                 style={{
                   position: 'absolute',
@@ -291,42 +373,68 @@ export const Header = ({ activeTab, setActiveTab, onOpenPitchDeck }) => {
                   flexDirection: 'column',
                   gap: '6px',
                   zIndex: 200,
-                  minWidth: '200px'
+                  minWidth: '210px'
                 }}
-                onClick={() => setShowDataMenu(false)}
+                onClick={() => setShowToolsMenu(false)}
               >
+                <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'uppercase', padding: '4px 8px', fontWeight: 700 }}>
+                  SCADA Operations & Data
+                </div>
+
+                {/* Pause/Resume Live Stream */}
+                <button
+                  className="btn-demo"
+                  style={{ width: '100%', justifyContent: 'flex-start' }}
+                  onClick={() => setIsLiveStreamActive(!isLiveStreamActive)}
+                >
+                  {isLiveStreamActive ? <Pause size={13} /> : <Play size={13} color="var(--status-normal)" />}
+                  <span>{isLiveStreamActive ? "Pause Stream (Space)" : "Resume Stream (Space)"}</span>
+                </button>
+
+                {/* Sound FX Toggle */}
+                <button
+                  className="btn-demo"
+                  style={{ width: '100%', justifyContent: 'flex-start' }}
+                  onClick={toggleSound}
+                >
+                  {soundMuted ? <VolumeX size={13} color="var(--text-muted)" /> : <Volume2 size={13} color="var(--status-normal)" />}
+                  <span>{soundMuted ? "Unmute SCADA Audio [M]" : "Mute Audio [M]"}</span>
+                </button>
+
+                {/* CSV Power Plants */}
                 <button
                   className="btn-demo"
                   style={{ width: '100%', justifyContent: 'flex-start' }}
                   onClick={() => setShowCsvModal(true)}
                 >
                   <Database size={13} color="var(--accent-cyan)" />
-                  Power Plants ({sources.length})
+                  <span>Power Plants ({sources.length})</span>
                 </button>
+
+                {/* CSV Demand Sinks */}
                 <button
                   className="btn-demo"
                   style={{ width: '100%', justifyContent: 'flex-start' }}
                   onClick={() => setShowSinkCsvModal(true)}
                 >
                   <Building2 size={13} color="var(--status-normal)" />
-                  Demand Sinks ({sinks.length})
+                  <span>Demand Sinks ({sinks.length})</span>
+                </button>
+
+                {/* Reset Grid Baseline */}
+                <button
+                  className="btn-demo restore"
+                  style={{ width: '100%', justifyContent: 'flex-start', borderTop: '1px solid var(--border-subtle)', paddingTop: '6px' }}
+                  onClick={resetToHealthy}
+                >
+                  <RefreshCw size={13} />
+                  <span>Reset All to Baseline</span>
                 </button>
               </div>
             )}
           </div>
 
-          {/* Sound FX Toggle */}
-          <button
-            className="btn-demo"
-            id="btn-toggle-sound"
-            onClick={toggleSound}
-            style={{ padding: '6px 9px' }}
-            title={soundMuted ? "Unmute SCADA audio [M]" : "Mute audio [M]"}
-          >
-            {soundMuted ? <VolumeX size={13} color="var(--text-muted)" /> : <Volume2 size={13} color="var(--status-normal)" />}
-          </button>
-
-          {/* Theme Toggle */}
+          {/* Theme Toggle (Day / Night Mode) */}
           <button
             className="theme-toggle-btn"
             id="btn-toggle-theme"
@@ -334,72 +442,10 @@ export const Header = ({ activeTab, setActiveTab, onOpenPitchDeck }) => {
             style={{ padding: '6px 10px' }}
             title={theme === 'dark' ? "Switch to Light Theme [T]" : "Switch to Dark Theme [T]"}
           >
-            {theme === 'dark' ? <Sun size={13} color="#f59e0b" /> : <Moon size={13} color="#0284c7" />}
-          </button>
-
-          {/* Reset Baseline */}
-          <button
-            className="btn-demo restore"
-            id="btn-reset-grid"
-            onClick={resetToHealthy}
-            title="Reset to baseline"
-            style={{ padding: '6px 10px' }}
-          >
-            <RefreshCw size={13} />
+            {theme === 'dark' ? <Sun size={14} color="#f59e0b" /> : <Moon size={14} color="#0284c7" />}
           </button>
         </div>
       </div>
-
-      {/* 4 Clean Primary Section Tabs */}
-      <nav className="nav-tabs-wrapper" aria-label="Primary SCADA Modules">
-        {/* Module 1: National Grid */}
-        <button
-          className={`nav-tab-btn ${activeCategory === 'national-grid' ? 'active' : ''}`}
-          onClick={() => setActiveTab('india-map')}
-          id="tab-india-map"
-        >
-          <Compass size={15} />
-          National Grid GIS
-        </button>
-
-        {/* Module 2: Substation SCADA */}
-        <button
-          className={`nav-tab-btn ${activeCategory === 'substation' ? 'active' : ''}`}
-          onClick={() => setActiveTab('topology')}
-          id="tab-substation"
-        >
-          <Zap size={15} />
-          Substation SCADA
-          {flisrActive && (
-            <span className="nav-tab-badge" style={{ background: 'var(--status-critical)', color: '#fff' }}>
-              FAULT
-            </span>
-          )}
-        </button>
-
-        {/* Module 3: AI & Cyber Defense */}
-        <button
-          className={`nav-tab-btn ${activeCategory === 'ai-cyber' ? 'active' : ''}`}
-          onClick={() => setActiveTab('ml-studio')}
-          id="tab-ai-cyber"
-        >
-          <Cpu size={15} />
-          AI & Cyber Defense
-          <span className="nav-tab-badge" style={{ background: 'rgba(168, 85, 247, 0.2)', color: '#c084fc' }}>
-            ML CORE
-          </span>
-        </button>
-
-        {/* Module 4: Energy Markets & DB */}
-        <button
-          className={`nav-tab-btn ${activeCategory === 'markets' ? 'active' : ''}`}
-          onClick={() => setActiveTab('market')}
-          id="tab-markets"
-        >
-          <Coins size={15} />
-          Markets & Database
-        </button>
-      </nav>
 
       {/* Clean Secondary Segmented Bar for the Active Category */}
       {activeCategory === 'substation' && (
@@ -444,7 +490,6 @@ export const Header = ({ activeTab, setActiveTab, onOpenPitchDeck }) => {
             <button 
               className={`subnav-segmented-btn ${activeTab === 'ecostruxure' ? 'active' : ''}`}
               onClick={() => setActiveTab('ecostruxure')}
-              style={{ color: activeTab === 'ecostruxure' ? '#10b981' : undefined }}
             >
               <Boxes size={13} />
               Schneider EcoStruxure™

@@ -329,7 +329,7 @@ export const MachineLearningStudio = () => {
                 FastAPI / Scikit-Learn / PyTorch Real-Time Edge Pipeline
               </span>
             </div>
-            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.45rem', marginTop: '6px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.45rem', marginTop: '6px', display: 'flex', alignItems: 'center', gap: '10px', color: 'var(--text-primary)' }}>
               <Cpu size={26} color="#8b5cf6" />
               Machine Learning Smart Grid Intelligence Suite
             </h2>

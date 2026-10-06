@@ -115,3 +115,38 @@
 - **SAIFI**: System Average Interruption Frequency Index (interruptions/customer/year)
 - **AT&C Loss**: Aggregate Technical and Commercial Loss (%)
 - **Renewable Absorption**: % of generated solar/wind consumed without grid curtailment
+
+---
+
+## 5. UI Component Architecture & Design System
+
+### Layout Hierarchy
+```
+[ Root Viewport (100vh) ]
+ ├── [ Header.jsx ] ── Single Command Bar
+ │    ├── Brand Identity & Live Stream Status (:5000 / WS)
+ │    ├── 4 Primary Domain Tabs (National Grid | Substation SCADA | AI & Cyber | Markets & Ops)
+ │    ├── Consolidated Telemetry Capsule (50.04 Hz | 24.2 MW Load)
+ │    ├── Slide-Over Alarms Trigger (🔔 Bell Icon with Unread Count Badge)
+ │    ├── Grouped Action Dropdowns (Drills ▾ | Tools ▾)
+ │    └── Utility Controls (Pitch Deck [P] | Theme Toggle [T])
+ │
+ ├── [ Secondary Segmented Subnav Bar ] (Contextual: renders only for active domain with sub-views)
+ │
+ ├── [ Main Content Area (dashboard-container) ]
+ │    ├── National Grid GIS Map (765kV Corridors, Sources & Sinks, Floating Pills)
+ │    ├── Substation SCADA (SLD, Double Busbar Twin, Feeder Telemetry, Switchgear, FLISR, EcoStruxure)
+ │    ├── AI & Cyber (Neural ML Studio, IEC 62351 Zero-Trust Defense, Predictive DGA)
+ │    └── Markets & Ops (IEX Merit Order Despatch, EV Fleet V2G, SQLite Explorer, ESG Carbon)
+ │
+ ├── [ AlarmsDrawer.jsx ] ── Slide-over right drawer with backdrop blur (ALL / CRITICAL / WARNING / INFO)
+ ├── [ VoiceDispatchCopilot.jsx ] ── Floating Web Speech AI assistant (bottom-right: 24px)
+ └── [ HackathonPitchDeck.jsx ] ── 11-slide jury pitch deck overlay (Hotkey: [P])
+```
+
+### Semantic Design Tokens (`src/index.css`)
+* **Surfaces**: `var(--bg-card)`, `var(--bg-glass)`, `var(--bg-stat-box)`, `var(--bg-elevated)`
+* **Text**: `var(--text-primary)`, `var(--text-secondary)`, `var(--text-muted)`, `var(--text-accent)`
+* **Borders**: `var(--border-subtle)`, `var(--border-medium)`, `var(--border-active)`
+* **Status Glows**: `var(--status-normal)`, `var(--status-warning)`, `var(--status-critical)`, `var(--accent-cyan)`
+

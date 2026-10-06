@@ -36,7 +36,7 @@ export const PredictiveMaintenance = () => {
       <div className="grid-card" style={{ padding: '20px', borderLeft: '4px solid #8b5cf6' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
           <div>
-            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-primary)' }}>
               <Cpu size={22} color="#8b5cf6" />
               Machine Learning Predictive Asset Health & DGA Analytics
             </h3>

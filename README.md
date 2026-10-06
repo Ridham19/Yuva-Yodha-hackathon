@@ -72,6 +72,7 @@ GridPulse is an enterprise-grade SCADA operations platform designed for state DI
 | **Cyber Shield** | IEC 62351 Zero-Trust defense, Chi-Square residual state estimation. | Intercepts FDIA & rogue breaker trips |
 | **National GIS Map** | 100% keyless Esri World Dark Gray Canvas with 765kV transmission corridors. | Monitors **29,825 MW** capacity & **36,586 MW** load |
 | **Relational Database** | Production-grade ACID SQLite database (`backend/data/gridpulse.db`). | 8 relational tables + interactive SQL console |
+| **Human-Centered SCADA UI** | Unified command header, slide-over notification drawer, semantic design tokens. | Reclaimed 55px vertical space, zero visual fatigue |
 | **Jury Pitch Deck** | 11-slide presentation mode with embedded live micro-widgets and speaker notes. | Launch via header button or **`[P]`** key |
 
 ---

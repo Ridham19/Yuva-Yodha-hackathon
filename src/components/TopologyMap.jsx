@@ -40,8 +40,8 @@ export const TopologyMap = () => {
       {/* View Title & Quick Legend */}
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '12px' }}>
         <div>
-          <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <Layers size={20} color="#38bdf8" />
+          <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-primary)' }}>
+            <Layers size={20} color="var(--accent-cyan)" />
             Substation & Feeder GIS Topology
           </h2>
           <p style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>
@@ -50,7 +50,7 @@ export const TopologyMap = () => {
         </div>
 
         {/* Legend */}
-        <div style={{ display: 'flex', gap: '14px', alignItems: 'center', background: 'rgba(0,0,0,0.3)', padding: '6px 14px', borderRadius: '8px', border: '1px solid var(--border-subtle)', fontSize: '0.75rem' }}>
+        <div style={{ display: 'flex', gap: '14px', alignItems: 'center', background: 'var(--bg-stat-box)', padding: '6px 14px', borderRadius: '8px', border: '1px solid var(--border-subtle)', fontSize: '0.75rem', color: 'var(--text-primary)' }}>
           <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             <span style={{ width: 10, height: 10, borderRadius: '50%', background: '#10b981' }}></span> Energized
           </span>
