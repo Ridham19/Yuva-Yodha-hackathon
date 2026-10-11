@@ -1,7 +1,4 @@
-// Real-World Indian Electricity Demand Sinks: Cities, Heavy Industrial Factories, Residential Housing & Critical Infrastructure
-// Sourced from DISCOM Load Curves, CEA Power Supply Position Reports, State GIDC & Urban Development Authorities.
-
-export const ELECTRICITY_SINKS = [
+[
   {
     "id": "SNK-DELHI",
     "name": "Delhi-NCR Megacity & Commercial Hub",
@@ -1130,4 +1127,4 @@ export const ELECTRICITY_SINKS = [
     "drActive": false,
     "priorityLevel": "TIER_0_LIFELINE"
   }
-];
+]

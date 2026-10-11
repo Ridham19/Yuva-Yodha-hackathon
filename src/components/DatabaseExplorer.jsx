@@ -21,7 +21,7 @@ import { playBreakerCloseSound } from '../utils/audioEffects';
 export const DatabaseExplorer = () => {
   const [dbStats, setDbStats] = useState({
     status: 'ONLINE',
-    engine: 'Node.js 25 Native SQLite (node:sqlite)',
+    engine: 'Python 3.14 Native SQLite (sqlite3)',
     databaseFile: 'backend/data/gridpulse.db',
     sizeKb: 64.0,
     tableCounts: {

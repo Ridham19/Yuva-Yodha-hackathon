@@ -953,6 +953,187 @@ body:not([data-theme="light"]) {
   animation: corridorPulse 1.2s infinite ease-in-out;
 }
 
+/* =========================================================================
+   REAL-TIME POWER FLOW & GEOSPATIAL VECTOR ANIMATIONS
+   ========================================================================= */
+@keyframes powerFlowForward {
+  from { stroke-dashoffset: 28; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes powerFlowFast {
+  from { stroke-dashoffset: 28; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes powerFlowCongested {
+  0% { stroke-dashoffset: 28; filter: drop-shadow(0 0 3px #f59e0b); }
+  50% { stroke-dashoffset: 14; filter: drop-shadow(0 0 8px #ef4444); }
+  100% { stroke-dashoffset: 0; filter: drop-shadow(0 0 3px #f59e0b); }
+}
+
+/* Applied directly to SVG path elements created by Leaflet polyline */
+.leaflet-corridor-flow,
+.leaflet-corridor-flow path {
+  animation: powerFlowForward 1.3s linear infinite !important;
+}
+
+.leaflet-corridor-flow-fast,
+.leaflet-corridor-flow-fast path {
+  animation: powerFlowFast 0.65s linear infinite !important;
+}
+
+.leaflet-corridor-congested,
+.leaflet-corridor-congested path {
+  animation: powerFlowCongested 0.45s linear infinite !important;
+}
+
+.leaflet-corridor-glow {
+  filter: drop-shadow(0 0 8px currentColor);
+}
+
+/* Pulsing Weather & Hazard Markers */
+@keyframes hazardPulse {
+  0% { transform: scale(1); opacity: 0.88; }
+  50% { transform: scale(1.18); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.88; }
+}
+
+.map-hazard-marker {
+  animation: hazardPulse 2s infinite ease-in-out;
+}
+
+/* Solar & Wind Resource Aura animation */
+@keyframes auraPulse {
+  0% { opacity: 0.25; transform: scale(0.96); }
+  50% { opacity: 0.55; transform: scale(1.04); }
+  100% { opacity: 0.25; transform: scale(0.96); }
+}
+
+.map-resource-aura {
+  animation: auraPulse 3.5s infinite ease-in-out;
+}
+
+/* Floating Search Bar on Map */
+.map-search-container {
+  position: relative;
+  width: 260px;
+}
+
+.map-search-input {
+  width: 100%;
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-medium);
+  border-radius: 8px;
+  padding: 6px 10px 6px 30px;
+  font-size: 0.76rem;
+  color: var(--text-primary);
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.map-search-input:focus {
+  border-color: var(--accent-cyan);
+  box-shadow: 0 0 12px rgba(6, 182, 212, 0.3);
+}
+
+.map-search-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 5px;
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-medium);
+  border-radius: 10px;
+  max-height: 260px;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  z-index: 1000;
+  padding: 4px;
+}
+
+.map-search-item {
+  padding: 6px 10px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-size: 0.74rem;
+  transition: background var(--transition-fast);
+}
+
+.map-search-item:hover {
+  background: var(--bg-subtle);
+}
+
+/* 24-Hour Duck Curve Time Scrubber */
+.map-time-scrubber-dock {
+  position: absolute;
+  bottom: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-medium);
+  border-radius: 12px;
+  padding: 8px 16px;
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  box-shadow: var(--shadow-lg);
+  min-width: 480px;
+  max-width: 90vw;
+}
+
+.time-range-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #1e293b 0%, #3b82f6 25%, #f59e0b 50%, #ef4444 80%, #1e293b 100%);
+  outline: none;
+}
+
+.time-range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #38bdf8;
+  cursor: pointer;
+  box-shadow: 0 0 10px #38bdf8;
+}
+
+.time-range-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #38bdf8;
+  cursor: pointer;
+  box-shadow: 0 0 10px #38bdf8;
+}
+
+/* Fullscreen Map Mode */
+.map-container-fullscreen {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  max-height: none !important;
+  border-radius: 0 !important;
+  z-index: 9998 !important;
+}
+
 /* Leaflet Custom Tooltip & Popup Theme Styling */
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {
   background: var(--bg-card) !important;

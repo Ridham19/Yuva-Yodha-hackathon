@@ -385,7 +385,7 @@ export const INDIA_GRID_SOURCES = [
     "unitDetails": "8 x 250 MW Francis Turbines",
     "fuelType": "Hydro",
     "operator": "NHPC Limited",
-    "description": "Largest hydroelectric project conceived in Northeast India providing high-capacity clean balancing to the national grid via ±800kV HVDC.",
+    "description": "Largest hydroelectric project conceived in Northeast India providing high-capacity clean balancing to the national grid via \u00b1800kV HVDC.",
     "status": "ONLINE",
     "curtailed": false,
     "corridorTarget": "SNK-GUWAHATI"
@@ -925,7 +925,7 @@ export const INDIA_GRID_SOURCES = [
     "unitDetails": "5 x 200 MW + 2 x 500 MW Pulverized Coal Units",
     "fuelType": "Domestic Bituminous Coal",
     "operator": "NTPC Limited",
-    "description": "Flagship pithead power station connected via India's pioneering ±500 kV HVDC Rihand-Dadri transmission link.",
+    "description": "Flagship pithead power station connected via India's pioneering \u00b1500 kV HVDC Rihand-Dadri transmission link.",
     "status": "ONLINE",
     "curtailed": false,
     "corridorTarget": "SNK-DELHI"
@@ -1033,7 +1033,7 @@ export const INDIA_GRID_SOURCES = [
     "unitDetails": "6 x 500 MW Coal-Fired Steam Turbine Generating Units",
     "fuelType": "Coal (MCL Pithead)",
     "operator": "NTPC Limited",
-    "description": "Key baseload station linked to the Southern Region via the iconic ±500 kV Talcher-Kolar HVDC bipole corridor.",
+    "description": "Key baseload station linked to the Southern Region via the iconic \u00b1500 kV Talcher-Kolar HVDC bipole corridor.",
     "status": "ONLINE",
     "curtailed": false,
     "corridorTarget": "SNK-BHUBANESWAR"
@@ -1226,6 +1226,2298 @@ export const INDIA_GRID_SOURCES = [
     "status": "ONLINE",
     "curtailed": false,
     "corridorTarget": "SNK-KOLKATA"
+  },
+  {
+    "id": "SRC-OMKARESHWAR-FLOAT",
+    "name": "Omkareshwar Floating Solar Project",
+    "location": "Omkareshwar Reservoir / Khandwa",
+    "state": "Madhya Pradesh",
+    "riverBasin": "Narmada River",
+    "coordinates": [
+      22.24,
+      76.15
+    ],
+    "region": "WR",
+    "type": "SOLAR_RE",
+    "subtype": "Reservoir Floating Photovoltaic Park",
+    "capacityMw": 600,
+    "currentGenMw": 510,
+    "minDispatchMw": 0,
+    "maxDispatchMw": 600,
+    "voltageKv": 220,
+    "unitsCount": 6,
+    "unitDetails": "6 x 100 MW Floating Arrays with anchor mooring lines",
+    "fuelType": "Solar PV (Floating)",
+    "operator": "Rewa Ultra Mega Solar Ltd (RUMSL / NHDC)",
+    "description": "World's largest reservoir floating solar installation, eliminating land footprint and reducing reservoir water evaporation.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-INDORE"
+  },
+  {
+    "id": "SRC-SALAL",
+    "name": "Salal Hydroelectric Power Station",
+    "location": "Reasi District",
+    "state": "Jammu & Kashmir",
+    "riverBasin": "Chenab River",
+    "coordinates": [
+      33.14,
+      74.83
+    ],
+    "region": "NR",
+    "type": "HYDRO_DAM",
+    "subtype": "Run-of-the-River Concrete Dam",
+    "capacityMw": 690,
+    "currentGenMw": 620,
+    "minDispatchMw": 150,
+    "maxDispatchMw": 690,
+    "voltageKv": 220,
+    "unitsCount": 6,
+    "unitDetails": "6 x 115 MW Francis Turbines (BHEL)",
+    "fuelType": "Hydro",
+    "operator": "NHPC Limited",
+    "description": "Pioneering Himalayan hydro installation on Chenab river providing baseline hydro power to Northern Regional Grid.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-LUDHIANA"
+  },
+  {
+    "id": "SRC-DULHASTI",
+    "name": "Dulhasti Hydroelectric Power Station",
+    "location": "Kishtwar District",
+    "state": "Jammu & Kashmir",
+    "riverBasin": "Chenab River",
+    "coordinates": [
+      33.36,
+      75.78
+    ],
+    "region": "NR",
+    "type": "HYDRO_DAM",
+    "subtype": "Run-of-the-River Underground Station",
+    "capacityMw": 390,
+    "currentGenMw": 360,
+    "minDispatchMw": 80,
+    "maxDispatchMw": 390,
+    "voltageKv": 400,
+    "unitsCount": 3,
+    "unitDetails": "3 x 130 MW Vertical Shaft Francis Turbines",
+    "fuelType": "Hydro",
+    "operator": "NHPC Limited",
+    "description": "High-head underground hydroelectric station on Chenab river providing fast peaking response.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-JAMMU"
+  },
+  {
+    "id": "SRC-KOLDAM",
+    "name": "Koldam Hydroelectric Project",
+    "location": "Barmana / Bilaspur District",
+    "state": "Himachal Pradesh",
+    "riverBasin": "Satluj River",
+    "coordinates": [
+      31.36,
+      76.86
+    ],
+    "region": "NR",
+    "type": "HYDRO_DAM",
+    "subtype": "Rockfill Dam & Surface Powerhouse",
+    "capacityMw": 800,
+    "currentGenMw": 740,
+    "minDispatchMw": 160,
+    "maxDispatchMw": 800,
+    "voltageKv": 400,
+    "unitsCount": 4,
+    "unitDetails": "4 x 200 MW Francis Turbines",
+    "fuelType": "Hydro",
+    "operator": "NTPC Limited",
+    "description": "NTPC's flagship 800 MW hydroelectric project on the Satluj upstream of Bhakra reservoir.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-CHANDIGARH"
+  },
+  {
+    "id": "SRC-DHAULIGANGA",
+    "name": "Dhauliganga Hydroelectric Power Station",
+    "location": "Dharchula / Pithoragarh District",
+    "state": "Uttarakhand",
+    "riverBasin": "Dhauliganga River",
+    "coordinates": [
+      29.96,
+      80.57
+    ],
+    "region": "NR",
+    "type": "HYDRO_DAM",
+    "subtype": "Underground Run-of-River Station",
+    "capacityMw": 280,
+    "currentGenMw": 250,
+    "minDispatchMw": 50,
+    "maxDispatchMw": 280,
+    "voltageKv": 400,
+    "unitsCount": 4,
+    "unitDetails": "4 x 70 MW Vertical Francis Turbines",
+    "fuelType": "Hydro",
+    "operator": "NHPC Limited",
+    "description": "Underground Himalayan powerhouse featuring a 56m high concrete face rockfill dam.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-DELHI"
+  },
+  {
+    "id": "SRC-GHAVP",
+    "name": "Gorakhpur Haryana Anu Vidyut Pariyojana (GHAVP)",
+    "location": "Gorakhpur / Fatehabad District",
+    "state": "Haryana",
+    "riverBasin": "Bhakra Canal Water System",
+    "coordinates": [
+      29.51,
+      75.76
+    ],
+    "region": "NR",
+    "type": "NUCLEAR_BASE",
+    "subtype": "Indigenous 700 MWe PHWR Nuclear Station",
+    "capacityMw": 1400,
+    "currentGenMw": 1360,
+    "minDispatchMw": 1200,
+    "maxDispatchMw": 1400,
+    "voltageKv": 400,
+    "unitsCount": 2,
+    "unitDetails": "2 x 700 MWe Pressurized Heavy Water Reactors (Units 1 & 2)",
+    "fuelType": "Natural Uranium (UO2)",
+    "operator": "Nuclear Power Corporation of India Limited (NPCIL)",
+    "description": "Northern India's newest flagship nuclear energy station delivering round-the-clock baseload to Haryana, Delhi NCR, and Punjab.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-DELHI"
+  },
+  {
+    "id": "SRC-KAMENG",
+    "name": "Kameng Hydroelectric Power Station",
+    "location": "Bichom / West Kameng District",
+    "state": "Arunachal Pradesh",
+    "riverBasin": "Bichom & Tenga Rivers",
+    "coordinates": [
+      27.24,
+      92.68
+    ],
+    "region": "NER",
+    "type": "HYDRO_DAM",
+    "subtype": "High-Head Trans-Basin Hydro Station",
+    "capacityMw": 600,
+    "currentGenMw": 550,
+    "minDispatchMw": 100,
+    "maxDispatchMw": 600,
+    "voltageKv": 400,
+    "unitsCount": 4,
+    "unitDetails": "4 x 150 MW Vertical Francis Turbines",
+    "fuelType": "Hydro",
+    "operator": "NEEPCO Limited",
+    "description": "Largest operational hydro facility in Arunachal Pradesh, connecting via 400kV lines to Balipara and the national grid.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-GUWAHATI"
+  },
+  {
+    "id": "SRC-TEESTA-V",
+    "name": "Teesta-V Hydroelectric Power Station",
+    "location": "Dikchu / Singtam",
+    "state": "Sikkim",
+    "riverBasin": "Teesta River",
+    "coordinates": [
+      27.35,
+      88.51
+    ],
+    "region": "ER",
+    "type": "HYDRO_DAM",
+    "subtype": "Run-of-the-River Concrete Gravity Station",
+    "capacityMw": 510,
+    "currentGenMw": 470,
+    "minDispatchMw": 100,
+    "maxDispatchMw": 510,
+    "voltageKv": 400,
+    "unitsCount": 3,
+    "unitDetails": "3 x 170 MW Vertical Francis Turbines",
+    "fuelType": "Hydro",
+    "operator": "NHPC Limited",
+    "description": "Key Eastern hydro peaking asset on the Teesta river with underground powerhouse feeding the Siliguri corridor.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-SILIGURI"
+  },
+  {
+    "id": "SRC-CHAMERA-I",
+    "name": "Chamera-I Hydroelectric Power Station",
+    "location": "Chamba District",
+    "state": "Himachal Pradesh",
+    "riverBasin": "Ravi River",
+    "coordinates": [
+      32.58,
+      75.99
+    ],
+    "region": "NR",
+    "type": "HYDRO_DAM",
+    "subtype": "High-Capacity Peaking Reservoir Station",
+    "capacityMw": 540,
+    "currentGenMw": 510,
+    "minDispatchMw": 100,
+    "maxDispatchMw": 540,
+    "voltageKv": 400,
+    "unitsCount": 3,
+    "unitDetails": "3 x 180 MW Francis Turbines",
+    "fuelType": "Hydro",
+    "operator": "NHPC Limited",
+    "description": "Vital peaking station on the Ravi river operating 140m arch gravity dam with fast frequency regulation response.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-LUDHIANA"
+  },
+  {
+    "id": "SRC-URI-II",
+    "name": "Uri-II Hydroelectric Power Station",
+    "location": "Uri / Baramulla District",
+    "state": "Jammu & Kashmir",
+    "riverBasin": "Jhelum River",
+    "coordinates": [
+      34.14,
+      74.07
+    ],
+    "region": "NR",
+    "type": "HYDRO_DAM",
+    "subtype": "Underground Run-of-River Station",
+    "capacityMw": 240,
+    "currentGenMw": 220,
+    "minDispatchMw": 50,
+    "maxDispatchMw": 240,
+    "voltageKv": 400,
+    "unitsCount": 4,
+    "unitDetails": "4 x 60 MW Francis Turbines",
+    "fuelType": "Hydro",
+    "operator": "NHPC Limited",
+    "description": "Strategic hydro asset on Jhelum river near Line of Control delivering high winter generation.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-SRINAGAR"
+  },
+  {
+    "id": "SRC-LOKTAK",
+    "name": "Loktak Hydroelectric Power Station",
+    "location": "Komkeirap / Churachandpur District",
+    "state": "Manipur",
+    "riverBasin": "Leimatak & Manipur River",
+    "coordinates": [
+      24.55,
+      93.78
+    ],
+    "region": "NER",
+    "type": "HYDRO_DAM",
+    "subtype": "Inter-Basin Peaking Power Station",
+    "capacityMw": 105,
+    "currentGenMw": 95,
+    "minDispatchMw": 30,
+    "maxDispatchMw": 105,
+    "voltageKv": 132,
+    "unitsCount": 3,
+    "unitDetails": "3 x 35 MW Francis Turbines",
+    "fuelType": "Hydro",
+    "operator": "NHPC Limited",
+    "description": "Anchor generating facility powering the Northeast grid from the iconic freshwater Loktak Lake.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-IMPHAL"
+  },
+  {
+    "id": "SRC-GHATGHAR-PSP",
+    "name": "Ghatghar Pumped Storage Hydro Project",
+    "location": "Ahmednagar & Thane Districts",
+    "state": "Maharashtra",
+    "riverBasin": "Pravara River",
+    "coordinates": [
+      19.53,
+      73.66
+    ],
+    "region": "WR",
+    "type": "HYDRO_PSP",
+    "subtype": "Pure Closed-Loop Pumped Storage",
+    "capacityMw": 250,
+    "currentGenMw": 210,
+    "minDispatchMw": 0,
+    "maxDispatchMw": 250,
+    "voltageKv": 400,
+    "unitsCount": 2,
+    "unitDetails": "2 x 125 MW Reversible Francis Pump-Turbines (Roller Compacted Concrete)",
+    "fuelType": "Hydro",
+    "operator": "Mahagenco / Water Resources Dept",
+    "description": "First Roller Compacted Concrete (RCC) dam based pumped-storage plant in Asia providing peak-shaving for Mumbai-Pune.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-MUMBAI"
+  },
+  {
+    "id": "SRC-KADAMPARAI-PSP",
+    "name": "Kadamparai Pumped Storage Hydro Plant",
+    "location": "Anamalai Hills / Coimbatore",
+    "state": "Tamil Nadu",
+    "riverBasin": "Aliyar Basin",
+    "coordinates": [
+      10.39,
+      76.96
+    ],
+    "region": "SR",
+    "type": "HYDRO_PSP",
+    "subtype": "Underground High-Head Reversible PSP",
+    "capacityMw": 400,
+    "currentGenMw": 340,
+    "minDispatchMw": 0,
+    "maxDispatchMw": 400,
+    "voltageKv": 230,
+    "unitsCount": 4,
+    "unitDetails": "4 x 100 MW Reversible Francis Pump-Turbines (BHEL)",
+    "fuelType": "Hydro",
+    "operator": "TANGEDCO",
+    "description": "Underground pumped-storage plant located in the Western Ghats buffering seasonal wind variability from Muppandal.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-COIMBATORE"
+  },
+  {
+    "id": "SRC-SHARAVATHI",
+    "name": "Sharavathi Generating Station (Linganamakki)",
+    "location": "Jog Falls / Shimoga District",
+    "state": "Karnataka",
+    "riverBasin": "Sharavathi River",
+    "coordinates": [
+      14.23,
+      74.78
+    ],
+    "region": "SR",
+    "type": "HYDRO_DAM",
+    "subtype": "High-Head Hydro Peaking Complex",
+    "capacityMw": 1035,
+    "currentGenMw": 880,
+    "minDispatchMw": 150,
+    "maxDispatchMw": 1035,
+    "voltageKv": 220,
+    "unitsCount": 10,
+    "unitDetails": "10 x 103.5 MW Vertical Pelton Wheel Turbines",
+    "fuelType": "Hydro",
+    "operator": "Karnataka Power Corporation Ltd (KPCL)",
+    "description": "Major hydroelectric powerhouse near Jog Falls with massive 1035 MW capacity, undergoing expansion into a 2000 MW PSP.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-BLR"
+  },
+  {
+    "id": "SRC-HIRAKUD",
+    "name": "Hirakud Hydro Power Station",
+    "location": "Sambalpur District",
+    "state": "Odisha",
+    "riverBasin": "Mahanadi River",
+    "coordinates": [
+      21.52,
+      83.87
+    ],
+    "region": "ER",
+    "type": "HYDRO_DAM",
+    "subtype": "Longest Earthen Dam Hydro Complex",
+    "capacityMw": 347,
+    "currentGenMw": 290,
+    "minDispatchMw": 50,
+    "maxDispatchMw": 347,
+    "voltageKv": 132,
+    "unitsCount": 7,
+    "unitDetails": "Burla (2 x 37.5 + 2 x 32 + 3 x 43.5 MW) & Chipilima powerhouses",
+    "fuelType": "Hydro",
+    "operator": "OHPC (Odisha Hydro Power Corporation)",
+    "description": "Built across the massive Mahanadi river, forming Asia's longest artificial lake and feeding Odisha's mineral belt.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-BHUBANESWAR"
+  },
+  {
+    "id": "SRC-BALIMELA",
+    "name": "Balimela Hydro Electric Project",
+    "location": "Malkangiri District",
+    "state": "Odisha",
+    "riverBasin": "Sileru River",
+    "coordinates": [
+      18.14,
+      82.12
+    ],
+    "region": "ER",
+    "type": "HYDRO_DAM",
+    "subtype": "High-Head Underground Dam Powerhouse",
+    "capacityMw": 510,
+    "currentGenMw": 440,
+    "minDispatchMw": 80,
+    "maxDispatchMw": 510,
+    "voltageKv": 220,
+    "unitsCount": 8,
+    "unitDetails": "6 x 60 MW + 2 x 75 MW Vertical Francis Turbines",
+    "fuelType": "Hydro",
+    "operator": "OHPC Limited",
+    "description": "Major inter-state hydro sharing project on Sileru river providing vital spinning reserves to the Eastern Grid.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-VISAKHAPATNAM"
+  },
+  {
+    "id": "SRC-RAMAGUNDAM-FLOAT",
+    "name": "Ramagundam Floating Solar Photovoltaic Plant",
+    "location": "Peddapalli District",
+    "state": "Telangana",
+    "riverBasin": "Godavari Thermal Reservoir",
+    "coordinates": [
+      18.76,
+      79.48
+    ],
+    "region": "SR",
+    "type": "SOLAR_RE",
+    "subtype": "Thermal Reservoir Floating Solar Array",
+    "capacityMw": 100,
+    "currentGenMw": 88,
+    "minDispatchMw": 0,
+    "maxDispatchMw": 100,
+    "voltageKv": 33,
+    "unitsCount": 40,
+    "unitDetails": "BHEL designed floating arrays on NTPC reservoir",
+    "fuelType": "Solar PV (Floating)",
+    "operator": "NTPC Limited",
+    "description": "High-efficiency floating solar project deployed on the cooling water reservoir of Ramagundam Super Thermal Power Station.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-HYDERABAD"
+  },
+  {
+    "id": "SRC-MOUDA-STPS",
+    "name": "Mouda Super Thermal Power Station",
+    "location": "Mouda / Nagpur District",
+    "state": "Maharashtra",
+    "riverBasin": "Kanhan River",
+    "coordinates": [
+      21.17,
+      79.39
+    ],
+    "region": "WR",
+    "type": "THERMAL_COAL",
+    "subtype": "Supercritical Coal Thermal Plant",
+    "capacityMw": 2320,
+    "currentGenMw": 2080,
+    "minDispatchMw": 1000,
+    "maxDispatchMw": 2320,
+    "voltageKv": 400,
+    "unitsCount": 4,
+    "unitDetails": "2 x 500 MW Subcritical + 2 x 660 MW Supercritical Boilers",
+    "fuelType": "Coal",
+    "operator": "NTPC Limited",
+    "description": "Central Indian thermal baseload powerhouse linked to 400kV Wardha hub supporting Western-Southern interstate transmission.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-NAGPUR"
+  },
+  {
+    "id": "SRC-NORTH-KARANPURA",
+    "name": "North Karanpura Super Thermal Power Project",
+    "location": "Tandwa / Chatra District",
+    "state": "Jharkhand",
+    "riverBasin": "Damodar River Basin",
+    "coordinates": [
+      23.86,
+      85.04
+    ],
+    "region": "ER",
+    "type": "THERMAL_COAL",
+    "subtype": "Air-Cooled Condenser Supercritical Plant",
+    "capacityMw": 1980,
+    "currentGenMw": 1780,
+    "minDispatchMw": 900,
+    "maxDispatchMw": 1980,
+    "voltageKv": 400,
+    "unitsCount": 3,
+    "unitDetails": "3 x 660 MW Supercritical with India's largest Air-Cooled Condensers (ACC)",
+    "fuelType": "Coal",
+    "operator": "NTPC Limited",
+    "description": "First super thermal plant in India operating massive Air-Cooled Condensers (ACC) to conserve water in arid zones.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-RANCHI"
+  },
+  {
+    "id": "SRC-LARA-STPS",
+    "name": "Lara Super Thermal Power Station",
+    "location": "Raigarh District",
+    "state": "Chhattisgarh",
+    "riverBasin": "Mahanadi River Basin",
+    "coordinates": [
+      21.78,
+      83.43
+    ],
+    "region": "WR",
+    "type": "THERMAL_COAL",
+    "subtype": "Pithead Supercritical Station",
+    "capacityMw": 1600,
+    "currentGenMw": 1490,
+    "minDispatchMw": 750,
+    "maxDispatchMw": 1600,
+    "voltageKv": 765,
+    "unitsCount": 2,
+    "unitDetails": "2 x 800 MW Ultra-Supercritical Turbines",
+    "fuelType": "Coal",
+    "operator": "NTPC Limited",
+    "description": "Ultra-supercritical pithead thermal plant directly injecting power into the 765kV Raigarh national power corridor.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-RAIPUR"
+  },
+  {
+    "id": "SRC-CHUTKA-NUCLEAR",
+    "name": "Chutka Atomic Power Project",
+    "location": "Chutka / Mandla District",
+    "state": "Madhya Pradesh",
+    "riverBasin": "Narmada River",
+    "coordinates": [
+      22.84,
+      80.22
+    ],
+    "region": "WR",
+    "type": "NUCLEAR_BASE",
+    "subtype": "Indigenous 700 MWe PHWR Nuclear Station",
+    "capacityMw": 1400,
+    "currentGenMw": 1340,
+    "minDispatchMw": 1200,
+    "maxDispatchMw": 1400,
+    "voltageKv": 400,
+    "unitsCount": 2,
+    "unitDetails": "2 x 700 MWe Pressurized Heavy Water Reactors",
+    "fuelType": "Natural Uranium (UO2)",
+    "operator": "Nuclear Power Corporation of India Limited (NPCIL)",
+    "description": "Central India nuclear baseload station providing clean firm generation on the Narmada basin.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-JABALPUR"
+  },
+  {
+    "id": "SRC-MAHI-BANSWARA",
+    "name": "Mahi Banswara Nuclear Project",
+    "location": "Banswara District",
+    "state": "Rajasthan",
+    "riverBasin": "Mahi River",
+    "coordinates": [
+      23.54,
+      74.45
+    ],
+    "region": "NR",
+    "type": "NUCLEAR_BASE",
+    "subtype": "Indigenous 700 MWe PHWR Fleet Station",
+    "capacityMw": 1400,
+    "currentGenMw": 1350,
+    "minDispatchMw": 1150,
+    "maxDispatchMw": 1400,
+    "voltageKv": 400,
+    "unitsCount": 2,
+    "unitDetails": "2 x 700 MWe Standardized PHWR Reactors",
+    "fuelType": "Natural Uranium (UO2)",
+    "operator": "NPCIL",
+    "description": "Strategic nuclear base in southern Rajasthan feeding Gujarat and Northern grid interconnection.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-UDAIPUR"
+  },
+  {
+    "id": "SRC-SIMHADRI-STPS",
+    "name": "Simhadri Super Thermal Power Station",
+    "location": "Parawada / Visakhapatnam",
+    "state": "Andhra Pradesh",
+    "riverBasin": "Bay of Bengal Coast",
+    "coordinates": [
+      17.6,
+      83.05
+    ],
+    "region": "SR",
+    "type": "THERMAL_COAL",
+    "subtype": "Coastal Super Thermal Power Plant",
+    "capacityMw": 2000,
+    "currentGenMw": 1820,
+    "minDispatchMw": 900,
+    "maxDispatchMw": 2000,
+    "voltageKv": 400,
+    "unitsCount": 4,
+    "unitDetails": "4 x 500 MW Coal Fired Boilers",
+    "fuelType": "Coal",
+    "operator": "NTPC Limited",
+    "description": "Coastal baseload anchor in Andhra Pradesh hosting sea-water intake cooling and floating solar.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-VISAKHAPATNAM"
+  },
+  {
+    "id": "SRC-RIHAND-STPS",
+    "name": "Rihand Super Thermal Power Station",
+    "location": "Rihand Nagar / Sonbhadra",
+    "state": "Uttar Pradesh",
+    "riverBasin": "Govind Ballabh Pant Sagar",
+    "coordinates": [
+      24.02,
+      82.79
+    ],
+    "region": "NR",
+    "type": "THERMAL_COAL",
+    "subtype": "Pithead Super Thermal Complex",
+    "capacityMw": 3000,
+    "currentGenMw": 2780,
+    "minDispatchMw": 1400,
+    "maxDispatchMw": 3000,
+    "voltageKv": 400,
+    "unitsCount": 6,
+    "unitDetails": "6 x 500 MW Super Thermal Coal Units",
+    "fuelType": "Coal",
+    "operator": "NTPC Limited",
+    "description": "Major national energy hub feeding the Rihand-Dadri \u00b1500kV HVDC bi-pole link directly to Delhi.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-DELHI"
+  },
+  {
+    "id": "SRC-KHARGONE-STPS",
+    "name": "Khargone Super Thermal Power Plant",
+    "location": "Selda / Khargone District",
+    "state": "Madhya Pradesh",
+    "riverBasin": "Narmada Basin",
+    "coordinates": [
+      21.82,
+      75.61
+    ],
+    "region": "WR",
+    "type": "THERMAL_COAL",
+    "subtype": "Ultra-Supercritical Thermal Station",
+    "capacityMw": 1320,
+    "currentGenMw": 1240,
+    "minDispatchMw": 600,
+    "maxDispatchMw": 1320,
+    "voltageKv": 400,
+    "unitsCount": 2,
+    "unitDetails": "2 x 660 MW Ultra-Supercritical (NTPC first USC efficiency)",
+    "fuelType": "Coal",
+    "operator": "NTPC Limited",
+    "description": "NTPC's first ultra-supercritical coal plant achieving 41.5% cycle efficiency with lower emissions.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-INDORE"
+  },
+  {
+    "id": "SRC-GADARWARA-STPS",
+    "name": "Gadarwara Super Thermal Power Plant",
+    "location": "Dongargaon / Narsinghpur District",
+    "state": "Madhya Pradesh",
+    "riverBasin": "Shakkar & Narmada Rivers",
+    "coordinates": [
+      22.92,
+      78.78
+    ],
+    "region": "WR",
+    "type": "THERMAL_COAL",
+    "subtype": "Supercritical Baseload Station",
+    "capacityMw": 1600,
+    "currentGenMw": 1480,
+    "minDispatchMw": 750,
+    "maxDispatchMw": 1600,
+    "voltageKv": 765,
+    "unitsCount": 2,
+    "unitDetails": "2 x 800 MW Supercritical Turbines",
+    "fuelType": "Coal",
+    "operator": "NTPC Limited",
+    "description": "High-capacity supercritical generating station feeding the 765kV central switching corridor.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-BHOPAL"
+  },
+  {
+    "id": "SRC-DARLIPALI-STPS",
+    "name": "Darlipali Super Thermal Power Station",
+    "location": "Sundargarh District",
+    "state": "Odisha",
+    "riverBasin": "Ib River Basin",
+    "coordinates": [
+      21.98,
+      83.92
+    ],
+    "region": "ER",
+    "type": "THERMAL_COAL",
+    "subtype": "Pithead Supercritical Station",
+    "capacityMw": 1600,
+    "currentGenMw": 1510,
+    "minDispatchMw": 750,
+    "maxDispatchMw": 1600,
+    "voltageKv": 765,
+    "unitsCount": 2,
+    "unitDetails": "2 x 800 MW Supercritical Boilers",
+    "fuelType": "Coal",
+    "operator": "NTPC Limited",
+    "description": "Pithead station on Dulanga coal mine supplying Odisha, Bihar, Jharkhand, and West Bengal.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-ROURKELA"
+  },
+  {
+    "id": "SRC-SOLAPUR-STPS",
+    "name": "Solapur Super Thermal Power Station",
+    "location": "Fatatewadi / Solapur District",
+    "state": "Maharashtra",
+    "riverBasin": "Sina River",
+    "coordinates": [
+      17.6,
+      75.85
+    ],
+    "region": "WR",
+    "type": "THERMAL_COAL",
+    "subtype": "Supercritical Thermal Station",
+    "capacityMw": 1320,
+    "currentGenMw": 1210,
+    "minDispatchMw": 600,
+    "maxDispatchMw": 1320,
+    "voltageKv": 400,
+    "unitsCount": 2,
+    "unitDetails": "2 x 660 MW Supercritical Units",
+    "fuelType": "Coal",
+    "operator": "NTPC Limited",
+    "description": "Key southern Maharashtra power plant connected directly to 765kV Solapur inter-regional hub.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-PUNE"
+  },
+  {
+    "id": "SRC-TANDA-STPS",
+    "name": "Tanda Thermal Power Station Stage-II",
+    "location": "Vidyut Nagar / Ambedkar Nagar",
+    "state": "Uttar Pradesh",
+    "riverBasin": "Ghaghra (Sarayu) River",
+    "coordinates": [
+      26.58,
+      82.65
+    ],
+    "region": "NR",
+    "type": "THERMAL_COAL",
+    "subtype": "Supercritical Expansion Plant",
+    "capacityMw": 1760,
+    "currentGenMw": 1620,
+    "minDispatchMw": 800,
+    "maxDispatchMw": 1760,
+    "voltageKv": 400,
+    "unitsCount": 6,
+    "unitDetails": "4 x 110 MW Subcritical + 2 x 660 MW Supercritical Units",
+    "fuelType": "Coal",
+    "operator": "NTPC Limited",
+    "description": "Major supercritical baseload generator powering eastern Uttar Pradesh and Northern Grid balance.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-VARANASI"
+  },
+  {
+    "id": "SRC-PATRATU-STPS",
+    "name": "Patratu Super Thermal Power Station",
+    "location": "Ramgarh District",
+    "state": "Jharkhand",
+    "riverBasin": "Nalkari Dam Reservoir",
+    "coordinates": [
+      23.67,
+      85.3
+    ],
+    "region": "ER",
+    "type": "THERMAL_COAL",
+    "subtype": "Ultra-Supercritical JV Station",
+    "capacityMw": 2400,
+    "currentGenMw": 2180,
+    "minDispatchMw": 1000,
+    "maxDispatchMw": 2400,
+    "voltageKv": 400,
+    "unitsCount": 3,
+    "unitDetails": "3 x 800 MW Ultra-Supercritical (Phase 1)",
+    "fuelType": "Coal",
+    "operator": "PVUNL (NTPC & JBVNL Joint Venture)",
+    "description": "Mega greenfield pithead project replacing vintage plant with high-efficiency 800MW units.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-RANCHI"
+  },
+  {
+    "id": "SRC-ANPARA-STPS",
+    "name": "Anpara Super Thermal Power Station",
+    "location": "Anpara / Sonebhadra",
+    "state": "Uttar Pradesh",
+    "riverBasin": "Rihand Reservoir",
+    "coordinates": [
+      24.2,
+      82.78
+    ],
+    "region": "NR",
+    "type": "THERMAL_COAL",
+    "subtype": "Mega Pithead Thermal Complex",
+    "capacityMw": 3830,
+    "currentGenMw": 3490,
+    "minDispatchMw": 1800,
+    "maxDispatchMw": 3830,
+    "voltageKv": 765,
+    "unitsCount": 9,
+    "unitDetails": "Anpara A (3x210) + B (2x500) + C (2x600) + D (2x500 MW)",
+    "fuelType": "Coal (Northern Coalfields Singrauli)",
+    "operator": "UPRVUNL & Lanco",
+    "description": "One of India's largest thermal complexes supplying vital base energy to Uttar Pradesh Transco.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-KANPUR"
+  },
+  {
+    "id": "SRC-MEJA-STPS",
+    "name": "Meja Thermal Power Station",
+    "location": "Kohdar / Prayagraj",
+    "state": "Uttar Pradesh",
+    "riverBasin": "Belan & Ganga Basins",
+    "coordinates": [
+      25.13,
+      81.93
+    ],
+    "region": "NR",
+    "type": "THERMAL_COAL",
+    "subtype": "Supercritical Joint Venture",
+    "capacityMw": 1320,
+    "currentGenMw": 1230,
+    "minDispatchMw": 600,
+    "maxDispatchMw": 1320,
+    "voltageKv": 400,
+    "unitsCount": 2,
+    "unitDetails": "2 x 660 MW Supercritical Boilers",
+    "fuelType": "Coal",
+    "operator": "MUNPL (NTPC & UPRVUNL JV)",
+    "description": "Supercritical generation hub near Prayagraj with direct 400kV lines to Northern regional grid.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-PRAYAGRAJ"
+  },
+  {
+    "id": "SRC-KAYAMKULAM-FLOAT",
+    "name": "Kayamkulam Floating Solar Photovoltaic Plant",
+    "location": "Choonakkara / Alappuzha District",
+    "state": "Kerala",
+    "riverBasin": "Kayamkulam Thermal Reservoir Lagoon",
+    "coordinates": [
+      9.23,
+      76.5
+    ],
+    "region": "SR",
+    "type": "SOLAR_RE",
+    "subtype": "Lagoon Floating Solar Farm",
+    "capacityMw": 92,
+    "currentGenMw": 82,
+    "minDispatchMw": 0,
+    "maxDispatchMw": 92,
+    "voltageKv": 33,
+    "unitsCount": 24,
+    "unitDetails": "Tata Power & Bharat Electronics floating arrays",
+    "fuelType": "Solar PV (Floating)",
+    "operator": "NTPC Limited",
+    "description": "Large water-surface solar plant installed over former Rajiv Gandhi CCPP reservoir in backwaters.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-KOCHI"
+  },
+  {
+    "id": "SRC-KAYATHAR-WIND",
+    "name": "Kayathar Wind Farm Complex",
+    "location": "Kayathar / Thoothukudi District",
+    "state": "Tamil Nadu",
+    "riverBasin": "Theri Sands Basin",
+    "coordinates": [
+      8.95,
+      77.77
+    ],
+    "region": "SR",
+    "type": "WIND_RE",
+    "subtype": "High-Yield Wind Turbine Complex",
+    "capacityMw": 450,
+    "currentGenMw": 380,
+    "minDispatchMw": 50,
+    "maxDispatchMw": 450,
+    "voltageKv": 230,
+    "unitsCount": 350,
+    "unitDetails": "Vestas, Suzlon, and Gamesa multi-megawatt turbines",
+    "fuelType": "Wind Kinetic",
+    "operator": "TANGEDCO / IPPs",
+    "description": "Dense wind corridor in southern Tamil Nadu harnessing consistent trade winds toward Tuticorin.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-MADURAI"
+  },
+  {
+    "id": "SRC-BRAHMANVEL-WIND",
+    "name": "Brahmanvel Wind Farm",
+    "location": "Dhule District",
+    "state": "Maharashtra",
+    "riverBasin": "Tapi Basin Uplands",
+    "coordinates": [
+      21.43,
+      74.28
+    ],
+    "region": "WR",
+    "type": "WIND_RE",
+    "subtype": "Ridge Wind Turbine Installation",
+    "capacityMw": 528,
+    "currentGenMw": 440,
+    "minDispatchMw": 40,
+    "maxDispatchMw": 528,
+    "voltageKv": 220,
+    "unitsCount": 420,
+    "unitDetails": "Suzlon Energy 1.25 MW to 2.1 MW wind turbines",
+    "fuelType": "Wind Kinetic",
+    "operator": "Parakh Agro / Suzlon",
+    "description": "One of western India's largest wind complexes perched along the Satpura mountain ranges.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-NASHIK"
+  },
+  {
+    "id": "SRC-DHALGAON-WIND",
+    "name": "Dhalgaon Wind Energy Park",
+    "location": "Kavathe Mahankal / Sangli",
+    "state": "Maharashtra",
+    "riverBasin": "Krishna Basin Plateau",
+    "coordinates": [
+      17.06,
+      74.88
+    ],
+    "region": "WR",
+    "type": "WIND_RE",
+    "subtype": "Plateau Wind Turbine Farm",
+    "capacityMw": 278,
+    "currentGenMw": 230,
+    "minDispatchMw": 20,
+    "maxDispatchMw": 278,
+    "voltageKv": 220,
+    "unitsCount": 220,
+    "unitDetails": "Enercon & Suzlon gearless synchronous generator turbines",
+    "fuelType": "Wind Kinetic",
+    "operator": "Gadre Marine / Suzlon",
+    "description": "High wind density site in southern Maharashtra providing clean summer peaking power.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-KOLHAPUR"
+  },
+  {
+    "id": "SRC-MANDSAUR-SOLAR",
+    "name": "Mandsaur Ultra Mega Solar Plant",
+    "location": "Sitamau / Mandsaur District",
+    "state": "Madhya Pradesh",
+    "riverBasin": "Chambal Basin",
+    "coordinates": [
+      24.01,
+      75.35
+    ],
+    "region": "WR",
+    "type": "SOLAR_RE",
+    "subtype": "Ground-Mounted Solar PV Park",
+    "capacityMw": 250,
+    "currentGenMw": 215,
+    "minDispatchMw": 0,
+    "maxDispatchMw": 250,
+    "voltageKv": 220,
+    "unitsCount": 5,
+    "unitDetails": "5 x 50 MW Solar PV Blocks (BHEL / Tata Power)",
+    "fuelType": "Solar PV",
+    "operator": "NTPC Limited",
+    "description": "Commissioned by NTPC in western MP feeding clean daytime generation into the 400kV line.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-UJJAIN"
+  },
+  {
+    "id": "SRC-NEEMUCH-SOLAR",
+    "name": "Neemuch Mega Solar Park",
+    "location": "Neemuch District",
+    "state": "Madhya Pradesh",
+    "riverBasin": "Gambhir River",
+    "coordinates": [
+      24.47,
+      74.87
+    ],
+    "region": "WR",
+    "type": "SOLAR_RE",
+    "subtype": "Utility Photovoltaic Park",
+    "capacityMw": 500,
+    "currentGenMw": 430,
+    "minDispatchMw": 0,
+    "maxDispatchMw": 500,
+    "voltageKv": 220,
+    "unitsCount": 2,
+    "unitDetails": "2 x 250 MW High Efficiency Solar Arrays",
+    "fuelType": "Solar PV",
+    "operator": "RUMSL / SECI",
+    "description": "High irradiation solar installation delivering clean power to Indian Railways and western grid.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-INDORE"
+  },
+  {
+    "id": "SRC-GALIVEEDU-SOLAR",
+    "name": "Galiveedu Solar Park (Ananthapuramu II)",
+    "location": "Rayachoti / Annamayya District",
+    "state": "Andhra Pradesh",
+    "riverBasin": "Papagni River",
+    "coordinates": [
+      14.07,
+      78.52
+    ],
+    "region": "SR",
+    "type": "SOLAR_RE",
+    "subtype": "Arid Scrubland Solar Park",
+    "capacityMw": 500,
+    "currentGenMw": 440,
+    "minDispatchMw": 0,
+    "maxDispatchMw": 500,
+    "voltageKv": 400,
+    "unitsCount": 2,
+    "unitDetails": "2 x 250 MW Multi-Developer Blocks",
+    "fuelType": "Solar PV",
+    "operator": "APSPCL / Tata Solar",
+    "description": "Southern green hub in Rayalaseema region evacuating power to 400kV Chittoor line.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-TIRUPATI"
+  },
+  {
+    "id": "SRC-KUNDAH-HYDRO",
+    "name": "Kundah Hydroelectric Power Complex",
+    "location": "Nilgiris District",
+    "state": "Tamil Nadu",
+    "riverBasin": "Bhavani River Basin",
+    "coordinates": [
+      11.28,
+      76.68
+    ],
+    "region": "SR",
+    "type": "HYDRO_DAM",
+    "subtype": "Cascaded Cascade Mountain Hydro System",
+    "capacityMw": 585,
+    "currentGenMw": 510,
+    "minDispatchMw": 80,
+    "maxDispatchMw": 585,
+    "voltageKv": 230,
+    "unitsCount": 14,
+    "unitDetails": "Powerhouses I through V with Pelton & Francis turbines",
+    "fuelType": "Hydro",
+    "operator": "TANGEDCO",
+    "description": "Iconic Nilgiris mountain cascade powerhouse built with Canadian Colombo Plan partnership.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-COIMBATORE"
+  },
+  {
+    "id": "SRC-SILERU-UPPER",
+    "name": "Upper Sileru Hydro Electric Project",
+    "location": "Alluri Sitharama Raju District",
+    "state": "Andhra Pradesh",
+    "riverBasin": "Sileru River",
+    "coordinates": [
+      18.04,
+      82.02
+    ],
+    "region": "SR",
+    "type": "HYDRO_DAM",
+    "subtype": "Storage Reservoir Dam Powerhouse",
+    "capacityMw": 240,
+    "currentGenMw": 210,
+    "minDispatchMw": 40,
+    "maxDispatchMw": 240,
+    "voltageKv": 220,
+    "unitsCount": 4,
+    "unitDetails": "4 x 60 MW Francis Turbines",
+    "fuelType": "Hydro",
+    "operator": "APGENCO",
+    "description": "Major hydro peaking asset on eastern ghats river system balancing southern diurnal load.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-VISAKHAPATNAM"
+  },
+  {
+    "id": "SRC-RIHAND-HYDRO",
+    "name": "Rihand Hydro Electric Project (Pipri Dam)",
+    "location": "Pipri / Sonebhadra District",
+    "state": "Uttar Pradesh",
+    "riverBasin": "Rihand River",
+    "coordinates": [
+      24.21,
+      83.03
+    ],
+    "region": "NR",
+    "type": "HYDRO_DAM",
+    "subtype": "Concrete Gravity Dam Station",
+    "capacityMw": 300,
+    "currentGenMw": 270,
+    "minDispatchMw": 50,
+    "maxDispatchMw": 300,
+    "voltageKv": 132,
+    "unitsCount": 6,
+    "unitDetails": "6 x 50 MW Francis Turbines (English Electric)",
+    "fuelType": "Hydro",
+    "operator": "UPRVUNL",
+    "description": "Premier hydro station of Uttar Pradesh forming Govind Ballabh Pant Sagar reservoir.",
+    "status": "ONLINE",
+    "curtailed": false,
+    "corridorTarget": "SNK-VARANASI"
+  }
+];
+
+// Official 765 kV / 400 kV / ±800 kV HVDC Grid Substations & Renewable Energy Pooling Stations (REMC)
+// Sourced from Central Electricity Authority (CEA) & POWERGRID (PGCIL)
+export const INDIA_GRID_SUBSTATIONS = [
+  {
+    "id": "SS-KHAVDA-PS",
+    "name": "Khavda 765/400 kV Pooling Substation (REMC)",
+    "operator": "POWERGRID / Adani Energy Solutions",
+    "state": "Gujarat",
+    "region": "WR",
+    "coordinates": [
+      23.85,
+      69.75
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 6000,
+    "substationType": "RENEWABLE_POOLING_STATION",
+    "connectedCorridor": "CORR-765KV-KHAVDA-BHUJ",
+    "statcomInstalled": true,
+    "status": "ENERGIZED",
+    "description": "Evacuation mega-hub for the 30,000 MW Khavda Renewable Hybrid Park."
+  },
+  {
+    "id": "SS-BHADLA-PS",
+    "name": "Bhadla-II 765/400 kV Pooling Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Rajasthan",
+    "region": "NR",
+    "coordinates": [
+      27.51,
+      71.93
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 4500,
+    "substationType": "RENEWABLE_POOLING_STATION",
+    "connectedCorridor": "CORR-765KV-BHADLA-BIKANER",
+    "statcomInstalled": true,
+    "status": "ENERGIZED",
+    "description": "Evacuation hub for 2,245 MW Bhadla Solar Park feeding the Northern Green Energy Corridor."
+  },
+  {
+    "id": "SS-FATEHGARH-PS",
+    "name": "Fatehgarh-II 765/400/220 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Rajasthan",
+    "region": "NR",
+    "coordinates": [
+      26.48,
+      70.98
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 3000,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-FATEHGARH-BHADLA",
+    "statcomInstalled": true,
+    "synchronousCondensers": 2,
+    "status": "ENERGIZED",
+    "description": "Equipped with 2x synchronous condensers providing dynamic inertia and short-circuit ratio support."
+  },
+  {
+    "id": "SS-BIKANER-PS",
+    "name": "Bikaner-III 765/400 kV Pooling Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Rajasthan",
+    "region": "NR",
+    "coordinates": [
+      28.02,
+      73.31
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 4500,
+    "substationType": "RENEWABLE_POOLING_STATION",
+    "connectedCorridor": "CORR-765KV-BIKANER-MOGA",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Major RE evacuation node feeding northern demand centers in Punjab, Haryana, and Delhi."
+  },
+  {
+    "id": "SS-KURNOOL-PS",
+    "name": "Kurnool-III 765/400 kV Ultra-Mega Pooling Station",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Andhra Pradesh",
+    "region": "SR",
+    "coordinates": [
+      15.68,
+      78.25
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 4500,
+    "substationType": "RENEWABLE_POOLING_STATION",
+    "connectedCorridor": "CORR-765KV-KURNOOL-MAHESHWARAM",
+    "statcomInstalled": true,
+    "status": "ENERGIZED",
+    "description": "Southern Grid REZ pooling hub evacuating Kurnool Ultra Mega Solar & wind farms."
+  },
+  {
+    "id": "SS-RAIGARH-HVDC",
+    "name": "Raigarh (Kotra) 765/400 kV & \u00b1800 kV HVDC Station",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Chhattisgarh",
+    "region": "WR",
+    "coordinates": [
+      21.89,
+      83.39
+    ],
+    "voltageKv": 800,
+    "transformationCapacityMva": 6000,
+    "substationType": "HVDC_CONVERTER_STATION",
+    "connectedCorridor": "CORR-HVDC-RAIGARH-PUGALUR",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Northern terminal of the 6,000 MW Raigarh-Pugalur \u00b1800 kV Bipole HVDC link."
+  },
+  {
+    "id": "SS-PUGALUR-HVDC",
+    "name": "Pugalur \u00b1800 kV HVDC Converter Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Tamil Nadu",
+    "region": "SR",
+    "coordinates": [
+      11.05,
+      77.98
+    ],
+    "voltageKv": 800,
+    "transformationCapacityMva": 6000,
+    "substationType": "HVDC_CONVERTER_STATION",
+    "connectedCorridor": "CORR-HVDC-RAIGARH-PUGALUR",
+    "statcomInstalled": true,
+    "status": "ENERGIZED",
+    "description": "Southern bulk receiving HVDC terminal feeding Tamil Nadu, Kerala, and Karnataka."
+  },
+  {
+    "id": "SS-CHAMPA-HVDC",
+    "name": "Champa \u00b1800 kV HVDC Terminal Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Chhattisgarh",
+    "region": "WR",
+    "coordinates": [
+      22.04,
+      82.65
+    ],
+    "voltageKv": 800,
+    "transformationCapacityMva": 6000,
+    "substationType": "HVDC_CONVERTER_STATION",
+    "connectedCorridor": "CORR-HVDC-CHAMPA-KURUKSHETRA",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Western terminal of the 6,000 MW Champa-Kurukshetra long-distance energy expressway."
+  },
+  {
+    "id": "SS-KURUKSHETRA-HVDC",
+    "name": "Kurukshetra \u00b1800 kV HVDC Receiving Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Haryana",
+    "region": "NR",
+    "coordinates": [
+      29.97,
+      76.85
+    ],
+    "voltageKv": 800,
+    "transformationCapacityMva": 6000,
+    "substationType": "HVDC_CONVERTER_STATION",
+    "connectedCorridor": "CORR-HVDC-CHAMPA-KURUKSHETRA",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Receiving terminal for 6,000 MW bulk power injection into the Northern Grid."
+  },
+  {
+    "id": "SS-AGRA-HVDC",
+    "name": "Agra 765/400 kV & \u00b1800 kV Multi-Terminal HVDC Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Uttar Pradesh",
+    "region": "NR",
+    "coordinates": [
+      27.18,
+      78.01
+    ],
+    "voltageKv": 800,
+    "transformationCapacityMva": 6000,
+    "substationType": "HVDC_CONVERTER_STATION",
+    "connectedCorridor": "CORR-HVDC-BISWANATH-AGRA",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Inverter terminal of the world's first \u00b1800 kV multi-terminal HVDC linking Northeast hydro."
+  },
+  {
+    "id": "SS-BISWANATH-HVDC",
+    "name": "Biswanath Chariali \u00b1800 kV Multi-Terminal HVDC Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Assam",
+    "region": "NER",
+    "coordinates": [
+      26.73,
+      93.15
+    ],
+    "voltageKv": 800,
+    "transformationCapacityMva": 6000,
+    "substationType": "HVDC_CONVERTER_STATION",
+    "connectedCorridor": "CORR-HVDC-BISWANATH-AGRA",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Rectifier terminal gathering hydro power from Assam and Arunachal Pradesh for transit to Agra."
+  },
+  {
+    "id": "SS-WARDHA-765",
+    "name": "Wardha 765/400 kV National Backbone Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Maharashtra",
+    "region": "WR",
+    "coordinates": [
+      20.74,
+      78.6
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 4500,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-SEONI-WARDHA",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Critical 765 kV crossroad connecting Western, Southern, and Northern transmission grids."
+  },
+  {
+    "id": "SS-SEONI-765",
+    "name": "Seoni 765/400 kV Central Switching Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Madhya Pradesh",
+    "region": "WR",
+    "coordinates": [
+      22.08,
+      79.54
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 4500,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-SEONI-WARDHA",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Central 765 kV hub routing coal thermal generation from Singrauli/Korba to western load centers."
+  },
+  {
+    "id": "SS-GWALIOR-765",
+    "name": "Gwalior 765/400 kV Interconnection Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Madhya Pradesh",
+    "region": "NR",
+    "coordinates": [
+      26.22,
+      78.18
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 4500,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-GWALIOR-AGRA",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Inter-regional gateway connecting Western and Northern Grid 765 kV lines."
+  },
+  {
+    "id": "SS-PAVAGADA-PS",
+    "name": "Pavagada (Tumkur) 400/220 kV Pooling Substation",
+    "operator": "KSPDCL / POWERGRID",
+    "state": "Karnataka",
+    "region": "SR",
+    "coordinates": [
+      14.1,
+      77.27
+    ],
+    "voltageKv": 400,
+    "transformationCapacityMva": 3000,
+    "substationType": "RENEWABLE_POOLING_STATION",
+    "connectedCorridor": "CORR-400KV-PAVAGADA-DEVANGERE",
+    "statcomInstalled": true,
+    "status": "ENERGIZED",
+    "description": "Primary pooling station for 2,050 MW Pavagada (Shakti Sthala) Solar Park."
+  },
+  {
+    "id": "SS-REWA-PS",
+    "name": "Rewa 400/220 kV Pooling Substation",
+    "operator": "MPPTCL / POWERGRID",
+    "state": "Madhya Pradesh",
+    "region": "WR",
+    "coordinates": [
+      24.47,
+      81.57
+    ],
+    "voltageKv": 400,
+    "transformationCapacityMva": 1500,
+    "substationType": "RENEWABLE_POOLING_STATION",
+    "connectedCorridor": "CORR-400KV-REWA-JABALPUR",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "750 MW Rewa Ultra Mega Solar evacuation hub feeding MP grid and Delhi Metro."
+  },
+  {
+    "id": "SS-KOPPAL-PS",
+    "name": "Koppal-II 765/400 kV Pooling Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Karnataka",
+    "region": "SR",
+    "coordinates": [
+      15.35,
+      76.15
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 3000,
+    "substationType": "RENEWABLE_POOLING_STATION",
+    "connectedCorridor": "CORR-765KV-KOPPAL-NARENDRA",
+    "statcomInstalled": true,
+    "status": "ENERGIZED",
+    "description": "Key evacuation hub for high-yield wind and solar resource zones in northern Karnataka."
+  },
+  {
+    "id": "SS-SOLAPUR-765",
+    "name": "Solapur 765/400 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Maharashtra",
+    "region": "WR",
+    "coordinates": [
+      17.66,
+      75.91
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 4500,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-SOLAPUR-RAICHUR",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Western-to-Southern inter-regional synchronization anchor linking to Raichur 765 kV."
+  },
+  {
+    "id": "SS-RAICHUR-765",
+    "name": "Raichur 765/400 kV Interconnection Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Karnataka",
+    "region": "SR",
+    "coordinates": [
+      16.21,
+      77.36
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 3000,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-SOLAPUR-RAICHUR",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Historic landmark 765 kV synchronous link commissioned to achieve 'One Nation, One Grid, One Frequency'."
+  },
+  {
+    "id": "SS-MEERUT-765",
+    "name": "Meerut 765/400 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Uttar Pradesh",
+    "region": "NR",
+    "coordinates": [
+      28.98,
+      77.7
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 3000,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-AGRA-MEERUT",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "High-voltage ring substation buffering Delhi-NCR from Northern generation influx."
+  },
+  {
+    "id": "SS-JALANDHAR-765",
+    "name": "Jalandhar 765/400 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Punjab",
+    "region": "NR",
+    "coordinates": [
+      31.33,
+      75.58
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 3000,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-MOGA-JALANDHAR",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Northern agricultural and industrial load hub feeding Punjab and Himachal Pradesh."
+  },
+  {
+    "id": "SS-GORAKHPUR-765",
+    "name": "Gorakhpur 765/400 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Uttar Pradesh",
+    "region": "NR",
+    "coordinates": [
+      26.76,
+      83.37
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 3000,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-BALLIA-GORAKHPUR",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Eastern UP bulk transmission node connecting to cross-border Nepal transmission line."
+  },
+  {
+    "id": "SS-PUNE-765",
+    "name": "Pune (Talegaon) 765/400 kV GIS Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Maharashtra",
+    "region": "WR",
+    "coordinates": [
+      18.73,
+      73.68
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 3000,
+    "substationType": "GAS_INSULATED_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-SOLAPUR-PUNE",
+    "statcomInstalled": true,
+    "status": "ENERGIZED",
+    "description": "Compact SF6 Gas-Insulated Substation supplying Pune auto and IT industrial belt."
+  },
+  {
+    "id": "SS-THIRUVALAM-765",
+    "name": "Thiruvalam 765/400 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Tamil Nadu",
+    "region": "SR",
+    "coordinates": [
+      12.98,
+      79.25
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 3000,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-KURNOOL-THIRUVALAM",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Major transmission hub feeding Chennai industrial corridor and North Tamil Nadu."
+  },
+  {
+    "id": "SS-TUTICORIN-765",
+    "name": "Tuticorin-II 765/400 kV GIS Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Tamil Nadu",
+    "region": "SR",
+    "coordinates": [
+      8.76,
+      78.13
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 3000,
+    "substationType": "GAS_INSULATED_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-TUTICORIN-PUGALUR",
+    "statcomInstalled": true,
+    "status": "ENERGIZED",
+    "description": "Evacuation node for southern wind farms and coastal thermal/nuclear power plants."
+  },
+  {
+    "id": "SS-VEMAGIRI-765",
+    "name": "Vemagiri 765/400 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Andhra Pradesh",
+    "region": "SR",
+    "coordinates": [
+      16.98,
+      81.82
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 3000,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-VEMAGIRI-GAJUWAKA",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Coastal Andhra gas & renewable power evacuation node on Godavari basin."
+  },
+  {
+    "id": "SS-WARANGAL-765",
+    "name": "Warangal 765/400 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Telangana",
+    "region": "SR",
+    "coordinates": [
+      17.96,
+      79.59
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 3000,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-WARANGAL-HYDERABAD",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Central Telangana 765 kV hub routing Ramagundam power to Hyderabad."
+  },
+  {
+    "id": "SS-HYDERABAD-765",
+    "name": "Maheshwaram 765/400 kV GIS Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Telangana",
+    "region": "SR",
+    "coordinates": [
+      17.13,
+      78.43
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 3000,
+    "substationType": "GAS_INSULATED_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-KURNOOL-MAHESHWARAM",
+    "statcomInstalled": true,
+    "status": "ENERGIZED",
+    "description": "Gas Insulated Substation ring feeding Hyderabad IT corridor, pharma city, and metro."
+  },
+  {
+    "id": "SS-RANCHI-765",
+    "name": "Ranchi 765/400 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Jharkhand",
+    "region": "ER",
+    "coordinates": [
+      23.34,
+      85.31
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 3000,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-RANCHI-GAYA",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Eastern Grid bulk transit station linking Jharkhand pithead power to Bihar and UP."
+  },
+  {
+    "id": "SS-GAYA-765",
+    "name": "Gaya 765/400 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Bihar",
+    "region": "ER",
+    "coordinates": [
+      24.8,
+      85.0
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 3000,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-RANCHI-GAYA",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Major inter-regional switching node routing Eastern Grid energy to Northern Grid."
+  },
+  {
+    "id": "SS-JHARSUGUDA-765",
+    "name": "Jharsuguda 765/400 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Odisha",
+    "region": "ER",
+    "coordinates": [
+      21.85,
+      84.01
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 3000,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-JHARSUGUDA-RAIPUR",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "High-capacity hub routing Ib valley and Hirakud power across Odisha and Chhattisgarh."
+  },
+  {
+    "id": "SS-ANGUL-765",
+    "name": "Angul 765/400 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Odisha",
+    "region": "ER",
+    "coordinates": [
+      20.84,
+      85.1
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 4500,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-ANGUL-JHARSUGUDA",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Evacuation backbone for 3,000 MW Talcher Super Thermal and surrounding heavy industries."
+  },
+  {
+    "id": "SS-BALLIA-765",
+    "name": "Ballia 765/400 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Uttar Pradesh",
+    "region": "NR",
+    "coordinates": [
+      25.76,
+      84.15
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 3000,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-BALLIA-GORAKHPUR",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Critical 765 kV gateway on the UP-Bihar border connecting Eastern and Northern Grids."
+  },
+  {
+    "id": "SS-BAHARAMPUR-BORDER",
+    "name": "Baharampur 400 kV Cross-Border Interconnection Station",
+    "operator": "POWERGRID & PGCB (Bangladesh)",
+    "state": "West Bengal",
+    "region": "ER",
+    "coordinates": [
+      24.1,
+      88.25
+    ],
+    "voltageKv": 400,
+    "transformationCapacityMva": 1000,
+    "substationType": "CROSS_BORDER_INTERCONNECTION",
+    "connectedCorridor": "CORR-XBORDER-INDIA-BANGLADESH-1",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Historic cross-border link delivering 1,000 MW from Indian grid to Bheramara, Bangladesh via HVDC Back-to-Back."
+  },
+  {
+    "id": "SS-MUZAFFARPUR-BORDER",
+    "name": "Muzaffarpur 400 kV Cross-Border Interconnection Substation",
+    "operator": "POWERGRID & NEA (Nepal)",
+    "state": "Bihar",
+    "region": "ER",
+    "coordinates": [
+      26.12,
+      85.39
+    ],
+    "voltageKv": 400,
+    "transformationCapacityMva": 1000,
+    "substationType": "CROSS_BORDER_INTERCONNECTION",
+    "connectedCorridor": "CORR-XBORDER-INDIA-NEPAL",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Primary high-capacity 400 kV link transmitting power to Dhalkebar, Nepal with seasonal hydro reverse flow."
+  },
+  {
+    "id": "SS-SURYAMANINAGAR-BORDER",
+    "name": "Suryamaninagar 400/132 kV Cross-Border Station",
+    "operator": "TSECL / POWERGRID",
+    "state": "Tripura",
+    "region": "NER",
+    "coordinates": [
+      23.77,
+      91.28
+    ],
+    "voltageKv": 400,
+    "transformationCapacityMva": 500,
+    "substationType": "CROSS_BORDER_INTERCONNECTION",
+    "connectedCorridor": "CORR-XBORDER-INDIA-BANGLADESH-2",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Supplies power from Tripura gas plants directly to Comilla in eastern Bangladesh."
+  },
+  {
+    "id": "SS-ALIPURDUAR-HVDC",
+    "name": "Alipurduar \u00b1800 kV / 400 kV Cross-Border & HVDC Station",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "West Bengal",
+    "region": "ER",
+    "coordinates": [
+      26.49,
+      89.53
+    ],
+    "voltageKv": 800,
+    "transformationCapacityMva": 6000,
+    "substationType": "HVDC_CONVERTER_STATION",
+    "connectedCorridor": "CORR-XBORDER-BHUTAN-INDIA",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Substation importing surplus hydro from Tala, Chhukha & Punatsangchhu plants in Bhutan."
+  },
+  {
+    "id": "SS-SILIGURI-400",
+    "name": "Siliguri 400/220 kV Substation (Chicken's Neck Hub)",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "West Bengal",
+    "region": "ER",
+    "coordinates": [
+      26.71,
+      88.43
+    ],
+    "voltageKv": 400,
+    "transformationCapacityMva": 2000,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-400KV-SILIGURI-BONGAIGAON",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Crucial geographic bottleneck linking Northeast regional grid with the National Synchronous Grid."
+  },
+  {
+    "id": "SS-BALIPARA-400",
+    "name": "Balipara 400/220/132 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Assam",
+    "region": "NER",
+    "coordinates": [
+      26.82,
+      92.83
+    ],
+    "voltageKv": 400,
+    "transformationCapacityMva": 1500,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-400KV-BALIPARA-BONGAIGAON",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Primary pooling station evacuating hydro generation from Arunachal Pradesh (Kameng & Ranganadi)."
+  },
+  {
+    "id": "SS-KOLAR-HVDC",
+    "name": "Kolar \u00b1500 kV HVDC Converter & 400 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Karnataka",
+    "region": "SR",
+    "coordinates": [
+      13.13,
+      78.13
+    ],
+    "voltageKv": 500,
+    "transformationCapacityMva": 2500,
+    "substationType": "HVDC_CONVERTER_STATION",
+    "connectedCorridor": "CORR-HVDC-TALCHER-KOLAR",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Receiving terminal for the historic Talcher-Kolar 2,500 MW HVDC East-to-South inter-regional link."
+  },
+  {
+    "id": "SS-TALCHER-HVDC",
+    "name": "Talcher \u00b1500 kV HVDC Converter Station",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Odisha",
+    "region": "ER",
+    "coordinates": [
+      20.95,
+      85.22
+    ],
+    "voltageKv": 500,
+    "transformationCapacityMva": 2500,
+    "substationType": "HVDC_CONVERTER_STATION",
+    "connectedCorridor": "CORR-HVDC-TALCHER-KOLAR",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Rectifier terminal dispatching 2,500 MW from NTPC Talcher directly to Bangalore/Kolar."
+  },
+  {
+    "id": "SS-CHANDRAPUR-HVDC",
+    "name": "Chandrapur 2x500 MW Back-to-Back HVDC Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Maharashtra",
+    "region": "WR",
+    "coordinates": [
+      19.96,
+      79.3
+    ],
+    "voltageKv": 400,
+    "transformationCapacityMva": 1000,
+    "substationType": "HVDC_CONVERTER_STATION",
+    "connectedCorridor": "CORR-HVDC-CHANDRAPUR-RAMAGUNDAM",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Pioneering inter-regional back-to-back HVDC station facilitating controlled power flow between West and South."
+  },
+  {
+    "id": "SS-GAJUWAKA-HVDC",
+    "name": "Gazuwaka 2x500 MW Back-to-Back HVDC Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Andhra Pradesh",
+    "region": "SR",
+    "coordinates": [
+      17.69,
+      83.21
+    ],
+    "voltageKv": 400,
+    "transformationCapacityMva": 1000,
+    "substationType": "HVDC_CONVERTER_STATION",
+    "connectedCorridor": "CORR-HVDC-JEYPORE-GAJUWAKA",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "HVDC link connecting Eastern Grid (Jeypore, Odisha) with Southern Grid (Visakhapatnam)."
+  },
+  {
+    "id": "SS-RIHAND-HVDC",
+    "name": "Rihand \u00b1500 kV HVDC Converter Station",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Uttar Pradesh",
+    "region": "NR",
+    "coordinates": [
+      24.02,
+      82.8
+    ],
+    "voltageKv": 500,
+    "transformationCapacityMva": 1500,
+    "substationType": "HVDC_CONVERTER_STATION",
+    "connectedCorridor": "CORR-HVDC-RIHAND-DADRI",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "First long-distance commercial HVDC transmission system built in India (Rihand-Dadri 1,500 MW)."
+  },
+  {
+    "id": "SS-DADRI-HVDC",
+    "name": "Dadri \u00b1500 kV HVDC Receiving Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Uttar Pradesh",
+    "region": "NR",
+    "coordinates": [
+      28.55,
+      77.56
+    ],
+    "voltageKv": 500,
+    "transformationCapacityMva": 1500,
+    "substationType": "HVDC_CONVERTER_STATION",
+    "connectedCorridor": "CORR-HVDC-RIHAND-DADRI",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Receiving terminal delivering baseload power to the National Capital Region (NCR)."
+  },
+  {
+    "id": "SS-THRISSUR-HVDC",
+    "name": "Thrissur (Madakkathara) \u00b1800 kV VSC-HVDC Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Kerala",
+    "region": "SR",
+    "coordinates": [
+      10.55,
+      76.26
+    ],
+    "voltageKv": 800,
+    "transformationCapacityMva": 2000,
+    "substationType": "HVDC_CONVERTER_STATION",
+    "connectedCorridor": "CORR-HVDC-PUGALUR-THRISSUR",
+    "statcomInstalled": true,
+    "status": "ENERGIZED",
+    "description": "India's first Voltage Source Converter (VSC) based HVDC technology providing black-start capability to Kerala."
+  },
+  {
+    "id": "SS-VADODARA-765",
+    "name": "Vadodara 765/400 kV GIS Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Gujarat",
+    "region": "WR",
+    "coordinates": [
+      22.31,
+      73.18
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 3000,
+    "substationType": "GAS_INSULATED_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-VADODARA-INDORE",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Central Gujarat industrial power hub linking Saurashtra/Kutch green energy to central India."
+  },
+  {
+    "id": "SS-INDORE-765",
+    "name": "Indore 765/400 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Madhya Pradesh",
+    "region": "WR",
+    "coordinates": [
+      22.72,
+      75.86
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 4500,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-VADODARA-INDORE",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "High-voltage inter-regional nexus feeding the Malwa industrial corridor."
+  },
+  {
+    "id": "SS-JAIPUR-765",
+    "name": "Jaipur South (Phagi) 765/400 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Rajasthan",
+    "region": "NR",
+    "coordinates": [
+      26.58,
+      75.57
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 3000,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-JAIPUR-GWALIOR",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "High-capacity switching station receiving green power from western Rajasthan solar and wind zones."
+  },
+  {
+    "id": "SS-ROORKEE-400",
+    "name": "Roorkee 400/220 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Uttarakhand",
+    "region": "NR",
+    "coordinates": [
+      29.87,
+      77.89
+    ],
+    "voltageKv": 400,
+    "transformationCapacityMva": 1500,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-400KV-TEHRI-ROORKEE",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Primary receiving terminal routing 2,400 MW Tehri Hydro complex generation to northern plains."
+  },
+  {
+    "id": "SS-LUCKNOW-400",
+    "name": "Lucknow 400/220 kV Substation",
+    "operator": "UPPTCL / POWERGRID",
+    "state": "Uttar Pradesh",
+    "region": "NR",
+    "coordinates": [
+      26.85,
+      80.95
+    ],
+    "voltageKv": 400,
+    "transformationCapacityMva": 1500,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-400KV-LUCKNOW-KANPUR",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Capital region bulk feeding station regulating transmission across central Uttar Pradesh."
+  },
+  {
+    "id": "SS-VARANASI-765",
+    "name": "Varanasi 765/400 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Uttar Pradesh",
+    "region": "NR",
+    "coordinates": [
+      25.32,
+      82.97
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 3000,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-VARANASI-GAYA",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "High-voltage transmission ring serving eastern UP and interconnecting with Bihar grid."
+  },
+  {
+    "id": "SS-CHENNAI-SRIPERUMBUDUR",
+    "name": "Sriperumbudur 400/230 kV Substation",
+    "operator": "TANTRANSCO / POWERGRID",
+    "state": "Tamil Nadu",
+    "region": "SR",
+    "coordinates": [
+      12.97,
+      79.94
+    ],
+    "voltageKv": 400,
+    "transformationCapacityMva": 2000,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-400KV-THIRUVALAM-SRIPERUMBUDUR",
+    "statcomInstalled": true,
+    "status": "ENERGIZED",
+    "description": "Industrial power hub feeding the Sriperumbudur-Oragadam automotive and electronics corridor."
+  },
+  {
+    "id": "SS-BLR-BIDADI-400",
+    "name": "Bidadi 400/220 kV GIS Substation",
+    "operator": "KPTCL / POWERGRID",
+    "state": "Karnataka",
+    "region": "SR",
+    "coordinates": [
+      12.8,
+      77.38
+    ],
+    "voltageKv": 400,
+    "transformationCapacityMva": 2000,
+    "substationType": "GAS_INSULATED_SUBSTATION",
+    "connectedCorridor": "CORR-400KV-PAVAGADA-BIDADI",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Modern GIS substation delivering Pavagada solar power into southern Bengaluru and industrial parks."
+  },
+  {
+    "id": "SS-KOCHI-BRAHMAPURAM",
+    "name": "Brahmapuram 400/220 kV Substation",
+    "operator": "KSEB / POWERGRID",
+    "state": "Kerala",
+    "region": "SR",
+    "coordinates": [
+      9.99,
+      76.36
+    ],
+    "voltageKv": 400,
+    "transformationCapacityMva": 1500,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-400KV-MADAKKATHARA-BRAHMAPURAM",
+    "statcomInstalled": true,
+    "status": "ENERGIZED",
+    "description": "Greater Cochin industrial and commercial lifeline receiving HVDC and Idukki Hydro power."
+  },
+  {
+    "id": "SS-KANPUR-765",
+    "name": "Kanpur 765/400 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Uttar Pradesh",
+    "region": "NR",
+    "coordinates": [
+      26.44,
+      80.33
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 3000,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-KANPUR-LUCKNOW",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Industrial manufacturing node for central UP and defense corridor."
+  },
+  {
+    "id": "SS-NARENDRA-400",
+    "name": "Narendra (Dharwad) 400/220 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Karnataka",
+    "region": "SR",
+    "coordinates": [
+      15.48,
+      74.98
+    ],
+    "voltageKv": 400,
+    "transformationCapacityMva": 2000,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-400KV-NARENDRA-KOPPAL",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "High-capacity switching junction connecting coastal hydro (Kali/Kaiga) with northern Karnataka."
+  },
+  {
+    "id": "SS-BILASPUR-765",
+    "name": "Bilaspur (Kotra) 765/400 kV Pooling Station",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Chhattisgarh",
+    "region": "WR",
+    "coordinates": [
+      22.08,
+      82.14
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 4500,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-SIPAT-BILASPUR",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Pioneering 765kV pooling hub evacuating NTPC Sipat to Western Grid."
+  },
+  {
+    "id": "SS-AURANGABAD-765",
+    "name": "Aurangabad 765/400 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Maharashtra",
+    "region": "WR",
+    "coordinates": [
+      19.87,
+      75.34
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 3000,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-WARDHA-AURANGABAD",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Marathwada industrial backbone station routing central Indian power to Mumbai outskirts."
+  },
+  {
+    "id": "SS-BHUJ-765",
+    "name": "Bhuj-II 765/400 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Gujarat",
+    "region": "WR",
+    "coordinates": [
+      23.24,
+      69.66
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 4500,
+    "substationType": "RENEWABLE_POOLING_STATION",
+    "connectedCorridor": "CORR-765KV-KHAVDA-BHUJ",
+    "statcomInstalled": true,
+    "status": "ENERGIZED",
+    "description": "Kutch renewable energy evacuation junction linking Khavda to Lakadia and Ahmedabad."
+  },
+  {
+    "id": "SS-ALIGARH-765",
+    "name": "Aligarh 765/400 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Uttar Pradesh",
+    "region": "NR",
+    "coordinates": [
+      27.89,
+      78.08
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 3000,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-AGRA-ALIGARH",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Western UP 765 kV transmission link supplying Aligarh, Mathura, and Delhi ring."
+  },
+  {
+    "id": "SS-BAREILLY-765",
+    "name": "Bareilly 765/400 kV Substation",
+    "operator": "POWERGRID (PGCIL)",
+    "state": "Uttar Pradesh",
+    "region": "NR",
+    "coordinates": [
+      28.36,
+      79.43
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 3000,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-BAREILLY-MEERUT",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Northern Rohilkhand regional switching substation routing Himalayan hydro to plains."
+  },
+  {
+    "id": "SS-MUNDRA-765",
+    "name": "Mundra 765/400 kV Evacuation Substation",
+    "operator": "Adani Transmission / POWERGRID",
+    "state": "Gujarat",
+    "region": "WR",
+    "coordinates": [
+      22.84,
+      69.54
+    ],
+    "voltageKv": 765,
+    "transformationCapacityMva": 4500,
+    "substationType": "GRID_SUBSTATION",
+    "connectedCorridor": "CORR-765KV-MUNDRA-DEHGAM",
+    "statcomInstalled": false,
+    "status": "ENERGIZED",
+    "description": "Mega coastal substation evacuating 8,600 MW from Mundra thermal & port clusters."
+  },
+  {
+    "id": "SS-DHOLERA-400",
+    "name": "Dholera SIR 400/220 kV Solar Pooling Station",
+    "operator": "GETCO / GPCL",
+    "state": "Gujarat",
+    "region": "WR",
+    "coordinates": [
+      22.25,
+      72.19
+    ],
+    "voltageKv": 400,
+    "transformationCapacityMva": 2000,
+    "substationType": "RENEWABLE_POOLING_STATION",
+    "connectedCorridor": "CORR-400KV-DHOLERA-AHMEDABAD",
+    "statcomInstalled": true,
+    "status": "ENERGIZED",
+    "description": "Primary pooling station for Dholera Special Investment Region Ultra Mega Solar Park."
   }
 ];
 
@@ -2362,198 +4654,446 @@ export const INDIA_GRID_SINKS = [
 
 export const TRANSMISSION_CORRIDORS = [
   {
-    id: "CORR-01",
-    name: "Bhadla -> Delhi 765 kV Green Energy Corridor",
-    from: [27.53, 71.91],
-    to: [28.61, 77.23],
-    capacityMw: 4000,
-    flowMw: 1840,
-    voltageKv: 765,
-    type: "GREEN_ENERGY_CORRIDOR",
-    color: "#f59e0b",
-    status: "ENERGIZED",
-    rerouteTarget: "CORR-06"
+    "id": "CORR-01",
+    "name": "Bhadla -> Delhi 765 kV Green Energy Corridor",
+    "from": [
+      27.53,
+      71.91
+    ],
+    "to": [
+      28.61,
+      77.23
+    ],
+    "capacityMw": 4000,
+    "flowMw": 1840,
+    "voltageKv": 765,
+    "type": "GREEN_ENERGY_CORRIDOR",
+    "color": "#f59e0b",
+    "status": "ENERGIZED",
+    "rerouteTarget": "CORR-06"
   },
   {
-    id: "CORR-02",
-    name: "Khavda RE -> Mumbai Inter-Regional HVDC",
-    from: [23.85, 69.73],
-    to: [19.07, 72.87],
-    capacityMw: 5000,
-    flowMw: 2420,
-    voltageKv: 765,
-    type: "HVDC_INTERREGIONAL",
-    color: "#06b6d4",
-    status: "ENERGIZED",
-    rerouteTarget: "CORR-07"
+    "id": "CORR-02",
+    "name": "Khavda RE -> Mumbai Inter-Regional HVDC",
+    "from": [
+      23.85,
+      69.73
+    ],
+    "to": [
+      19.07,
+      72.87
+    ],
+    "capacityMw": 5000,
+    "flowMw": 2420,
+    "voltageKv": 765,
+    "type": "HVDC_INTERREGIONAL",
+    "color": "#06b6d4",
+    "status": "ENERGIZED",
+    "rerouteTarget": "CORR-07"
   },
   {
-    id: "CORR-03",
-    name: "Tehri Hydro -> Delhi Northern Peaking Line",
-    from: [30.37, 78.48],
-    to: [28.61, 77.23],
-    capacityMw: 2500,
-    flowMw: 1450,
-    voltageKv: 400,
-    type: "HYDRO_PEAKING",
-    color: "#38bdf8",
-    status: "ENERGIZED",
-    rerouteTarget: null
+    "id": "CORR-03",
+    "name": "Tehri Hydro -> Delhi Northern Peaking Line",
+    "from": [
+      30.37,
+      78.48
+    ],
+    "to": [
+      28.61,
+      77.23
+    ],
+    "capacityMw": 2500,
+    "flowMw": 1450,
+    "voltageKv": 400,
+    "type": "HYDRO_PEAKING",
+    "color": "#38bdf8",
+    "status": "ENERGIZED",
+    "rerouteTarget": null
   },
   {
-    id: "CORR-UKAI-SURAT",
-    name: "Ukai Dam Hydro -> Surat 220 kV Feeder",
-    from: [21.25, 73.58],
-    to: [21.17, 72.83],
-    capacityMw: 600,
-    flowMw: 240,
-    voltageKv: 220,
-    type: "HYDRO_FEEDER",
-    color: "#38bdf8",
-    status: "ENERGIZED",
-    rerouteTarget: null
+    "id": "CORR-04",
+    "name": "Pavagada Solar -> Bengaluru 400 kV Line",
+    "from": [
+      14.1,
+      77.27
+    ],
+    "to": [
+      12.97,
+      77.59
+    ],
+    "capacityMw": 2500,
+    "flowMw": 1710,
+    "voltageKv": 400,
+    "type": "REGIONAL_TRANS",
+    "color": "#f59e0b",
+    "status": "ENERGIZED",
+    "rerouteTarget": null
   },
   {
-    id: "CORR-NARMADA-AHM",
-    name: "Sardar Sarovar Narmada Hydro -> Ahmedabad 400 kV",
-    from: [21.83, 73.75],
-    to: [23.02, 72.57],
-    capacityMw: 1500,
-    flowMw: 1180,
-    voltageKv: 400,
-    type: "HYDRO_TRANSMISSION",
-    color: "#38bdf8",
-    status: "ENERGIZED",
-    rerouteTarget: null
+    "id": "CORR-05",
+    "name": "Muppandal Wind -> Chennai 400 kV Corridor",
+    "from": [
+      8.26,
+      77.54
+    ],
+    "to": [
+      13.08,
+      80.27
+    ],
+    "capacityMw": 2000,
+    "flowMw": 1120,
+    "voltageKv": 400,
+    "type": "WIND_CORRIDOR",
+    "color": "#10b981",
+    "status": "ENERGIZED",
+    "rerouteTarget": null
   },
   {
-    id: "CORR-KAPS-HAZIRA",
-    name: "Kakrapar Nuclear -> Hazira Heavy Industry 400 kV",
-    from: [21.24, 73.35],
-    to: [21.11, 72.67],
-    capacityMw: 2000,
-    flowMw: 1420,
-    voltageKv: 400,
-    type: "NUCLEAR_FEEDER",
-    color: "#a855f7",
-    status: "ENERGIZED",
-    rerouteTarget: null
+    "id": "CORR-06",
+    "name": "Singrauli Thermal -> Delhi \u00b1500 kV HVDC (Rihand-Dadri)",
+    "from": [
+      24.1,
+      82.67
+    ],
+    "to": [
+      28.61,
+      77.23
+    ],
+    "capacityMw": 3000,
+    "flowMw": 1880,
+    "voltageKv": 500,
+    "type": "HVDC_BASELOAD",
+    "color": "#8b5cf6",
+    "status": "ENERGIZED",
+    "rerouteTarget": null
   },
   {
-    id: "CORR-TAPS-MUMBAI",
-    name: "Tarapur Nuclear -> Mumbai 400 kV Line",
-    from: [19.83, 72.65],
-    to: [19.07, 72.87],
-    capacityMw: 1600,
-    flowMw: 1350,
-    voltageKv: 400,
-    type: "NUCLEAR_FEEDER",
-    color: "#a855f7",
-    status: "ENERGIZED",
-    rerouteTarget: null
+    "id": "CORR-07",
+    "name": "Khavda -> Ahmedabad-Sanand 400 kV Line",
+    "from": [
+      23.85,
+      69.73
+    ],
+    "to": [
+      23.02,
+      72.57
+    ],
+    "capacityMw": 2500,
+    "flowMw": 1100,
+    "voltageKv": 400,
+    "type": "INDUSTRIAL_FEEDER",
+    "color": "#06b6d4",
+    "status": "ENERGIZED",
+    "rerouteTarget": null
   },
   {
-    id: "CORR-04",
-    name: "Pavagada Solar -> Bengaluru 400 kV Line",
-    from: [14.10, 77.27],
-    to: [12.97, 77.59],
-    capacityMw: 2500,
-    flowMw: 1710,
-    voltageKv: 400,
-    type: "REGIONAL_TRANS",
-    color: "#f59e0b",
-    status: "ENERGIZED",
-    rerouteTarget: null
+    "id": "CORR-08",
+    "name": "Champa -> Kurukshetra \u00b1800 kV UHVDC Link",
+    "from": [
+      22.05,
+      82.65
+    ],
+    "to": [
+      29.96,
+      76.87
+    ],
+    "capacityMw": 6000,
+    "flowMw": 3800,
+    "voltageKv": 800,
+    "type": "UHVDC_INTERREGIONAL",
+    "color": "#ec4899",
+    "status": "ENERGIZED",
+    "rerouteTarget": null
   },
   {
-    id: "CORR-05",
-    name: "Muppandal Wind -> Chennai 400 kV Corridor",
-    from: [8.26, 77.54],
-    to: [13.08, 80.27],
-    capacityMw: 2000,
-    flowMw: 1120,
-    voltageKv: 400,
-    type: "WIND_CORRIDOR",
-    color: "#10b981",
-    status: "ENERGIZED",
-    rerouteTarget: null
+    "id": "CORR-09",
+    "name": "Raigarh -> Pugalur \u00b1800 kV UHVDC Bipole",
+    "from": [
+      21.89,
+      83.39
+    ],
+    "to": [
+      11.05,
+      77.99
+    ],
+    "capacityMw": 6000,
+    "flowMw": 4100,
+    "voltageKv": 800,
+    "type": "UHVDC_INTERREGIONAL",
+    "color": "#ec4899",
+    "status": "ENERGIZED",
+    "rerouteTarget": null
   },
   {
-    id: "CORR-06",
-    name: "Singrauli Thermal -> Delhi ±500 kV HVDC",
-    from: [24.10, 82.67],
-    to: [28.61, 77.23],
-    capacityMw: 3000,
-    flowMw: 1880,
-    voltageKv: 500,
-    type: "HVDC_BASELOAD",
-    color: "#8b5cf6",
-    status: "ENERGIZED",
-    rerouteTarget: null
+    "id": "CORR-10",
+    "name": "Kudankulam -> Bengaluru-Hyderabad 400 kV Grid",
+    "from": [
+      8.17,
+      77.71
+    ],
+    "to": [
+      12.97,
+      77.59
+    ],
+    "capacityMw": 2200,
+    "flowMw": 1650,
+    "voltageKv": 400,
+    "type": "NUCLEAR_FEEDER",
+    "color": "#a855f7",
+    "status": "ENERGIZED",
+    "rerouteTarget": null
   },
   {
-    id: "CORR-MUNDRA-SANAND",
-    name: "Mundra Thermal -> Sanand Auto Mega Hub 400 kV",
-    from: [22.82, 69.52],
-    to: [23.00, 72.38],
-    capacityMw: 1200,
-    flowMw: 480,
-    voltageKv: 400,
-    type: "INDUSTRIAL_FEEDER",
-    color: "#8b5cf6",
-    status: "ENERGIZED",
-    rerouteTarget: null
+    "id": "CORR-XBORDER-BANGLADESH",
+    "name": "Baharampur (India) -> Bheramara (Bangladesh) 400 kV HVDC Interconnection",
+    "from": [
+      24.1,
+      88.25
+    ],
+    "to": [
+      24.03,
+      89.02
+    ],
+    "fromLabel": "Baharampur 400kV Substation",
+    "toLabel": "Bheramara HVDC Back-to-Back Terminal",
+    "capacityMw": 1000,
+    "flowMw": 840,
+    "voltageKv": 400,
+    "lengthKm": 125,
+    "conductorType": "Twin ACSR Moose",
+    "nominalCurrentA: ": 1600,
+    "type": "CROSS_BORDER_LINK",
+    "color": "#10b981",
+    "status": "ENERGIZED",
+    "rerouteTarget": null
   },
   {
-    id: "CORR-CHARANKA-AHM",
-    name: "Charanka Solar -> Ahmedabad 400 kV Line",
-    from: [23.91, 71.19],
-    to: [23.02, 72.57],
-    capacityMw: 1000,
-    flowMw: 680,
-    voltageKv: 400,
-    type: "GREEN_ENERGY_CORRIDOR",
-    color: "#f59e0b",
-    status: "ENERGIZED",
-    rerouteTarget: null
+    "id": "CORR-XBORDER-NEPAL",
+    "name": "Muzaffarpur (India) -> Dhalkebar (Nepal) 400 kV Cross-Border Interconnection",
+    "from": [
+      26.12,
+      85.39
+    ],
+    "to": [
+      26.96,
+      85.95
+    ],
+    "fromLabel": "Muzaffarpur 400kV Substation",
+    "toLabel": "Dhalkebar 400kV GIS Substation",
+    "capacityMw": 1000,
+    "flowMw": 620,
+    "voltageKv": 400,
+    "lengthKm": 140,
+    "conductorType": "Twin ACSR Moose",
+    "nominalCurrentA: ": 1600,
+    "type": "CROSS_BORDER_LINK",
+    "color": "#10b981",
+    "status": "ENERGIZED",
+    "rerouteTarget": null
   },
   {
-    id: "CORR-08",
-    name: "Champa -> Kurukshetra ±800 kV UHVDC Link",
-    from: [22.05, 82.65],
-    to: [29.96, 76.87],
-    capacityMw: 6000,
-    flowMw: 3800,
-    voltageKv: 800,
-    type: "UHVDC_INTERREGIONAL",
-    color: "#ec4899",
-    status: "ENERGIZED",
-    rerouteTarget: null
-  },
-  {
-    id: "CORR-09",
-    name: "Raigarh -> Pugalur ±800 kV UHVDC Bipole",
-    from: [21.89, 83.39],
-    to: [11.05, 77.99],
-    capacityMw: 6000,
-    flowMw: 4100,
-    voltageKv: 800,
-    type: "UHVDC_INTERREGIONAL",
-    color: "#ec4899",
-    status: "ENERGIZED",
-    rerouteTarget: null
-  },
-  {
-    id: "CORR-10",
-    name: "Kudankulam -> Bengaluru-Chennai 400 kV Grid",
-    from: [8.17, 77.71],
-    to: [12.97, 77.59],
-    capacityMw: 2200,
-    flowMw: 1650,
-    voltageKv: 400,
-    type: "NUCLEAR_FEEDER",
-    color: "#a855f7",
-    status: "ENERGIZED",
-    rerouteTarget: null
+    "id": "CORR-XBORDER-BHUTAN",
+    "name": "Tala Hydro (Bhutan) -> Alipurduar (India) 400 kV Cross-Border Interconnection",
+    "from": [
+      27.02,
+      89.65
+    ],
+    "to": [
+      26.49,
+      89.53
+    ],
+    "fromLabel": "Tala Hydro Generating Station",
+    "toLabel": "Alipurduar 400kV/\u00b1800kV HVDC Hub",
+    "capacityMw": 2000,
+    "flowMw": 1450,
+    "voltageKv": 400,
+    "lengthKm": 115,
+    "conductorType": "Quad ACSR Bersimis",
+    "nominalCurrentA: ": 2800,
+    "type": "CROSS_BORDER_LINK",
+    "color": "#38bdf8",
+    "status": "ENERGIZED",
+    "rerouteTarget": null
   }
 ];
+
+export const SOLAR_RE_ZONES = [
+  {
+    id: "ZONE-THAR",
+    name: "Thar Super Solar Basin",
+    center: [27.35, 71.95],
+    radiusKm: 110000,
+    dniKwhM2: 6.25,
+    installedMw: 14200,
+    potentialMw: 45000,
+    ambientTempC: 44.2,
+    description: "Highest Direct Normal Irradiance (DNI) in South Asia. Hosts Bhadla & Jaisalmer parks."
+  },
+  {
+    id: "ZONE-KUTCH",
+    name: "Rann of Kutch Hybrid RE Basin",
+    center: [23.85, 69.80],
+    radiusKm: 95000,
+    dniKwhM2: 5.95,
+    installedMw: 18500,
+    potentialMw: 30000,
+    ambientTempC: 38.6,
+    description: "India's largest hybrid solar-wind sanctuary at Khavda on India-Pakistan border salt flat."
+  },
+  {
+    id: "ZONE-DECCAN",
+    name: "Deccan Traps Solar Plateau",
+    center: [14.30, 77.30],
+    radiusKm: 85000,
+    dniKwhM2: 5.50,
+    installedMw: 9200,
+    potentialMw: 22000,
+    ambientTempC: 34.8,
+    description: "Semiarid plateau belt spanning Pavagada, Ananthapuramu, and Kurnool solar clusters."
+  },
+  {
+    id: "ZONE-LADAKH",
+    name: "Ladakh High-Altitude Solar Plateau",
+    center: [33.70, 78.10],
+    radiusKm: 75000,
+    dniKwhM2: 6.70,
+    installedMw: 2500,
+    potentialMw: 13000,
+    ambientTempC: 16.5,
+    description: "Ultra-pure atmosphere at 3,500m elevation with low temperatures increasing PV panel efficiency by +14%."
+  }
+];
+
+// Geospatial Coastal & Ridge Wind Corridors
+export const WIND_RESOURCE_ZONES = [
+  {
+    id: "WIND-MUPPANDAL",
+    name: "Muppandal & Palghat Gap Wind Funnel",
+    center: [8.30, 77.55],
+    radiusKm: 65000,
+    avgSpeedMs: 9.4,
+    installedMw: 5800,
+    capacityFactorPct: 41.2,
+    description: "Natural mountain pass funneling Southwest Monsoon winds through Western Ghats."
+  },
+  {
+    id: "WIND-SAURASHTRA",
+    name: "Saurashtra & Gulf of Khambhat Maritime Ridge",
+    center: [21.90, 69.90],
+    radiusKm: 80000,
+    avgSpeedMs: 8.6,
+    installedMw: 4900,
+    capacityFactorPct: 37.8,
+    description: "Consistent coastal sea breezes feeding Jamnagar, Porbandar, and Bhavnagar wind farms."
+  },
+  {
+    id: "WIND-SATARA",
+    name: "Western Ghats High Escarpment Ridge",
+    center: [17.50, 73.80],
+    radiusKm: 60000,
+    avgSpeedMs: 7.9,
+    installedMw: 3400,
+    capacityFactorPct: 34.5,
+    description: "Chalkewadi plateau & Koyna reservoir ridge turbines providing seasonal monsoon peaking."
+  }
+];
+
+// Real-Time Grid Meteorological & Hazard Alerts (Directly Affecting IEEE 738 Dynamic Line Rating)
+export const GRID_WEATHER_HAZARDS = [
+  {
+    id: "HAZ-01",
+    type: "HEATWAVE",
+    name: "Extreme Thar Heatwave: 46.5°C",
+    location: [27.20, 71.40],
+    severity: "WARNING",
+    affectedCorridors: ["CORR-01"],
+    ampacityDeltaPct: -12.4,
+    impact: "High thermal sag risk on Bhadla-Delhi 765kV line. Dynamic Line Rating ceiling active."
+  },
+  {
+    id: "HAZ-02",
+    type: "GUSTS",
+    name: "Monsoon Wind Squalls: 68 km/h",
+    location: [18.90, 73.10],
+    severity: "INFO",
+    affectedCorridors: ["CORR-02", "CORR-TAPS-MUMBAI"],
+    ampacityDeltaPct: +18.5,
+    impact: "Strong convective atmospheric cooling unlocks +18.5% extra power wheeling without conductor overheating."
+  },
+  {
+    id: "HAZ-03",
+    type: "LIGHTNING",
+    name: "Eastern Champa Corridor Lightning Risk",
+    location: [22.20, 83.10],
+    severity: "CRITICAL",
+    affectedCorridors: ["CORR-08", "CORR-09"],
+    ampacityDeltaPct: 0,
+    impact: "Severe thunderstorm activity. High-speed single-phase auto-reclosing relays (IEC 61850) armed."
+  }
+];
+
+// Inter-Regional Transmission Corridors (Total & Available Transfer Capability - TTC / ATC)
+export const INTER_REGIONAL_TRANSFERS = [
+  {
+    id: "TIE-NR-WR",
+    name: "WR -> NR Corridors (Western to Northern Grid)",
+    fromRegion: "WR",
+    toRegion: "NR",
+    center: [25.80, 75.80],
+    totalCapacityMw: 28400,
+    currentFlowMw: 5600,
+    ttcMw: 30000,
+    atcMw: 6800,
+    direction: "WR ➔ NR",
+    status: "NORMAL"
+  },
+  {
+    id: "TIE-WR-SR",
+    name: "WR -> SR Corridors (Western to Southern Grid)",
+    fromRegion: "WR",
+    toRegion: "SR",
+    center: [15.40, 75.50],
+    totalCapacityMw: 18200,
+    currentFlowMw: 3400,
+    ttcMw: 20000,
+    atcMw: 4600,
+    direction: "WR ➔ SR",
+    status: "NORMAL"
+  },
+  {
+    id: "TIE-ER-NR",
+    name: "ER -> NR Corridors (Eastern to Northern Grid)",
+    fromRegion: "ER",
+    toRegion: "NR",
+    center: [25.40, 83.20],
+    totalCapacityMw: 22500,
+    currentFlowMw: 4100,
+    ttcMw: 24000,
+    atcMw: 5200,
+    direction: "ER ➔ NR",
+    status: "NORMAL"
+  },
+  {
+    id: "TIE-ER-NER",
+    name: "ER -> NER Corridors (Eastern to North-Eastern Grid)",
+    fromRegion: "ER",
+    toRegion: "NER",
+    center: [26.20, 89.80],
+    totalCapacityMw: 3800,
+    currentFlowMw: 650,
+    ttcMw: 4200,
+    atcMw: 1150,
+    direction: "ER ➔ NER",
+    status: "NORMAL"
+  }
+];
+
+// Preset camera bounding boxes for quick regional navigation
+export const REGIONAL_CENTERS_BOUNDS = {
+  ALL: { center: [22.8, 79.5], zoom: 5, label: "🇮🇳 All India" },
+  NR: { center: [29.6, 76.8], zoom: 6, label: "Northern (NR)" },
+  WR: { center: [21.8, 73.2], zoom: 6, label: "Western (WR)" },
+  SR: { center: [12.8, 78.4], zoom: 6, label: "Southern (SR)" },
+  ER: { center: [23.5, 85.5], zoom: 6, label: "Eastern (ER)" },
+  NER: { center: [26.2, 92.8], zoom: 6, label: "North-Eastern (NER)" }
+};

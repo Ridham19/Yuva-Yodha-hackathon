@@ -10,6 +10,7 @@ import {
   OFFICIAL_NLDC_BASELINE,
   REGIONAL_DESPATCH_CENTRES,
   INDIA_GRID_SOURCES,
+  INDIA_GRID_SUBSTATIONS,
   INDIA_GRID_SINKS,
   TRANSMISSION_CORRIDORS
 } from '../data/indiaGridData';
@@ -35,6 +36,7 @@ export const GridProvider = ({ children }) => {
   const [nldc, setNldc] = useState(OFFICIAL_NLDC_BASELINE);
   const [regions, setRegions] = useState(REGIONAL_DESPATCH_CENTRES);
   const [sources, setSources] = useState(INDIA_GRID_SOURCES);
+  const [substations, setSubstations] = useState(INDIA_GRID_SUBSTATIONS);
   const [sinks, setSinks] = useState(INDIA_GRID_SINKS);
   const [corridors, setCorridors] = useState(TRANSMISSION_CORRIDORS);
   const [isBackendConnected, setIsBackendConnected] = useState(false);
@@ -302,6 +304,7 @@ export const GridProvider = ({ children }) => {
                 if (data.payload.nldc) setNldc(data.payload.nldc);
                 if (data.payload.regions) setRegions(data.payload.regions);
                 if (data.payload.sources) setSources(data.payload.sources);
+                if (data.payload.substations) setSubstations(data.payload.substations);
                 if (data.payload.sinks) setSinks(data.payload.sinks);
                 if (data.payload.corridors) setCorridors(data.payload.corridors);
                 if (data.payload.substation?.feeders) setFeeders(data.payload.substation.feeders);
@@ -312,6 +315,7 @@ export const GridProvider = ({ children }) => {
                 if (data.payload.nldc) setNldc(data.payload.nldc);
                 if (data.payload.nldc?.frequencyHz) setGridFrequencyHz(data.payload.nldc.frequencyHz);
                 if (data.payload.sources) setSources(data.payload.sources);
+                if (data.payload.substations) setSubstations(data.payload.substations);
                 if (data.payload.sinks) setSinks(data.payload.sinks);
                 if (data.payload.corridors) setCorridors(data.payload.corridors);
                 if (data.payload.substation?.feeders) setFeeders(data.payload.substation.feeders);
@@ -1049,6 +1053,8 @@ export const GridProvider = ({ children }) => {
         nldc,
         regions,
         sources,
+        substations,
+        setSubstations,
         sinks,
         corridors,
         isBackendConnected,

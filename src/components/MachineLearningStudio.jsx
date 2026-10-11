@@ -383,8 +383,8 @@ export const MachineLearningStudio = () => {
           </div>
           <div style={{ background: 'var(--bg-stat-box)', padding: '10px 14px', borderRadius: '8px', border: '1px solid var(--border-subtle)' }}>
             <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)' }}>SERVICE ENDPOINTS</div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.35rem', fontWeight: 'bold', color: '#38bdf8' }}>FastAPI :8000</div>
-            <div style={{ fontSize: '0.65rem', color: 'var(--text-secondary)' }}>Node Proxy Active :5000</div>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '1.35rem', fontWeight: 'bold', color: '#38bdf8' }}>FastAPI :5000</div>
+            <div style={{ fontSize: '0.65rem', color: 'var(--text-secondary)' }}>Python Native Backend Active</div>
           </div>
         </div>
       </div>

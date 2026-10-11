@@ -90,7 +90,13 @@ function DashboardContent() {
       />
 
       {/* Floating AI SCADA Voice Copilot */}
-      <VoiceDispatchCopilot onNavigateTab={(tab) => setActiveTab(tab)} />
+      <VoiceDispatchCopilot onNavigateTab={(tab) => {
+        if (tab === 'pitch-deck') {
+          setShowPitchDeck(true);
+        } else {
+          setActiveTab(tab);
+        }
+      }} />
 
       {/* Yuva Yodha Grand Finale Interactive Pitch Deck */}
       {showPitchDeck && (
@@ -106,10 +112,84 @@ function DashboardContent() {
   );
 }
 
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null };
+  }
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+  componentDidCatch(error, errorInfo) {
+    console.error("[GridPulse React Crash]", error, errorInfo);
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div style={{
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          background: '#090d16',
+          color: '#f8fafc',
+          padding: '24px',
+          fontFamily: 'system-ui, sans-serif'
+        }}>
+          <div style={{
+            maxWidth: '600px',
+            background: 'rgba(239, 68, 68, 0.1)',
+            border: '1px solid rgba(239, 68, 68, 0.3)',
+            borderRadius: '12px',
+            padding: '24px',
+            textAlign: 'center'
+          }}>
+            <h2 style={{ color: '#ef4444', marginBottom: '12px' }}>⚠️ SCADA Telemetry Render Alert</h2>
+            <p style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '16px' }}>
+              A UI component encountered an unexpected state. Automatic fallback recovery initialized.
+            </p>
+            <pre style={{
+              background: '#020617',
+              color: '#fca5a5',
+              padding: '12px',
+              borderRadius: '6px',
+              fontSize: '0.8rem',
+              textAlign: 'left',
+              overflowX: 'auto',
+              maxHeight: '150px'
+            }}>
+              {String(this.state.error?.message || this.state.error)}
+            </pre>
+            <button
+              onClick={() => window.location.reload()}
+              style={{
+                marginTop: '16px',
+                padding: '8px 20px',
+                background: '#10b981',
+                color: '#000',
+                fontWeight: 'bold',
+                border: 'none',
+                borderRadius: '6px',
+                cursor: 'pointer'
+              }}
+            >
+              Reload Dashboard
+            </button>
+          </div>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 export default function App() {
   return (
-    <GridProvider>
-      <DashboardContent />
-    </GridProvider>
+    <ErrorBoundary>
+      <GridProvider>
+        <DashboardContent />
+      </GridProvider>
+    </ErrorBoundary>
   );
 }

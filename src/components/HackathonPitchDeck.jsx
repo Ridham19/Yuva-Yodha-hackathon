@@ -149,9 +149,10 @@ export const HackathonPitchDeck = ({ onClose, onNavigateTab }) => {
               Real-time Indian Electricity Grid Code (IEGC) 50.00 Hz telemetry, 765kV national corridors, 33/11kV substation GIS topologies, and live renewable duck-curve balance.
             </p>
             <ul style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+              <li>✓ Animated Power Flow Vectors & 24h Duck-Curve Scrubber</li>
+              <li>✓ GIS Solar/Wind Resource Basins & N-1 Contingency Scan</li>
               <li>✓ Keyless Esri National GIS Map (15 Sources, 19 Sinks)</li>
-              <li>✓ Live 50Hz frequency drift monitoring</li>
-              <li>✓ Substation Single-Line Diagram (SLD)</li>
+              <li>✓ Live 50Hz frequency drift & Substation SLD</li>
             </ul>
           </div>
 
@@ -235,7 +236,7 @@ export const HackathonPitchDeck = ({ onClose, onNavigateTab }) => {
       title: "Predictive Intelligence: Neural Grid AI Suite",
       subtitle: "24h Duck-Curve Forecaster, PMU Transient Pinpointer & Smart Meter Theft Detection",
       category: "ARTIFICIAL INTELLIGENCE",
-      speakerNotes: "Highlight the dual-engine architecture: Python FastAPI on port 8000 with Node.js embedded fallback. Explain the Ridge + Diurnal Fourier duck forecaster and IEEE C57.104 Duval Triangle 1.",
+      speakerNotes: "Highlight the unified architecture: Python FastAPI with embedded Scikit-Learn. Explain the Ridge + Diurnal Fourier duck forecaster and IEEE C57.104 Duval Triangle 1.",
       content: (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '16px' }}>
           <div className="grid-card" style={{ padding: '18px' }}>
@@ -345,25 +346,41 @@ export const HackathonPitchDeck = ({ onClose, onNavigateTab }) => {
     },
     {
       id: 8,
-      title: "Energy Markets & Virtual Power Plant (VPP)",
-      subtitle: "IEX Real-Time Market (RTM) Arbitrage & 1,500+ EV Fleet V2G Peak Shaving",
-      category: "MARKET DISPATCH",
-      speakerNotes: "Explain how GridPulse monetizes battery storage by charging during solar trough hours (₹2.40/kWh) and discharging during evening peak (₹9.80/kWh), alongside EV bus V2G aggregation.",
+      title: "Energy Markets, P2P Microgrid Trading & 2nd-Life BESS Pooling",
+      subtitle: "IEX Real-Time Arbitrage, Peer-to-Peer Double Auction & 2nd-Life EV Battery Pooling (Schneider Track 03)",
+      category: "MARKET DISPATCH & MICROGRIDS",
+      speakerNotes: "Explain our 3-tier flexibility architecture: (1) Wholesale IEX arbitrage, (2) Local neighborhood P2P double-auction energy trading cutting consumer bills by 47%, (3) Repurposed 2nd-life EV battery pooling slashing storage CAPEX by 71.4%.",
       content: (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
-          <div className="grid-card" style={{ padding: '20px' }}>
-            <div style={{ color: '#f59e0b', fontWeight: 'bold', fontSize: '0.85rem' }}>IEX MERIT ORDER DESPATCH</div>
-            <h4 style={{ fontSize: '1.1rem', marginTop: '4px' }}>BESS Price Arbitrage</h4>
-            <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginTop: '8px', lineHeight: 1.5 }}>
-              Charges 20 MWh battery storage at noon (₹2.45/kWh solar glut) and dispatches at 20:00 (₹9.80/kWh evening peak), earning ₹1.47 Lakhs daily arbitrage profit.
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '16px' }}>
+          <div className="grid-card" style={{ padding: '18px', borderLeft: '3px solid #f59e0b' }}>
+            <div style={{ color: '#f59e0b', fontWeight: 'bold', fontSize: '0.8rem' }}>IEX MERIT ORDER DESPATCH</div>
+            <h4 style={{ fontSize: '1rem', marginTop: '4px' }}>BESS Price Arbitrage</h4>
+            <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', marginTop: '6px', lineHeight: 1.5 }}>
+              Charges 20 MWh battery storage at noon (₹2.15/kWh solar glut) and dispatches at 20:00 (₹9.95/kWh peak), earning ₹52.4 Lakhs/yr in DISCOM arbitrage.
             </p>
           </div>
 
-          <div className="grid-card" style={{ padding: '20px' }}>
-            <div style={{ color: '#06b6d4', fontWeight: 'bold', fontSize: '0.85rem' }}>VIRTUAL POWER PLANT (VPP)</div>
-            <h4 style={{ fontSize: '1.1rem', marginTop: '4px' }}>EV Fleet & V2G Dispatch</h4>
-            <p style={{ fontSize: '0.82rem', color: 'var(--text-secondary)', marginTop: '8px', lineHeight: 1.5 }}>
-              Aggregates 1,500 Delhi DTC electric buses and 3,200 two-wheeler battery swapping stations into a flexible 18.5 MW Virtual Power Plant to shave peak duck-curve demand.
+          <div className="grid-card" style={{ padding: '18px', borderLeft: '3px solid #10b981' }}>
+            <div style={{ color: '#10b981', fontWeight: 'bold', fontSize: '0.8rem' }}>P2P COMMUNITY TRADING</div>
+            <h4 style={{ fontSize: '1rem', marginTop: '4px' }}>Bilateral Double Auction</h4>
+            <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', marginTop: '6px', lineHeight: 1.5 }}>
+              Prosumers sell rooftop solar directly to neighbors at ₹3.55/unit (+69% over DISCOM buyback), saving buyers 47.8% while generating ₹0.40/unit wheeling tolls.
+            </p>
+          </div>
+
+          <div className="grid-card" style={{ padding: '18px', borderLeft: '3px solid #a855f7' }}>
+            <div style={{ color: '#a855f7', fontWeight: 'bold', fontSize: '0.8rem' }}>2ND-LIFE BATTERY POOLING</div>
+            <h4 style={{ fontSize: '1rem', marginTop: '4px' }}>Repurposed EV Packs (71% Off)</h4>
+            <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', marginTop: '6px', lineHeight: 1.5 }}>
+              Aggregates decommissioned EV packs (75-80% SOH) as neighborhood stationary storage at ₹4,150/kWh (vs ₹14,500 new), avoiding 54 tons of embodied CO₂.
+            </p>
+          </div>
+
+          <div className="grid-card" style={{ padding: '18px', borderLeft: '3px solid #06b6d4' }}>
+            <div style={{ color: '#06b6d4', fontWeight: 'bold', fontSize: '0.8rem' }}>VIRTUAL POWER PLANT (VPP)</div>
+            <h4 style={{ fontSize: '1rem', marginTop: '4px' }}>EV Fleet & V2G Dispatch</h4>
+            <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)', marginTop: '6px', lineHeight: 1.5 }}>
+              Aggregates 1,500 Delhi DTC electric buses and 3,200 two-wheeler swapping stations into an 18.5 MW Virtual Power Plant to shave peak duck-curve demand.
             </p>
           </div>
         </div>
@@ -408,16 +425,16 @@ export const HackathonPitchDeck = ({ onClose, onNavigateTab }) => {
       title: "Technical Scalability & SQLite Enterprise Architecture",
       subtitle: "Modular Microservices, ACID-Compliant Time-Series Database & 100% Offline Capability",
       category: "ARCHITECTURE & SCALE",
-      speakerNotes: "Highlight that GridPulse operates in dual mode: connected to Node.js / FastAPI or 100% standalone offline for air-gapped utility SCADA environments, backed by native SQLite.",
+      speakerNotes: "Highlight that GridPulse operates in dual mode: connected to Python FastAPI backend or 100% standalone offline for air-gapped utility SCADA environments, backed by native SQLite.",
       content: (
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
           <div className="grid-card" style={{ padding: '20px' }}>
             <h4 style={{ color: 'var(--text-primary)', fontSize: '1.05rem', marginBottom: '8px' }}>Modular Full-Stack Architecture</h4>
             <ul style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
               <li>• <strong>Frontend</strong>: React + Vite + Vanilla CSS high-contrast SCADA theme.</li>
-              <li>• <strong>Backend Gateway</strong>: Node.js Express + WebSocket streaming on port 5000.</li>
-              <li>• <strong>ML Microservice</strong>: Python FastAPI on port 8000 with Scikit-Learn & PyTorch.</li>
-              <li>• <strong>Relational Database</strong>: Native Node.js 25 SQLite engine (8 tables, ACID compliant).</li>
+              <li>• <strong>Backend Gateway</strong>: Python FastAPI + Uvicorn + WebSocket streaming on port 5000.</li>
+              <li>• <strong>ML Engine</strong>: High-performance Python Scikit-Learn & PyTorch neural inferencing.</li>
+              <li>• <strong>Relational Database</strong>: Native Python 3.14 SQLite3 engine (8 tables, WAL mode, ACID compliant).</li>
             </ul>
           </div>
 
@@ -482,6 +499,13 @@ export const HackathonPitchDeck = ({ onClose, onNavigateTab }) => {
               style={{ padding: '10px 18px', background: 'rgba(6, 182, 212, 0.2)', color: '#22d3ee', borderColor: '#06b6d4' }}
             >
               IEC 62351 Cyber Shield
+            </button>
+            <button
+              onClick={() => onNavigateTab('market')}
+              className="btn-demo"
+              style={{ padding: '10px 18px', background: 'rgba(245, 158, 11, 0.2)', color: '#fbbf24', borderColor: '#f59e0b' }}
+            >
+              P2P Market & 2nd-Life BESS
             </button>
           </div>
         </div>

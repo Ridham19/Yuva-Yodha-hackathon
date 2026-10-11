@@ -33,6 +33,8 @@
 - [x] Pillar 21: Multi-Hazard Disaster Resilience Sandbox with 5 Operational Simulation Drills (`src/components/SelfHealingAutomation.jsx`)
 - [x] Pillar 22: Programmatic EcoStruxure JSON Manifest Verification Endpoint (`backend/server.js`)
 - [x] Pillar 23: Human-Friendly UI & Visual Hierarchy Overhaul (Unified Header, Slide-Over Alarms Drawer, Viewport-Adaptive Map)
+- [x] Pillar 24: National Grid Geospatial Master Upgrade (Animated Vector Corridors, 24h Diurnal Duck Curve Scrubber, GIS Solar/Wind/Weather Overlays, Global Fly-To Search & N-1 Dynamic Contingency Analysis)
+- [x] Pillar 25: Full Backend Migration to Python (FastAPI + Uvicorn + WebSockets + Native SQLite3 Engine on Port 5000)
 
 
 ---
@@ -200,6 +202,14 @@
 - [x] `[BESS-ARBITRAGE]` Battery Storage Revenue & Arbitrage Tracker:
   - Automatically charges BESS when spot price dips (< ₹2.20/unit) and discharges during evening tariff peaks (> ₹9.80/unit).
   - Live revenue counter showing cumulative daily arbitrage profit in ₹ Lakhs for the DISCOM.
+- [x] `[P2P-MICROGRID]` Peer-to-Peer (P2P) Community Energy Trading & Double-Auction Engine (`src/components/ElectricityMarket.jsx` & `/api/market/p2p`):
+  - Local microgrid order book matching rooftop solar prosumers with residential and commercial demand sinks.
+  - Fair bilateral clearing price (₹3.55/unit) slashing buyer bills by 47.8% and boosting prosumer income by +69.0%.
+  - Generates ₹0.40/unit risk-free wheeling and congestion toll revenue for the DISCOM without touching physical switchgear.
+- [x] `[SECOND-LIFE-BESS]` Community 2nd-Life EV Battery Repurposing & Pooling Fleet (380 kWh):
+  - Aggregates decommissioned EV packs (75-80% SOH) from Tata Nexon EVs, DTC electric buses, and Mahindra 3Ws for stationary neighborhood buffering.
+  - Slashes storage CAPEX by 71.4% (₹4,150/kWh vs ₹14,500/kWh new LFP) and avoids 54.2 tons of embodied CO₂.
+  - Real-time BMS telemetry, cycle degradation models, cell temperatures, and Fast Frequency Response (FFR) arming.
 
 ---
 
@@ -337,6 +347,15 @@
   - Set viewport-responsive map canvas height (`calc(100vh - 125px)`) for complete view without scrolling.
 - [x] `[DESIGN-SYSTEM-THEMING]` Refactored theme tokens in `src/index.css` to use semantic CSS variables (`var(--bg-card)`, `var(--bg-stat-box)`, `var(--text-primary)`), eliminating low-contrast black blotches and neon glare in light mode.
 - [x] `[DEFENSIVE-HARDENING]` Fixed unhandled exception in `src/components/FeederMonitoring.jsx` with null-safe accessors (`feeder.consumerCount ?? 0`).
+- [x] `[GEOSPATIAL-UPGRADE]` Pillar 24: National Grid Geospatial Master Upgrade (`src/components/IndiaGridMap.jsx`, `src/data/indiaGridData.js`, `src/index.css`):
+  - **Animated Power Flow Vectors**: Real-time SVG stroke-dashoffset animation on all 765kV/400kV transmission lines with speed scaled to line loading (normal, fast, and congested glow states).
+  - **24-Hour Diurnal Duck Curve Time Scrubber**: Interactive time scrubber (00:00 - 23:00 IST) simulating solar ramp-up, midday surplus (low spot prices & BESS charging), and evening peak duck curve (zero solar, peakers ramping, BESS discharge, peak price surge).
+  - **GIS SCADA Overlays**: Toggleable geospatial layers for Solar DNI Resource Basins (Thar, Kutch, Deccan, Ladakh), Wind Velocity Funnels (Muppandal, Saurashtra, Satara), Meteorological Hazards & IEEE 738 DLR impacts, and Inter-Regional Transfer Ties (ATC/TTC).
+  - **Global Fly-To Search**: Instant search box with autocomplete across 30+ power plants, cities, and corridors with smooth Leaflet camera flyTo zoom.
+  - **Regional Quick-Zoom Controls**: 1-Click regional presets (`All India`, `NR`, `WR`, `SR`, `ER`, `NER`).
+  - **N-1 Dynamic Contingency Security Simulator**: Evaluates sudden loss of selected transmission lines and calculates power redistribution onto parallel corridors to detect overload violations and recommend Remedial Action Schemes (RAS).
+  - **POWERGRID Conductor Engineering Specs**: Displays conductor bundle type (Quad Bersimis/Twin Moose), thermal ampacity, line length, Surge Impedance Loading (SIL), and real-time $I^2R$ power & daily financial losses.
+  - **Fullscreen Command View**: 1-Click fullscreen expansion for control room wall displays.
 
 ---
 

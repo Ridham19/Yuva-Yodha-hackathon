@@ -140,7 +140,7 @@ export const Header = ({
                   border: isBackendConnected ? '1px solid var(--badge-border-success)' : '1px solid var(--badge-border-warning)',
                   fontWeight: 600
                 }}
-                title={isBackendConnected ? "Real-time Node.js + WebSocket Server active on Port 5000" : "In-browser simulation active"}
+                title={isBackendConnected ? "Real-time Python FastAPI + WebSocket Server active on Port 5000" : "In-browser simulation active"}
               >
                 <span className={`status-dot ${isBackendConnected ? 'normal' : 'warning'}`}></span> 
                 {isBackendConnected ? ":5000" : "Sim"}

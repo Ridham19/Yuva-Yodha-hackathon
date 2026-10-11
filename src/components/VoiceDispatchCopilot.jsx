@@ -151,9 +151,17 @@ export const VoiceDispatchCopilot = ({ onNavigateTab }) => {
       toggleTheme();
       replyText = `Theme toggled to ${theme === 'dark' ? 'Light Day SCADA' : 'Dark Control Room'} mode.`;
       actionType = 'UI';
-    } else if (q.includes('predictive') || q.includes('transformer') || q.includes('dga')) {
-      replyText = 'Loading Transformer Health Index and Duval Triangle DGA diagnostics.';
-      if (onNavigateTab) onNavigateTab('predictive');
+    } else if (q.includes('map') || q.includes('national') || q.includes('corridor') || q.includes('india')) {
+      replyText = 'Navigating to All-India National Power Grid Tele-Control. Displaying 765kV corridors, mega RE parks, and inter-regional transmission lines.';
+      if (onNavigateTab) onNavigateTab('india-map');
+      actionType = 'NAVIGATE';
+    } else if (q.includes('pitch') || q.includes('deck') || q.includes('presentation')) {
+      replyText = 'Opening Yuva Yodha Grand Finale 11-Slide Interactive Jury Pitch Deck.';
+      if (onNavigateTab) onNavigateTab('pitch-deck');
+      actionType = 'NAVIGATE';
+    } else if (q.includes('ecostruxure') || q.includes('schneider') || q.includes('hardware')) {
+      replyText = 'Opening Schneider Electric EcoStruxure Grid Interoperability & ION9000 Power Quality Center.';
+      if (onNavigateTab) onNavigateTab('ecostruxure');
       actionType = 'NAVIGATE';
     } else {
       replyText = `Understood: "${commandText}". Command verified against SCADA dispatch schema. Telemetry parameters remain nominal.`;
